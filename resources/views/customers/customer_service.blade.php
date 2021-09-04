@@ -1,6 +1,6 @@
-@extends('/main')
+@extends('/layouts/main')
 
-@section('title','Customer Service')
+@section('title','Atendimento ao Cliente')
 
 @section('content')
 
@@ -12,18 +12,18 @@
                  <!-- DataTales Example -->
             <div class="card shadow mb-4">
                 <div class="card-header py-3">
-                    <h6 class="m-0 font-weight-bold text-secondary">Customers</h6>
+                    <h6 class="m-0 font-weight-bold text-secondary">Clientes</h6>
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
                         <table class="table table-striped table-hover" id="dataTable" width="100%" cellspacing="0">
                             <thead class="thead-danger">
                                 <tr>
-                                    <th>Name</th>
-                                    <th>ITIN</th>
-                                    <th>Age</th>
-                                    <th>Start date</th>
-                                    <th>Action</th>
+                                    <th>Nome</th>
+                                    <th>CPF</th>
+                                    <th>Idade</th>
+                                    <th>Data.Cadastro</th>
+                                    <th>Ação</th>
                                 </tr>
                             </thead>
                             
