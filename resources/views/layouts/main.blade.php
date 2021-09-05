@@ -119,7 +119,7 @@
 
             <!-- Heading -->
             <div class="sidebar-heading">
-                Relatórios
+                Gerência
             </div>
 
             <!-- Nav Item - Pages Collapse Menu -->
@@ -127,21 +127,22 @@
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages"
                     aria-expanded="true" aria-controls="collapsePages">
                     <i class="fas fa-archive"></i>
-                    <span>Arquivos</span>
+                    <span>Operações</span>
                 </a>
                 <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">Financeiro:</h6>
+                        <a class="collapse-item" href="{{route('account.book')}}">
+                            <i class="fas fa-cash-register mx-2"></i>
+                            Caixa
+                        </a>
                         <h6 class="collapse-header">Relatórios:</h6>
                         <a class="collapse-item" href="{{route('archive.customer')}}">
                             <i class="fas fa-users mx-2"></i>
                             Clientes
                         </a>
-                        <a class="collapse-item" href="register.html">
-                            <i class="fas fa-chalkboard-teacher mx-2"></i>
-                            Resultados
-                        </a>
-                        <a class="collapse-item" href="forgot-password.html">
-                            <i class="fas fa-cash-register mx-2"></i>
+                        <a class="collapse-item" href="{{route('payment.report')}}">
+                            <i class="fas fa-piggy-bank mx-2"></i>
                             Pagamentos
                         </a>
                     </div>

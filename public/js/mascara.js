@@ -2,6 +2,8 @@
 $(function() {
     $('#valor').maskMoney(),
     $('#desconto').maskMoney();
+    $('#valorMaior').maskMoney();
+    $('#valorMenor').maskMoney();
   })
 
 

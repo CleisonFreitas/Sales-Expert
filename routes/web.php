@@ -61,4 +61,13 @@ Route::get('/archives/customer_report', function () {
     return view('archives/customer_report');
 })->middleware(['auth'])->name('archive.customer');
 
+Route::get('/archives/payments_report', function () {
+    return view('archives/payment_report');
+})->middleware(['auth'])->name('payment.report');
+
+// Operation
+Route::get('/operation/accountability', function () {
+    return view('operation/account_book');
+})->middleware(['auth'])->name('account.book');
+
 require __DIR__.'/auth.php';
