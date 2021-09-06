@@ -1,17 +1,20 @@
 @extends('/layouts/main')
 
-@section('title','Caixas')
+@section('title','Caixa')
 
 @section('content')
 
 <div class="card shadow mt-3">
     <div class="card-header py-1">
-        <h2 class="mb-4 text-gray-800 mt-2">Relatório de Pagamentos</h2>
+        <h2 class="mb-4 text-gray-800 mt-2">Controle de caixa</h2>
     </div>
     <div class="card-body text-danger">
+        <div class="card-header bg-gray-300">
+            <h5 class="m-0 font-weight-bold text-secondary">Abertura/Fechamento de caixa</h5>
+        </div>
         <form action="#" method="POST" class="">
             @csrf
-            <div class="row mb-4">
+            <div class="row mb-4 mt-2">
                 <div class="col-12 col-sm-8 col-lg-3">
                     <label for="dt_procedimento" class="col-form-label">Data:</label>
                     <input type="date" name="dt_procedimento" id="" value="{{ Date('Y-m-d') }}" class="form-control" readonly>
@@ -57,8 +60,8 @@
                     </div>
                     <div class="row mt-2">
                         <div class="col">
-                            <button type="submit" class="btn btn-danger">Gravar</button>
-                            <button type="submit" class="btn btn-secondary">Fechar</button>
+                            <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#abrirCaixa">Abrir</button>
+                            <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#fecharCaixa">Fechar</button>
                         </div>
                     </div>
                 </div>
@@ -73,6 +76,58 @@
                             <button class="btn bg-gray-400">Excel&nbsp; <img src="https://img.icons8.com/ios-filled/30/000000/ms-excel.png"/></button>
                             <button class="btn bg-gray-400">PDF&nbsp; <img src="https://img.icons8.com/ios-filled/30/000000/pdf--v2.png"/></button>
                         </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <!-- Modal para abertura de caixa -->
+                        <div class="modal fade" id="abrirCaixa" tabindex="-1" aria-labelledby="abrirCaixaLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                              <div class="modal-content">
+                                <div class="modal-header">
+                                  <h5 class="modal-title text-gray-600" id="abrirCaixaLabel">Abertura de caixa</h5>
+                                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                  </button>
+                                </div>
+                                <div class="modal-body">
+                                  <h6 class="text-form text-gray-600">
+                                    <i class="fas fa-exclamation-circle mx-3" style="color:red;"></i>
+                                        Deseja realmente abrir esse caixa?
+                                    </h6>
+                                </div>
+                                <div class="modal-footer">
+                                  <button type="submit" class="btn btn-danger" >Sim</button>
+                                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Não</button>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        <!-- #Abertura de caixa -->
+                        <!-- Modal para fechamento de caixa -->
+                        <div class="modal fade" id="fecharCaixa" tabindex="-1" aria-labelledby="fecharCaixaLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                              <div class="modal-content">
+                                <div class="modal-header">
+                                  <h5 class="modal-title text-gray-600" id="fecharCaixaLabel">Fechamento de caixa</h5>
+                                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                  </button>
+                                </div>
+                                <div class="modal-body">
+                                  <h6 class="text-form text-gray-600">
+                                    <i class="fas fa-exclamation-circle mx-3" style="color:red;"></i>
+                                        Deseja realmente fechar esse caixa?
+                                    </h6>
+                                </div>
+                                <div class="modal-footer">
+                                  <button type="submit" class="btn btn-danger" >Sim</button>
+                                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Não</button>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        <!-- #Abertura de caixa -->
                     </div>
                 </div>
 

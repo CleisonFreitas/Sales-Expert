@@ -8,7 +8,7 @@
         <div class="card-header py-1">
             <div class="row">
                 <div class="col-6 col-sm-6 col-lg-6">
-                    <h2 class="text-gray-600 mt-2 d-flex">Clientes</h2>
+                    <h2 class="text-gray-800 mt-2 d-flex">Clientes</h2>
                 </div>
                 <div class="col-6 col-sm-6 col-lg-6">
                     <nav class="mx-auto mt-2">

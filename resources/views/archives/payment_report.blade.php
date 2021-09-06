@@ -9,9 +9,13 @@
         <h2 class="mb-4 text-gray-800 mt-2">Relatório de Pagamentos</h2>
     </div>
     <div class="card-body text-danger">
+        <div class="card-header bg-gray-300">
+            <h5 class="m-0 font-weight-bold text-secondary">Relatório de pagamentos por período</h5>
+        </div>
         <form action="#" method="POST" class="">
             @csrf
             <div class="row mt-3">
+                
                 <div class="col-12 col-sm-12 col-lg-6"><!-- Início da divisão -->
 
                     <div class="row">
