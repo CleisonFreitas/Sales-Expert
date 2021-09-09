@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 
+use App\Http\Controllers\CompanyController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -13,6 +15,14 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+// Registers
+Route::get('/company', [CompanyController::class, 'show'])->name('company')->middleware(['auth']);
+
+Route::post('/company/create',  [CompanyController::class, 'register'])->name('company_register')->middleware(['auth']);
+Route::put('/company/update/{id}',   [CompanyController::class, 'update'])->name('company_updt')->middleware(['auth']);
+
+
+
 Route::get('/', function () {
     return view('welcome');
 });
@@ -21,9 +31,6 @@ Route::get('/dashboard', function () {
     return view('reports/dashboard');
 })->middleware(['auth'])->name('dashboard');
 
-Route::get('/company', function () {
-    return view('registers/company');
-})->middleware(['auth'])->name('company');
 
 Route::get('/employer', function () {
     return view('registers/employer');

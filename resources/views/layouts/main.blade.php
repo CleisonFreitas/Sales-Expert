@@ -332,6 +332,7 @@
         });
         </script>
 
+
     <!-- Bootstrap core JavaScript-->
     <script src="{{ asset('vendor/jquery/jquery.min.js') }}"></script>
     
@@ -370,6 +371,27 @@
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js" integrity="sha384-eMNCOe7tC1doHpGoWe/6oMVemdAVTMs2xqW4mwXrXsW0L84Iytr2wi5v2QjrP/xp" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.min.js" integrity="sha384-cn7l7gDp0eyniUwwAZgrzD06kc/tftFf19TOAs2zVinnD/C7E91j9yyk5//jjpt/" crossorigin="anonymous"></script>
 
+    <!-- Sweet Alert -->
+    <script src="{{ asset('js/sweetalert/sweetalert.min.js') }}"></script>
+    @if(session('sucesso'))
+        <script>
+            Swal.fire({
+            position: 'top-end',
+            icon: 'success',
+            title: 'Procedimento realizado com sucesso!',
+            showConfirmButton: false,
+            timer: 1500
+            })
+        </script>
+        @elseif ($errors->any())
+            <script>
+                Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Erro ao tentar realizar procedimento!',
+                })
+            </script>
+        @endif
 </body>
 
 </html>
