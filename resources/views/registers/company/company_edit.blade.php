@@ -19,7 +19,7 @@
                     <div class="row mt-3">
                         <div class="col-12 col-sm-3 col-lg-3">
                             <label for="dt_register text-danger">Cadastro</label>
-                            <input type="date" value="{{ date('Y-m-d')}}" name="dt_cadastro" id="" class="form-control mb-2" readonly>
+                            <input type="date" value="{{ date('Y-m-d',$c->created_up)}}" name="dt_cadastro" id="" class="form-control mb-2" readonly>
                         </div>
                     </div>
                     <div class="row mt-3">

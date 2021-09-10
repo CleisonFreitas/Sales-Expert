@@ -3,6 +3,9 @@
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\CompanyController;
+use App\Http\Controllers\EmployerController;
+
+
 
 /*
 |--------------------------------------------------------------------------
@@ -15,11 +18,16 @@ use App\Http\Controllers\CompanyController;
 |
 */
 
-// Registers
-Route::get('/company', [CompanyController::class, 'show'])->name('company')->middleware(['auth']);
+// Registers - Company
 
-Route::post('/company/create',  [CompanyController::class, 'register'])->name('company_register')->middleware(['auth']);
-Route::put('/company/update/{id}',   [CompanyController::class, 'update'])->name('company_updt')->middleware(['auth']);
+Route::get('/company',              [CompanyController::class, 'show'])->name('company')->middleware(['auth']);
+Route::post('/company/create',      [CompanyController::class, 'register'])->name('company_register')->middleware(['auth']);
+Route::put('/company/update/{id}',  [CompanyController::class, 'update'])->name('company_updt')->middleware(['auth']);
+
+// Registers - Employer
+Route::get('/employer',         [EmployerController::class, 'show'])->name('employer')->middleware(['auth']);
+Route::post('/employer/create', [EmployerController::class, 'create'])->name('employer_create')->middleware(['auth']);
+
 
 
 
@@ -32,9 +40,6 @@ Route::get('/dashboard', function () {
 })->middleware(['auth'])->name('dashboard');
 
 
-Route::get('/employer', function () {
-    return view('registers/employer');
-})->middleware(['auth'])->name('employer');
 
 Route::get('/supplier', function () {
     return view('registers/supplier');

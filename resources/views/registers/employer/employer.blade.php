@@ -1,4 +1,4 @@
-@extends('/layouts/main')
+@extends('./layouts/main')
 
 @section('title','Employer')
 
@@ -26,7 +26,7 @@
         </div>
         <div class="card-body text-danger">
 
-            <form action="#" method="POST">
+            <form action="{{ route('employer_create') }}" method="POST">
                 @csrf
                 <div class="tab-content" id="nav-tabContent">
                     <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
@@ -36,8 +36,8 @@
                         </div>
                         <div class="row mt-2 mb-3">
                             <div class="col-12 col-sm-12 col-lg-3">
-                                <label for="dt_register">Cadastro:</label>
-                                <input type="date" name="dt_register" value="{{ date('Y-m-d') }}" id="" class="form-control">
+                                <label for="dt_cad">Cadastro:</label>
+                                <input type="date" name="dt_cad" value="{{ date('Y-m-d') }}" id="" class="form-control">
                             </div>
                         </div>
 
@@ -58,27 +58,27 @@
                         <div class="row mb-3">
                             <div class="col-12 col-sm-12 col-lg-9">
                                 <label for="f_name">Nome Completo:</label>
-                                <input type="text" name="f_name" id="" class="form-control">
+                                <input type="text" name="p_nome" id="" class="form-control">
                                 <small class="form-text text-secondary">*Campo obrigatório</small>
                             </div>
                             <div class="col-12 col-sm-12 col-lg-3">
                                 <label for="b_day">Nascimento:</label>
-                                <input type="date" name="" id="" class="form-control">
+                                <input type="date" name="dt_nasc" id="" class="form-control">
                                 <small class="form-text text-secondary">*Campo obrigatório</small>
                             </div>
                         </div>
                         <div class="row mb-3">
                             <div class="col-12 col-sm-12 col-lg-4">
                                 <label for="itin">CPF:</label>
-                                <input type="text" name="itin" id="txtCpf" maxlength="14" onkeyup="mask_cpf();" class="form-control">
+                                <input type="text" name="cpf" id="txtCpf" maxlength="14" onkeyup="mask_cpf();" class="form-control">
                             </div>
                             <div class="col-12 col-sm-6 col-lg-5">
                                 <label for="ssn">RG:</label>
-                                <input type="text" name="ssn" id="" class="form-control">
+                                <input type="text" name="rg" id="" class="form-control">
                             </div>
                             <div class="col-12 col-sm-6 col-lg-3">
                                 <label for="gender">Gênero:</label>
-                                <select name="gender" id="" class="custom-select">
+                                <select name="genero" id="" class="custom-select">
                                     <option value="M">Masculino</option>
                                     <option value="F">Feminino</option>
                                     <option value="O">Outro</option>
@@ -94,28 +94,28 @@
                         <div class="row mt-2 mb-3">
                             <div class="col-12 col-sm-12 col-lg-3">
                                 <label for="zip_code">Cep: </label>
-                                <input type="text" name="zip_code" id="cep" maxlength="9" class="form-control" onkeyup="mask_cep();" onblur="pesquisacep(this.value);">                            </div>
+                                <input type="text" name="cep" id="cep" maxlength="9" class="form-control" onkeyup="mask_cep();" onblur="pesquisacep(this.value);">                            </div>
                             <div class="col-8 col-sm-9 col-lg-7">
                                 <label for="street">Rua/Avenida: </label>
-                                <input type="text" name="street" id="street" class="form-control">
+                                <input type="text" name="logradouro" id="street" class="form-control">
                             </div>
                             <div class="col-4 col-sm-3 col-lg-2">
                                 <label for="n_home">Número: </label>
-                                <input type="text" name="n_home" id="" class="form-control">
+                                <input type="text" name="numero" id="" class="form-control">
                             </div>
                         </div>
                         <div class="row mt-2 mb-3">
                             <div class="col-9 col-sm-9 col-lg-4">
                                 <label for="city">Cidade:</label>
-                                <input type="text" name="city" id="city" class="form-control">
+                                <input type="text" name="cidade" id="city" class="form-control">
                             </div>
                             <div class="col-3 col-sm-3 col-lg-2">
                                 <label for="state">Estado:</label>
-                                <input type="text" name="state" id="state" class="form-control">
+                                <input type="text" name="estado" id="state" class="form-control">
                             </div>
                             <div class="col-12 col-sm-12 col-lg-6">
                                 <label for="district">Bairro:</label>
-                                <input type="text" name="district" id="district" class="form-control">
+                                <input type="text" name="bairro" id="district" class="form-control">
                             </div>
                         </div>
                         <div class="row mt-2 mb-3">
@@ -130,17 +130,17 @@
                             </div>
                             <div class="col-12 col-sm-12 col-lg-4">
                                 <label for="ct_numb">Celular:</label>
-                                <input type="text" name="ct_numb" id="txtFone"  maxlength="15" onkeyup="mask_fone();" class="form-control">
+                                <input type="text" name="ct_num" id="txtFone"  maxlength="15" onkeyup="mask_fone();" class="form-control">
                             </div>
                         </div>
                         <div class="row mb-3">
                             <div class="col-12 col-sm-12 col-lg-4">
                                 <label for="whatsapp">WhatsApp:</label>
-                                <input type="text" name="whatsapp" id="txtWhats"  maxlength="15" onkeyup="mask_whats();" class="form-control">
+                                <input type="text" name="ct_whats" id="txtWhats"  maxlength="15" onkeyup="mask_whats();" class="form-control">
                             </div>
                             <div class="col-12 col-sm-12 col-lg-4">
                                 <label for="facebook">Facebook:</label>
-                                <input type="text" name="f_book" id="" class="form-control">
+                                <input type="text" name="facebook" id="" class="form-control">
                             </div>
                             <div class="col-12 col-sm-12 col-lg-4">
                                 <label for="col-12 col-sm-12 col-lg-4">Instagram:</label>
@@ -149,8 +149,8 @@
                         </div>
                         <div class="row mt-2 mb-3">
                             <div class="col">
-                                <button type="submit" class="btn btn-danger">Send</button>
-                                <button type="reset" class="btn btn-secondary">Clear</button>
+                                <button type="submit" class="btn btn-danger">Gravar</button>
+                                <button type="reset" class="btn btn-secondary">Desfazer</button>
                             </div>
                         </div>
                     </form>
@@ -182,11 +182,12 @@
                                                 </thead>
                                                 
                                                 <tbody>
+                                                    @foreach($employers as $employer)
                                                     <tr>
-                                                        <td>Tiger Nixon</td>
-                                                        <td>145.452.652-45</td>
-                                                        <td>18</td>
-                                                        <td>10/08/2021</td>
+                                                        <td>{{ $employer->p_nome }}</td>
+                                                        <td>{{ $employer->cpf }}</td>
+                                                        <td>{{ date('d-m-Y',strtotime($employer->dt_nasc)) }}</td>
+                                                        <td>{{ date('d-m-Y', strtotime($employer->dt_cad)) }}</td>
                                                         <td>
                                                             <div class="row">
                                                                 <div class="col-6 col-sm-6 col-lg-4">
@@ -202,46 +203,7 @@
                                                             </div>
                                                         </td>
                                                     </tr>
-                                                    <tr>
-                                                        <td>Garrett Winters</td>
-                                                        <td>452.141.365-25</td>
-                                                        <td>63</td>
-                                                        <td>20/07/2020</td>
-                                                        <td>
-                                                            <div class="row">
-                                                                <div class="col-6 col-sm-6 col-lg-4">
-                                                                    <a href="#" class="btn btn-danger">
-                                                                        <i class="fas fa-pencil-alt"></i>
-                                                                    </a>
-                                                                </div>
-                                                                <div class="col-6 col-sm-6 col-lg-4">
-                                                                    <a href="#" class="btn btn-secondary">
-                                                                        <i class="fas fa-user-check"></i>
-                                                                    </a>
-                                                                </div>
-                                                            </div> 
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>Ashton Cox</td>
-                                                        <td>033.143.893-37</td>
-                                                        <td>66</td>
-                                                        <td>12/01/2021</td>
-                                                        <td>
-                                                            <div class="row">
-                                                                <div class="col-6 col-sm-6 col-lg-4">
-                                                                    <a href="#" class="btn btn-danger">
-                                                                        <i class="fas fa-pencil-alt"></i>
-                                                                    </a>
-                                                                </div>
-                                                                <div class="col-6 col-sm-6 col-lg-4">
-                                                                    <a href="#" class="btn btn-secondary">
-                                                                        <i class="fas fa-user-check"></i>
-                                                                    </a>
-                                                                </div>
-                                                            </div> 
-                                                        </td>
-                                                    </tr>
+                                                    @endforeach
                                                 </tbody>
                                             </table>
                                         </div>
