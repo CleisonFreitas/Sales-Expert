@@ -25,11 +25,12 @@ Route::post('/company/create',      [CompanyController::class, 'register'])->nam
 Route::put('/company/update/{id}',  [CompanyController::class, 'update'])->name('company_updt')->middleware(['auth']);
 
 // Registers - Employer
-Route::get('/employer',         [EmployerController::class, 'show'])->name('employer')->middleware(['auth']);
-Route::post('/employer/create', [EmployerController::class, 'create'])->name('employer_create')->middleware(['auth']);
-
-
-
+Route::get('/employer',             [EmployerController::class, 'show'])->name('employer')->middleware(['auth']);
+Route::post('/employer/create',     [EmployerController::class, 'create'])->name('employer_create')->middleware(['auth']);
+Route::get('/employer/edit/{id}',   [EmployerController::class, 'edit'])->name('employer_edit')->middleware(['auth']);
+Route::put('/employer/update/{id}', [EmployerController::class, 'updt'])->name('employer_updt')->middleware(['auth']);
+Route::get('/employer/warning/{id}',[EmployerController::class, 'warning'])->name('employer_warning')->middleware(['auth']);
+Route::get('/employer/delete/{id}', [EmployerController::class, 'delete'])->name('employer_delete')->middleware(['auth']);
 
 Route::get('/', function () {
     return view('welcome');

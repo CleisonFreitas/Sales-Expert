@@ -255,11 +255,13 @@
                 <!-- End of Topbar -->
 
                 <!-- Begin Page Content -->
+                
+                    <div class="container-fluid lead mb-4" >
+                        <small>
+                            @yield('content')
+                        </small>
+                    </div>
                
-                <div class="container-fluid lead mb-4" >
-                    @yield('content')
-
-                </div>
                 <!-- /.container-fluid -->
 
             </div>
