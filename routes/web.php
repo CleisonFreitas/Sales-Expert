@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\EmployerController;
+use App\Http\Controllers\SupplierController;
 
 
 
@@ -32,6 +33,14 @@ Route::put('/employer/update/{id}', [EmployerController::class, 'updt'])->name('
 Route::get('/employer/warning/{id}',[EmployerController::class, 'warning'])->name('employer_warning')->middleware(['auth']);
 Route::get('/employer/delete/{id}', [EmployerController::class, 'delete'])->name('employer_delete')->middleware(['auth']);
 
+//Registers - Supplier
+Route::get('/supplier',                 [SupplierController::class, 'show'])->name('supplier')->middleware(['auth']);
+Route::post('/supplier/create',         [SupplierController::class, 'create'])->name('supplier_create')->middleware(['auth']);
+Route::get('/supplier/edit/{id}',       [SupplierController::class, 'edit'])->name('supplier_edit')->middleware(['auth']);
+Route::put('/supplier/update/{id}',     [SupplierController::class, 'updt'])->name('supplier_update')->middleware(['auth']);
+Route::get('/supplier/warning/{id}',    [SupplierController::class, 'warning'])->name('supplier_warning')->middleware(['auth']);
+Route::get('/supplier/delete/{id}',     [SupplierController::class, 'delete'])->name('supplier_delete')->middleware(['auth']);
+
 Route::get('/', function () {
     return view('welcome');
 });
@@ -41,10 +50,6 @@ Route::get('/dashboard', function () {
 })->middleware(['auth'])->name('dashboard');
 
 
-
-Route::get('/supplier', function () {
-    return view('registers/supplier');
-})->middleware(['auth'])->name('supplier');
 
 Route::get('/payment', function () {
     return view('registers/payment');

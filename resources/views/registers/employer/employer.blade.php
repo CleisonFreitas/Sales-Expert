@@ -190,8 +190,8 @@
                                                     <tr>
                                                         <td>{{ $employer->p_nome }}</td>
                                                         <td>{{ $employer->cpf }}</td>
-                                                        <td>{{ date('d-m-Y',strtotime($employer->dt_nasc)) }}</td>
-                                                        <td>{{ date('d-m-Y', strtotime($employer->dt_cad)) }}</td>
+                                                        <td>{{ date('d/m/Y',strtotime($employer->dt_nasc)) }}</td>
+                                                        <td>{{ date('d/m/Y', strtotime($employer->dt_cad)) }}</td>
                                                         <td>
                                                             <div class="row">
                                                                 <div class="col-6 col-sm-6 col-lg-3">
