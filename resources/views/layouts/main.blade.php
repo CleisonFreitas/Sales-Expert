@@ -83,7 +83,7 @@
                         <a class="collapse-item" href="{{ route('supplier') }}">
                             <i class="fas fa-store mx-1"></i><span>Fornecedores</span>
                         </a>
-                        <a class="collapse-item" href="{{ route('payment') }}">
+                        <a class="collapse-item" href="{{ route('payment_method') }}">
                             <i class="far fa-money-bill-alt mx-1"></i>
                             Formas de Pagamento
                         </a>
