@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\EmployerController;
 use App\Http\Controllers\SupplierController;
+use App\Http\Controllers\PaymentMethodController;
 
 
 
@@ -41,6 +42,14 @@ Route::put('/supplier/update/{id}',     [SupplierController::class, 'updt'])->na
 Route::get('/supplier/warning/{id}',    [SupplierController::class, 'warning'])->name('supplier_warning')->middleware(['auth']);
 Route::get('/supplier/delete/{id}',     [SupplierController::class, 'delete'])->name('supplier_delete')->middleware(['auth']);
 
+//Registers - Payments
+Route::get('/payment_method',                   [PaymentMethodController::class, 'show'])->name('payment_method')->middleware(['auth']);
+Route::post('/payment_method/create',           [PaymentMethodController::class, 'create'])->name('payment_method_create')->middleware(['auth']);
+Route::get('/payment_method/edit/{id}',         [PaymentMethodController::class, 'edit'])->name('payment_method_edit')->middleware(['auth']);
+Route::put('/payment_method/update/{id}',       [PaymentMethodController::class, 'updt'])->name('payment_method_updt')->middleware(['auth']);
+Route::get('/payment_method/warning/{id}',      [PaymentMethodController::class, 'warning'])->name('payment_method_warning')->middleware(['auth']);
+Route::get('/payment_method/delete/{id}',       [PaymentMethodController::class, 'delete'])->name('payment_method_delete')->middleware(['auth']);
+
 Route::get('/', function () {
     return view('welcome');
 });
@@ -49,11 +58,6 @@ Route::get('/dashboard', function () {
     return view('reports/dashboard');
 })->middleware(['auth'])->name('dashboard');
 
-
-
-Route::get('/payment', function () {
-    return view('registers/payment');
-})->middleware(['auth'])->name('payment');
 
 Route::get('/product&service', function () {
     return view('registers/service');
