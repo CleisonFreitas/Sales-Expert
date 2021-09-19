@@ -6,7 +6,8 @@ use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\EmployerController;
 use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\PaymentMethodController;
-
+use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\CustomerServiceController;
 
 
 /*
@@ -50,6 +51,18 @@ Route::put('/payment_method/update/{id}',       [PaymentMethodController::class,
 Route::get('/payment_method/warning/{id}',      [PaymentMethodController::class, 'warning'])->name('payment_method_warning')->middleware(['auth']);
 Route::get('/payment_method/delete/{id}',       [PaymentMethodController::class, 'delete'])->name('payment_method_delete')->middleware(['auth']);
 
+
+// Customers - Customer
+Route::get('/customer',                     [CustomerController::class, 'show'])->name('customer')->middleware(['auth']);
+Route::post('/customer/create',             [CustomerController::class, 'create'])->name('customer_create')->middleware(['auth']);
+Route::get('/customer/edit/{id}',           [CustomerController::class, 'edit'])->name('customer_edit')->middleware(['auth']);
+Route::put('/customer/update/{id}',         [CustomerController::class, 'updt'])->name('customer_updt')->middleware(['auth']);
+Route::get('/customer/warning/{id}',        [CustomerController::class, 'warning'])->name('customer_warning')->middleware(['auth']);
+Route::get('/customer/delete/{id}',         [CustomerController::class, 'delete'])->name('customer_delete')->middleware(['auth']);
+
+// Customers - Service
+Route::get('customers_service',             [CustomerServiceController::class, 'show'])->name('customer_service')->middleware(['auth']);
+
 Route::get('/', function () {
     return view('welcome');
 });
@@ -64,14 +77,6 @@ Route::get('/product&service', function () {
 })->middleware(['auth'])->name('service');
 
 // Customer
-
-Route::get('/customer', function () {
-    return view('customers/customer');
-})->middleware(['auth'])->name('customer');
-
-Route::get('/customer_service', function () {
-    return view('customers/customer_service');
-})->middleware(['auth'])->name('customer_service');
 
 Route::get('/customer_service_action', function () {
     return view('customers/customer_service_action');

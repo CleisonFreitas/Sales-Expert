@@ -69,7 +69,7 @@
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
                     aria-expanded="true" aria-controls="collapseTwo">
                     <i class="fas fa-paste"></i>
-                    <span>Área de Cadastro</span>
+                    <span>Área administrativa</span>
                 </a>
                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
@@ -85,7 +85,7 @@
                         </a>
                         <a class="collapse-item" href="{{ route('payment_method') }}">
                             <i class="far fa-money-bill-alt mx-1"></i>
-                            Formas de Pagamento
+                            Formas.pagamento
                         </a>
                     </div>
                 </div>

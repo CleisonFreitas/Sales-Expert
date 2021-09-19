@@ -30,7 +30,7 @@ private static $installed = array (
     'aliases' => 
     array (
     ),
-    'reference' => 'f80ef5c71d0263e6bc0832b0d8919b3967c725ba',
+    'reference' => '9b5c413bba0a9a21992a80c4ea5ebfa6df533898',
     'name' => 'laravel/laravel',
   ),
   'versions' => 
@@ -469,7 +469,7 @@ private static $installed = array (
       'aliases' => 
       array (
       ),
-      'reference' => 'f80ef5c71d0263e6bc0832b0d8919b3967c725ba',
+      'reference' => '9b5c413bba0a9a21992a80c4ea5ebfa6df533898',
     ),
     'laravel/sail' => 
     array (
@@ -1017,6 +1017,51 @@ private static $installed = array (
       array (
       ),
       'reference' => 'c6c1022351a901512170118436c764e473f6de8c',
+    ),
+    'spatie/db-dumper' => 
+    array (
+      'pretty_version' => '3.0.1',
+      'version' => '3.0.1.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => '1364325f3f3c5b7cdafd46bca5e9d422227a34d2',
+    ),
+    'spatie/laravel-backup' => 
+    array (
+      'pretty_version' => '7.6.6',
+      'version' => '7.6.6.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => '796d237b3774141317c956739ebaa40340e18b5a',
+    ),
+    'spatie/laravel-package-tools' => 
+    array (
+      'pretty_version' => '1.9.0',
+      'version' => '1.9.0.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => 'cf4c4cec220575e2864c6082842d76822421f1b1',
+    ),
+    'spatie/laravel-signal-aware-command' => 
+    array (
+      'pretty_version' => '1.1.1',
+      'version' => '1.1.1.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => '8c605808028943da9f6c0064d3fd16358526bcad',
+    ),
+    'spatie/temporary-directory' => 
+    array (
+      'pretty_version' => '2.0.0',
+      'version' => '2.0.0.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => '06fe0f10d068fdf145c9b2235030e568c913bb61',
     ),
     'swiftmailer/swiftmailer' => 
     array (

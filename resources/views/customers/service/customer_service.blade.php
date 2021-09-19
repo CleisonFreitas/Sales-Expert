@@ -61,7 +61,7 @@
                         </div>
                         <div class="row mt-3">
                             <div class="col-12 col-sm-12 col-lg-12">
-                                <label for="service">Profissional:</label>
+                                <label for="service">Responsável pelo atendimento:</label>
                                 <select name="pf_service" id="" class="custom-select">
                                     <option value="#">Jessica Andrade</option>
                                 </select>
