@@ -49,16 +49,16 @@
                             <div class="col-12 col-sm-9 col-lg-2">
                                 <label for="status">Status:</label>
                                 <select name="status" id="" class="custom-select">
-                                    <option value="on">Ativo</option>
-                                    <option value="off">Inativo</option>
+                                    <option value="Ativo">Ativo</option>
+                                    <option value="Inativo">Inativo</option>
                                 </select>
                             </div>
                         </div> 
 
                         <div class="row mb-3">
                             <div class="col-12 col-sm-12 col-lg-9">
-                                <label for="f_name">Nome Completo: <small class='text-danger'>@error('p_nome'){{  $message }} @enderror</small></label>
-                                <input type="text" name="p_nome" value="{{ old('p_nome') }}" id="" class="form-control">
+                                <label for="f_name">Nome Completo: <small class='text-danger'>@error('nome'){{  $message }} @enderror</small></label>
+                                <input type="text" name="nome" value="{{ old('nome') }}" id="" class="form-control">
                                 <small class="form-text text-secondary">
                                     *Campo obrigatório 
                                 </small>

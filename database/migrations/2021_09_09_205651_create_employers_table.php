@@ -14,9 +14,9 @@ class CreateEmployersTable extends Migration
     public function up()
     {
         Schema::create('employers', function (Blueprint $table) {
-            $table->id();
-            $table->string('p_nome',80);
-            $table->enum('status',['on','off']);
+            $table->increments('id');
+            $table->string('nome',80);
+            $table->enum('status',['Ativo','Inativo']);
             $table->date('dt_cad');
             $table->date('dt_nasc')->nullable();
             $table->string('cpf',15)->nullable();

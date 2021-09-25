@@ -56,22 +56,22 @@
                             <div class="col-12 col-sm-9 col-lg-2">
                                 <label for="status">Status:</label>
                                 @switch($employer->status)
-                                    @case('on')
+                                    @case('Ativo')
                                     <select name="status" id="" class="custom-select">
-                                        <option value="on" selected>Ativo</option>
-                                        <option value="off">Inativo</option>
+                                        <option value="Ativo" selected>Ativo</option>
+                                        <option value="Inativo">Inativo</option>
                                     </select>
                                         @break
-                                    @case('off')
+                                    @case('Inativo')
                                     <select name="status" id="" class="custom-select">
-                                        <option value="on">Ativo</option>
-                                        <option value="off" selected>Inativo</option>
+                                        <option value="Ativo">Ativo</option>
+                                        <option value="Inativo" selected>Inativo</option>
                                     </select>
                                         @break
                                     @default
                                     <select name="status" id="" class="custom-select">
-                                        <option value="on" selected>Ativo</option>
-                                        <option value="off">Inativo</option>
+                                        <option value="Ativo" selected>Ativo</option>
+                                        <option value="Inativo">Inativo</option>
                                     </select>
                                 @endswitch
                                 
@@ -81,7 +81,7 @@
                         <div class="row mb-3">
                             <div class="col-12 col-sm-12 col-lg-9">
                                 <label for="f_name">Nome Completo:</label>
-                                <input type="text" name="p_nome" value="{{ $employer->p_nome }}" id="" class="form-control">
+                                <input type="text" name="nome" value="{{ $employer->nome }}" id="" class="form-control">
                                 <small class="form-text text-secondary">*Campo obrigatório</small>
                             </div>
                             <div class="col-12 col-sm-12 col-lg-3">

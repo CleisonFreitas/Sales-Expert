@@ -19,6 +19,7 @@ class CreateCustomersTable extends Migration
             $table->string('apelido',15);
             $table->enum('status',['Ativo','Inativo']);
             $table->date('cadastro');
+            $table->integer('resp_id')->unsigned();
             $table->date('nascimento')->nullable();
             $table->string('cpf',15)->nullable();
             $table->string('rg',25)->nullable();
@@ -34,6 +35,7 @@ class CreateCustomersTable extends Migration
             $table->string('ct_whats',16)->nullable();
             $table->string('facebook',60)->nullable();
             $table->string('instagram',60)->nullable();
+            $table->foreign('resp_id')->references('id')->on('users');
             $table->timestamps();
         });
     }

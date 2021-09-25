@@ -35,14 +35,21 @@
             <div class="card-header bg-gray-300 ">
                 <h5 class="m-0 font-weight-bold text-secondary">Registrar novo atendimento</h5>
             </div>
-            <form action="#" method="POST">
+            <form action="{{ route('service_create') }}" method="POST">
                 @csrf
                 <div class="tab-content" id="nav-tabContent">
                     <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
                         <div class="row mt-3">
                             <div class="col-12 col-sm-8 col-lg-3">
                                 <label for="st_date">Cadastro:</label>
-                                <input type="date" name="st_date" value="{{ date('Y-m-d') }}"  id="" class="form-control">
+                                <input type="date" name="cadastro" value="{{ date('Y-m-d') }}"  id="" class="form-control">
+                            </div>
+                            <div class="col-12 col-sm-8 col-lg-3">
+                                <label for="status">Status:</label>
+                                <select name="status" id="" class="custom-select">
+                                    <option value="P">Pendente</option>
+                                    <option value="C">Concluído</option>
+                                </select>
                             </div>
                         </div>
                         <div class="row mt-3">
@@ -51,21 +58,21 @@
                                 <input type="text" name="id" id="" class="form-control bg-gray-300" readonly>
                             </div>
                             <div class="col-12 col-sm-6 col-lg-3">
-                                <label for="st_hour">Previsão:</label>
-                                <input type="date" name="dt_prev" value="{{ date('Y-m-d') }}" id="" class="form-control">
+                                <label for="dt_concl">Conclusão:</label>
+                                <input type="date" name="conclusao" value="" id="" class="form-control">
                             </div>
                             <div class="col-12 col-sm-6 col-lg-3">
                                 <label for="st_hour">Horário:</label>
-                                <input type="text" name="st_hour" value="{{ date('H:i:s') }}" id="" class="form-control">
+                                <input type="text" name="hora_agend" value="{{ date('H:i:s') }}" id="" class="form-control">
                             </div>
                         </div>
                         <div class="row mt-3">
                             <div class="col-12 col-sm-12 col-lg-12">
                                 <label for="service">Responsável pelo atendimento:</label>
-                                <select name="profissional" id="" class="custom-select">
+                                <select name="resp_id" id="" class="custom-select">
                                     <option>Selecionar</option>
                                     @foreach ($employers as $e)
-                                        <option value="#">{{ $e->p_nome }}</option>
+                                        <option value="{{ $e->id }}">{{ $e->p_nome }}</option>
                                     @endforeach
                                 </select>
                                 <small class="form-text text-secondary">*Campo obrigatório</small>
@@ -78,50 +85,65 @@
                         </div>
                         <div class="row">
                             <div class="col-12 col-sm-4 col-lg-2">
-                                <input type="text" name="" id="" class="form-control" readonly>
+                                <input type="text" name="cust_id" id="" value="{{ $customers->id }}" class="form-control" readonly>
                             </div>
                             <div class="col-12 col-sm-8 col-lg-10">
-                                <input type="text" name="ct_id" value="" id="" class="form-control" readonly>
+                                <input type="text" name="ct_nome" value="{{ $customers->nome }}" id="" class="form-control" readonly>
                             </div>
                         </div>
                         <div class="row mt-3">
                             <div class="col-12 col-sm-12 col-lg-12">
                                 <label for="description">Descrição:</label>
-                                <input type="text" name="descr" maxlength="255" id="" class="form-control">
+                                <input type="text" name="descricao" maxlength="255" id="" class="form-control">
                             </div>
                         </div>
                         <div class="row mt-3">
                             <div class="col-12 col-sm-12 col-lg-12">
                                 <label for="note">Observação:</label>
-                                <textarea name="note" id="" cols="30" rows="5" class="form-control" maxlength="255"></textarea>
+                                <textarea name="observacao" id="" cols="30" rows="5" class="form-control" maxlength="255"></textarea>
                             </div>      
                         </div>
+                        <div class="row mt-3">
+                            <div class="col">
+                                <small class="text-secondary">*Necessário informar a forma de pagamento, antes de gravar</small>
+                            </div>
+                        </div>
                     </div>
-
                     <!-- Produto/Serviço -->
                     <div class="tab-pane fade" id="nav-prdserv" role="tabpanel" aria-labelledby="nav-prdserv-tab">
-                        <div class="row mt-4">
+                        <div class="row mt-1">
                             <div class="col-12 col-sm-12 col-lg-6 mb-2">
+
                                 <div class="row">
                                     <div class="col">
-                                        <label for="service">Produto/Serviço:</label>
-                                        <select name="prd_serv" id="" class="custom-select" required>
-                                            <option value="#">Health Care</option>
-                                            <option value="#">Skin Drainage</option>
+                                        <label for="forma_pagamento">Forma de Pagamento:</label>
+                                        <select name="form_paga_id" id="" class="custom-select">
+                                            <option>Selecionar forma de pagamento</option>
+                                            @foreach ($payment_methods as $payment)
+                                                <option value="{{ $payment->id }}">{{ $payment->descricao }}</option>
+                                            @endforeach
                                         </select>
                                     </div>
                                 </div>
                                 <div class="row mt-2">
-                                    <div class="col">
-                                        <button type="button" class="btn btn-secondary" id="btn2" style="width:100%">Adicionar</button>
+                                    <div class="col-12 col-sm-6 col-lg-4">
+                                        <label for="cortesia">Cortesia: </label>
+                                        <select name="cortesia" id="" class="custom-select">
+                                            <option value="N" selected>Não</option>
+                                            <option value="S">Sim</option>
+                                        </select>
                                     </div>
                                 </div>
-                                <div class="form-group row mt-4">
+
+                            </div>
+                            <div class="col-12 col-sm-12 col-lg-6">
+
+                                <div class="row">
                                     <div class="col-12 col-sm-12 col-lg-6">
                                         <label for="valor">Valor:</label>
                                         <div class="input-group">
                                             <div class="input-group-prepend">
-                                                <span class="btn btn-danger">
+                                                <span class="btn btn-secondary">
                                                     R$
                                                 </span>
                                             </div>
@@ -140,47 +162,37 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="form-group row mt-3">
-                                    <div class="col-12 col-sm-6 col-lg-4">
-                                        <label for="cortesia">Cortesia: </label>
-                                        <select name="cortesia" id="" value="S" class="custom-select">
-                                            <option value="#" selected>Não</option>
-                                            <option value="#">Sim</option>
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-12 col-sm-12 col-lg-6">
-                                <div class="card shadow">
-                                    <div class="card-header bg-danger">
-                                        <h6 class="text-white mt-2 d-flex font-weight-bold">Adicionar/Remover</h6>
-                                    </div>
-                                    <div class="card-body shadow bg-light">
-                                        <div class="table-responsive">
-                                            <table class="table table-hover">
-                                                <tbody>
-                                                    <div id="div1">
-                                                    <tr>
-                                                        <td>Health Care</td>
-                                                        <td>
-                                                            <button type="button" class="btn btn-sm btn-danger btn-circle rem" >
-                                                                <i class="fas fa-minus"></i>
-                                                            </button>
-                                                        </td>
-                                                    </tr>
-                                                </div>
-                                                </tbody>
-                                            </table>
+                                <div class="row mt-2">
+                                    <div class="col-12 col-sm-12 col-lg-6">
+                                        <label for="total">Total:</label>
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="btn btn-secondary">
+                                                    R$
+                                                </span>
+                                            </div>
+                                            <input type="text" name="total" id="" class="form-control" readonly>
                                         </div>
                                     </div>
                                 </div>
-                                
+                            </div>
+
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col">
+                                <button type="submit" class="btn btn-danger">Gravar</button>
+                                <button type="reset" class="btn btn-secondary">Limpar</button>
                             </div>
                         </div>
                     </div>
+                </div>
+            </form>
+        </div>
+    </div>
+            
                     <!-- #Produto/Serviço -->
 
-                    <!-- Parcelas -->
+                    <!-- Parcelas 
                     <div class="tab-pane fade" id="nav-parc" role="tabpanel" aria-labelledby="nav-parc">
                         <div class="row mt-3">
                             <div class="col-12 col-sm-12 col-lg-3">
@@ -195,16 +207,5 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </div>
-                <div class="row mt-3">
-                    <div class="col">
-                        <button type="submit" class="btn btn-danger">Gravar</button>
-                        <button type="reset" class="btn btn-secondary">Limpar</button>
-                    </div>
-                </div>
-            </form>
-        </div>
-    </div>
-
+                    </div>-->
 @endsection

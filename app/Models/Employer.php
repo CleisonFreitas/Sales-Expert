@@ -16,7 +16,7 @@ class Employer extends Model
     protected $table = 'employers';
     protected $fillable = [
     'id',
-    'p_nome',
+    'nome',
     'status',
     'dt_cad',
     'dt_nasc',

@@ -38,6 +38,7 @@
                             <div class="col-12 col-sm-12 col-lg-3">
                                 <label for="dt_register">Cadastro:</label>
                                 <input type="date" name="cadastro" value="{{ date('Y-m-d') }}" id="" class="form-control">
+                                <input type="hidden" name="id_resp" value="{{ Auth::user()->id }}">
                             </div>
                         </div>
 
@@ -199,7 +200,7 @@
                                                             <a href="{{ route('customer_edit',$c->id) }}" class="btn btn-secondary btn-sm btn-circle">
                                                                 <i class="fas fa-pencil-alt"></i>
                                                             </a>
-                                                            <a href="{{ route('customer_edit',$c->id) }}" class="btn btn-primary btn-sm btn-circle">
+                                                            <a href="{{ route('customer_shop',$c->id) }}" class="btn btn-primary btn-sm btn-circle">
                                                                 <i class="fas fa-people-arrows"></i>
                                                             </a>.
                                                             <a href="{{ route('customer_warning',$c->id) }}" class="btn btn-danger btn-sm btn-circle">
