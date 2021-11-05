@@ -172,7 +172,7 @@
                                     <div class="card-header bg-gray-300 py-3">
                                         <h5 class="m-0 font-weight-bold text-secondary">Lista de Funcionários</h5>
                                     </div>           
-                                    <div class="card-body">
+                                    <small><div class="card-body">
                                         <div class="table-responsive">
                                             <table class="table table-striped table-hover border-1" id="dataTable" width="100%" cellspacing="0">
                                                 <thead class="text-dark">
@@ -188,7 +188,7 @@
                                                 <tbody>
                                                     @foreach($employers as $employer)
                                                     <tr>
-                                                        <td>{{ $employer->p_nome }}</td>
+                                                        <td>{{ $employer->nome }}</td>
                                                         <td>{{ $employer->cpf }}</td>
                                                         <td>{{ $employer->age }} anos</td>
                                                         <td>{{ date('d/m/Y', strtotime($employer->dt_cad)) }}</td>
@@ -206,7 +206,7 @@
                                                 </tbody>
                                             </table>
                                         </div>
-                                    </div>
+                                    </div><small>
                                 </div>
                                 <!-- table -->
                                 </div>

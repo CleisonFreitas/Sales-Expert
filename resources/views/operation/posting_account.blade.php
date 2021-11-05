@@ -1,4 +1,4 @@
-@extends('/layouts/main')
+@extends('layouts.main')
 
 @section('title','Lançamentos')
 
@@ -71,8 +71,8 @@
                     <div class="input-group">
                         <div class="input-group-prepend">
                             <button class="btn btn-dark">R$</button>
-                            <input type="text" name="valor" id="valor" class="form-control">
-                        </div>           
+                        </div> 
+                        <input type="text" name="valor" id="valor" class="form-control">         
                     </div>    
                 </div>
             </div>

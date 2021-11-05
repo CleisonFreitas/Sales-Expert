@@ -38,7 +38,7 @@
                             <div class="col-12 col-sm-12 col-lg-3">
                                 <label for="dt_register">Cadastro:</label>
                                 <input type="date" name="cadastro" value="{{ date('Y-m-d') }}" id="" class="form-control">
-                                <input type="hidden" name="id_resp" value="{{ Auth::user()->id }}">
+                                <input type="hidden" name="resp_id" value="{{ Auth::user()->id }}">
                             </div>
                         </div>
 
@@ -157,7 +157,7 @@
                         </div>
                         <div class="row mt-2 mb-3">
                             <div class="col">
-                                <button type="submit" class="btn btn-danger">Atualizar</button>
+                                <button type="submit" class="btn btn-danger">Gravar</button>
                                 <button type="reset" class="btn btn-secondary">Limpar</button>
                             </div>
                         </div>
@@ -171,7 +171,7 @@
                             @csrf
                             <div class="row">
                                 <div class="col-12 col-sm-12 col-lg-12">
-                                     <!-- DataTales Example -->
+                                <!-- DataTales Example -->
                                 <div class="card shadow mb-4">
                                     <div class="card-header bg-gray-300 ">
                                         <h5 class="m-0 font-weight-bold text-secondary">Lista de Clientes</h5>
@@ -202,7 +202,7 @@
                                                             </a>
                                                             <a href="{{ route('customer_shop',$c->id) }}" class="btn btn-primary btn-sm btn-circle">
                                                                 <i class="fas fa-people-arrows"></i>
-                                                            </a>.
+                                                            </a>
                                                             <a href="{{ route('customer_warning',$c->id) }}" class="btn btn-danger btn-sm btn-circle">
                                                                 <i class="fas fa-trash"></i>
                                                             </a>

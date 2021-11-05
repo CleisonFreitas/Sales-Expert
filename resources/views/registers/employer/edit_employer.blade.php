@@ -223,7 +223,7 @@
                                                 <tbody>
                                                    
                                                     <tr>
-                                                        <td>{{ $employer->p_nome }}</td>
+                                                        <td>{{ $employer->nome }}</td>
                                                         <td>{{ $employer->cpf }}</td>
                                                         <td>{{ $employer->age }} anos</td>
                                                         <td>{{ date('d/m/Y', strtotime($employer->dt_cad)) }}</td>
@@ -231,7 +231,7 @@
                                                             <div class="row">
                                                                 <div class="col-6 col-sm-6 col-lg-3">
                                                                     <a href="{{ route('employer_warning',$employer->id) }}" class="btn btn-sm btn-circle btn-danger">
-                                                                        <i class="fas fa-minus"></i>
+                                                                        <i class="fas fa-trash"></i>
                                                                     </a>
                                                                 </div>
                                                             </div>

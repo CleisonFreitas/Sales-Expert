@@ -18,7 +18,7 @@ class CreateCustomerServicesTable extends Migration
             $table->string('descricao', 100)->nullable();
             $table->date('cadastro')->nullable();
             $table->string('status',1);
-            $table->date('conclusao')->nullable();
+            $table->date('data_agend')->nullable();
             $table->string('hora_agend',10);
             $table->integer('resp_id')->unsigned();
             $table->integer('cust_id')->unsigned();

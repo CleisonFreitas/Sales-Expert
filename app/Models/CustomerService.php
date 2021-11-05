@@ -9,13 +9,17 @@ class CustomerService extends Model
 {
     use HasFactory;
 
+    public function getValorAttribute($valor){
+        return $this->attributes['valor'] = sprintf("R$",number_format($valor,2,',','.'));
+    }
+
     protected $table = 'customer_services';
     protected $fillable = [
         'ordem',
         'descricao',
         'cadastro',
         'status',
-        'conclusao',
+        'data_agend',
         'hora_agend',
         'resp_id',
         'cust_id',

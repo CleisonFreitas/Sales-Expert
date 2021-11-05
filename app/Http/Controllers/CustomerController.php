@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Customer;
-use RealRashid\SweetAlert\Facades\Alert;
+use Alert;
 
 class CustomerController extends Controller
 {
@@ -15,9 +15,9 @@ class CustomerController extends Controller
     public function create(Request $request){
         $cliente = Customer::create($request->all());
         if($cliente == true){
-            return redirect()->route('customer')->withSuccess('Cliente cadastrado com sucesso!');
+            return redirect()->route('customer')->with([Toast()->Success('Cliente cadastrado com sucesso!')->timerProgressBar()]);
         }
-            return redirect()->back()->withInput()->withError('Erro ao tentar cadastrar cliente');
+            return redirect()->back()->with([input()->toast()->error("Erro ao tentar cadastrar novo cliente")]);
     }
     public function edit($id){
         $cliente = Customer::find($id);
@@ -27,9 +27,9 @@ class CustomerController extends Controller
         $customer = Customer::find($id);
         $customer->update($request->all());
         if($customer == true){
-            return redirect()->back()->withSuccess('Cadastro de cliente atualizado com sucesso!');
+            return redirect()->back()->withToastSuccess('Cadastro de cliente atualizado com sucesso!');
         }
-            return redirect()->back()->withInput()->withError('Erro ao tentar atualizar cadastro!');
+            return redirect()->back()->withInput()->withToastError('Erro ao tentar atualizar cadastro!');
     }
     public function warning($id){
         $cliente = Customer::find($id);
@@ -47,7 +47,7 @@ class CustomerController extends Controller
         if($cliente == true){
             return redirect()->route('customer')->withSuccess('Cadastro de cliente excluído com sucesso!');
         }
-            return redirect()->back()->withError('Erro ao tentar excluir cliente');
+            return redirect()->back()->withToastError('Erro ao tentar excluir cliente');
     }
 
 }

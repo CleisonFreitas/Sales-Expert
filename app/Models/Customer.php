@@ -18,6 +18,7 @@ class Customer extends Model
         'nome',
         'apelido',
         'status',
+        'resp_id',
         'cadastro',
         'nascimento',
         'cpf',

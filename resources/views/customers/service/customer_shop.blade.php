@@ -58,12 +58,12 @@
                                 <input type="text" name="id" id="" class="form-control bg-gray-300" readonly>
                             </div>
                             <div class="col-12 col-sm-6 col-lg-3">
-                                <label for="dt_concl">Conclusão:</label>
-                                <input type="date" name="conclusao" value="" id="" class="form-control">
+                                <label for="dt_concl">Agendar para:</label>
+                                <input type="date" name="data_agend" value="" id="" class="form-control">
                             </div>
                             <div class="col-12 col-sm-6 col-lg-3">
                                 <label for="st_hour">Horário:</label>
-                                <input type="text" name="hora_agend" value="{{ date('H:i:s') }}" id="" class="form-control">
+                                <input type="text" name="hora_agend" value="{{ date('H:i') }}" id="" class="form-control">
                             </div>
                         </div>
                         <div class="row mt-3">
@@ -72,7 +72,7 @@
                                 <select name="resp_id" id="" class="custom-select">
                                     <option>Selecionar</option>
                                     @foreach ($employers as $e)
-                                        <option value="{{ $e->id }}">{{ $e->p_nome }}</option>
+                                        <option value="{{ $e->id }}">{{ $e->nome }}</option>
                                     @endforeach
                                 </select>
                                 <small class="form-text text-secondary">*Campo obrigatório</small>

@@ -96,11 +96,15 @@
         <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">Financeiro:</h6>
+                <a class="collapse-item" href="{{route('account.new')}}">
+                    <i class="fas fa-file-invoice-dollar mx-2"></i>
+                    Contas
+                </a>
                 <a class="collapse-item" href="{{route('account.book')}}">
                     <i class="fas fa-piggy-bank mx-2"></i>
                     Caixa
                 </a>
-                <a class="collapse-item" href="{{route('account.book')}}">
+                <a class="collapse-item" href="{{route('posting.book')}}">
                     <i class="fas fa-wallet mx-2"></i>
                     Lançamentos
                 </a>

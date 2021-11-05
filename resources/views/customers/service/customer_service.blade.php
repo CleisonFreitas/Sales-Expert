@@ -33,154 +33,55 @@
         </div>
         <div class="card-body text-danger">
             <div class="card-header bg-gray-300 ">
-                <h5 class="m-0 font-weight-bold text-secondary">Registrar novo atendimento</h5>
+                <h5 class="m-0 font-weight-bold text-secondary">Atendimentos agendados</h5>
             </div>
-            <form action="#" method="POST">
-                @csrf
-                <div class="tab-content" id="nav-tabContent">
-                    <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
-                        <div class="row mt-3">
-                            <div class="col-12 col-sm-8 col-lg-3">
-                                <label for="st_date">Cadastro:</label>
-                                <input type="date" name="st_date" value="{{ date('Y-m-d') }}"  id="" class="form-control">
-                            </div>
-                        </div>
-                        <div class="row mt-3">
-                            <div class="col-12 col-sm-6 col-lg-2">
-                                <label for="id">Ordem:</label>
-                                <input type="text" name="id" id="" class="form-control bg-gray-300" readonly>
-                            </div>
-                            <div class="col-12 col-sm-6 col-lg-3">
-                                <label for="st_hour">Previsão:</label>
-                                <input type="date" name="dt_prev" value="{{ date('Y-m-d') }}" id="" class="form-control">
-                            </div>
-                            <div class="col-12 col-sm-6 col-lg-3">
-                                <label for="st_hour">Horário:</label>
-                                <input type="text" name="st_hour" value="{{ date('H:i:s') }}" id="" class="form-control">
-                            </div>
-                        </div>
-                        <div class="row mt-3">
-                            <div class="col-12 col-sm-12 col-lg-12">
-                                <label for="service">Responsável pelo atendimento:</label>
-                                <select name="profissional" id="" class="custom-select">
-                                    <option>Selecionar</option>
-                                    @foreach ($employers as $e)
-                                        <option value="#">{{ $e->p_nome }}</option>
-                                    @endforeach
-                                </select>
-                                <small class="form-text text-secondary">*Campo obrigatório</small>
-                            </div>
-                        </div>
-                        <div class="row mt-3">
-                            <div class="col">
-                                <label for="customer">Cliente:</label>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-12 col-sm-4 col-lg-2">
-                                <input type="text" name="" id="" class="form-control" readonly>
-                            </div>
-                            <div class="col-12 col-sm-8 col-lg-10">
-                                <input type="text" name="ct_id" value="" id="" class="form-control" readonly>
-                            </div>
-                        </div>
-                        <div class="row mt-3">
-                            <div class="col-12 col-sm-12 col-lg-12">
-                                <label for="description">Descrição:</label>
-                                <input type="text" name="descr" maxlength="255" id="" class="form-control">
-                            </div>
-                        </div>
-                        <div class="row mt-3">
-                            <div class="col-12 col-sm-12 col-lg-12">
-                                <label for="note">Observação:</label>
-                                <textarea name="note" id="" cols="30" rows="5" class="form-control" maxlength="255"></textarea>
-                            </div>      
-                        </div>
+            <!-- DataTales Example -->
+               <small><div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-striped table-hover" id="dataTable" width="100%" cellspacing="0">
+                            <thead>
+                                <tr>
+                                    <th>Cliente</th>
+                                    <th>Data agendada</th>
+                                    <th>hora agendada</th>
+                                    <th>Profissional</th>
+                                    <th>Status</th>
+                                    <th>Ação</th>
+                                </tr>
+                            </thead>
+                            
+                            <tbody>
+                                @foreach ($customer_services as $c)
+                                <tr>
+                                    <td>{{ $c->c_nome}}</td>
+                                    <td>{{ date('d/m/Y', strtotime($c->data_agend)) }}</td>
+                                    <td>{{ $c->hora_agend }}</td>
+                                    <td>{{ $c->e_nome }}</td>
+                                    <td>{{ $c->status }}</td>
+                                    <td>
+                                        <a href="{{ route('service_edit',$c->ordem) }}" class="btn btn-secondary btn-sm btn-circle">
+                                            <i class="fas fa-pencil-alt"></i>
+                                        </a>
+                                        <a href="{{ route('customer_edit',$c->cust_id) }}" class="btn btn-info btn-sm btn-circle">
+                                            <i class="fas fa-people-arrows"></i>
+                                        </a>
+                                        <a href="" class="btn btn-danger btn-sm btn-circle">
+                                            <i class="fas fa-trash"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
                     </div>
-
-                    <!-- Produto/Serviço -->
-                    <div class="tab-pane fade" id="nav-prdserv" role="tabpanel" aria-labelledby="nav-prdserv-tab">
-                        <div class="row mt-4">
-                            <div class="col-12 col-sm-12 col-lg-6 mb-2">
-                                <div class="row">
-                                    <div class="col">
-                                        <label for="service">Produto/Serviço:</label>
-                                        <select name="prd_serv" id="" class="custom-select" required>
-                                            <option value="#">Health Care</option>
-                                            <option value="#">Skin Drainage</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="row mt-2">
-                                    <div class="col">
-                                        <button type="button" class="btn btn-secondary" id="btn2" style="width:100%">Adicionar</button>
-                                    </div>
-                                </div>
-                                <div class="form-group row mt-4">
-                                    <div class="col-12 col-sm-12 col-lg-6">
-                                        <label for="valor">Valor:</label>
-                                        <div class="input-group">
-                                            <div class="input-group-prepend">
-                                                <span class="btn btn-danger">
-                                                    R$
-                                                </span>
-                                            </div>
-                                            <input type="text" name="valor" id="valor" class="form-control">
-                                        </div>
-                                    </div>
-                                    <div class="col-12 col-sm-12 col-lg-6">
-                                        <label for="valor">Desconto:</label>
-                                        <div class="input-group">
-                                            <div class="input-group-prepend">
-                                                <span class="btn btn-secondary">
-                                                    R$
-                                                </span>
-                                            </div>
-                                            <input type="text" name="desconto" id="desconto" class="form-control">
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="form-group row mt-3">
-                                    <div class="col-12 col-sm-6 col-lg-4">
-                                        <label for="cortesia">Cortesia: </label>
-                                        <select name="cortesia" id="" value="S" class="custom-select">
-                                            <option value="#" selected>Não</option>
-                                            <option value="#">Sim</option>
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-12 col-sm-12 col-lg-6">
-                                <div class="card shadow">
-                                    <div class="card-header bg-danger">
-                                        <h6 class="text-white mt-2 d-flex font-weight-bold">Adicionar/Remover</h6>
-                                    </div>
-                                    <div class="card-body shadow bg-light">
-                                        <div class="table-responsive">
-                                            <table class="table table-hover">
-                                                <tbody>
-                                                    <div id="div1">
-                                                    <tr>
-                                                        <td>Health Care</td>
-                                                        <td>
-                                                            <button type="button" class="btn btn-sm btn-danger btn-circle rem" >
-                                                                <i class="fas fa-minus"></i>
-                                                            </button>
-                                                        </td>
-                                                    </tr>
-                                                </div>
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                    </div>
-                                </div>
-                                
-                            </div>
-                        </div>
-                    </div>
+                </div></small>
+            <!-- table -->
+        </div>
+    </div>
+            
                     <!-- #Produto/Serviço -->
 
-                    <!-- Parcelas -->
+                    <!-- Parcelas 
                     <div class="tab-pane fade" id="nav-parc" role="tabpanel" aria-labelledby="nav-parc">
                         <div class="row mt-3">
                             <div class="col-12 col-sm-12 col-lg-3">
@@ -195,16 +96,5 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </div>
-                <div class="row mt-3">
-                    <div class="col">
-                        <button type="submit" class="btn btn-danger">Gravar</button>
-                        <button type="reset" class="btn btn-secondary">Limpar</button>
-                    </div>
-                </div>
-            </form>
-        </div>
-    </div>
-
+                    </div>-->
 @endsection

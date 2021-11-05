@@ -8,19 +8,30 @@ use App\Models\CustomerService;
 use App\Models\Employer;
 use App\Models\Customer;
 use App\Models\PaymentMethod;
-use RealRashid\SweetAlert\Facades\Alert;
+use Alert;
+use Illuminate\Support\Facades\DB;
 
 class CustomerServiceController extends Controller
 {
     public function show(){
         $employer = Employer::all();
-        $customerservice = CustomerService::latest()->first();
+        $payments = PaymentMethod::all();
+      
+        $select = DB::table('customer_services')
+        ->join('customers','customers.id','=','customer_services.cust_id')
+        ->join('employers','employers.id','=','customer_services.resp_id')
+        ->select('customer_services.*','employers.nome as e_nome','customers.nome as c_nome')
+        ->get();
 
-        if($customerservice == true){
-            return view('customers.service.customer_service')->with('employers',$employer);
+        if($select == true){
+            return view('customers.service.customer_service')->with([
+            'employers'=>$employer,
+            'payment_methods'=>$payments,
+            'customer_services'=>$select
+            ]);
         }   
 
-            return redirect()->back()->with([alert("Você ainda não possui atendimento cadastrado!")->autoClose(5000)->showConfirmButton($btnText = 'Ok', $btnColor = '#3085d6')]);
+            return redirect()->back()->with([toast()->info("Você ainda não possui atendimento cadastrado!")]);
     }
     public function shop($id){
         $employers = Employer::all();
@@ -32,13 +43,37 @@ class CustomerServiceController extends Controller
             'payment_methods'=>$payments,
         ]);
     }
-    public function store(Request $request){
-        $customerservice = CustomerService::create($request->all());
+    public function store(CustomServiceRequest $request){
+        $customerservice = new CustomerService;
+        $customerservice = CustomerService::create($request->all(),[$customerservice->total = $request->input('valor')]);
         $id = $customerservice->id;
         if($customerservice == true){
             $customerservice->ordem;
-            return redirect()->route('customer_service')->with([alert('Atendimento cadastrado com sucesso!'),$id]);
+            return redirect()->route('customer_service')->with([toast()->success('Atendimento cadastrado com sucesso!'),$id]);
         }
             return redirect()->back()->withError("Erro ao tentar cadastrar atendimento");
+    }
+    public function edit($ordem){
+        $employer = Employer::all();
+        $payments = PaymentMethod::all();
+
+        $select = DB::table('customer_services')
+        ->join('customers','customers.id','=','customer_services.cust_id')
+        ->join('employers','employers.id','=','customer_services.resp_id')
+        ->join('payment_methods','payment_methods.id','=','customer_services.form_paga_id')
+        ->select('customer_services.*',
+                'employers.nome as e_nome',
+                'customers.nome as c_nome',
+                'payment_methods.descricao as p_method'
+                )
+        ->where('customer_services.ordem',$ordem)
+        ->get();
+
+        return view('customers.service.edit_customer_service')->with([
+            'employers'=>$employer,
+            'payment_methods'=>$payments,
+            'customer_services'=>$select
+            ]);
+
     }
 }

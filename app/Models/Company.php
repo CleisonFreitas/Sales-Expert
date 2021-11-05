@@ -9,7 +9,7 @@ class Company extends Model
 {
     use HasFactory;
     protected $table = 'company';
-    public $timestamps = 'true';
+    public $timestamps = true;
     protected $fillable = [
         'id',
         'ceo_nome',

@@ -17,9 +17,9 @@ class PaymentMethodController extends Controller
         $payment_methods = PaymentMethod::create($request->all());
 
         if($payment_methods == true){
-            return redirect()->route('payment_method')->withSuccess('Forma de pagamento cadastrada com sucesso!');
+            return redirect()->route('payment_method')->with([Toast()->Success('Forma de pagamento cadastrada com sucesso!')->timerProgressBar()]);
         }
-            return redirect()->route('payment_method')->withError('Erro ao tentar cadastrar forma de pagamento');
+            return redirect()->route('payment_method')->with([Toast()->Error('Erro ao tentar cadastrar forma de pagamento!')->timerProgressBar()]);
     }
     public function edit($id){
         $payment_methods = PaymentMethod::all()->where('id',$id);
@@ -30,9 +30,9 @@ class PaymentMethodController extends Controller
         $payment_methods->update($request->all());
 
         if($payment_methods == true){
-            return redirect()->back()->withSuccess('Forma de pagamento atualizada com sucesso!');
+            return redirect()->back()->with([Toast()->Success('Forma de pagamento atualizada com sucesso!')->timerProgressBar()]);
         }
-            return redirect()->back()->withInput();
+            return redirect()->back()->with([Toast()-Error('Erro ao tentar atualizar forma de pagamento!')->timerProgressBar()]);
     }
     public function warning($id){
         Alert::alert()->html('Aviso'," Você está prestes a excluir essa forma de pagamento! 
@@ -46,8 +46,8 @@ class PaymentMethodController extends Controller
         $payment_method = PaymentMethod::find($id);
         $payment_method->delete();
         if($payment_method == true){
-            return redirect()->route('payment_method')->withSuccess('Forma de pagamento excluída com êxito!');
+            return redirect()->route('payment_method')->with([Toast()->Success('Forma de pagamento excluída com sucesso!')->timerProgressBar()]);
         }
-            return redirect()->back()->withError('Erro ao tentar excluir forma de pagamento!');
+            return redirect()->back()->with([Toast()->Error('Erro ao tentar excluir forma de pagamento!')->timerProgressBar()]);
     }
 }

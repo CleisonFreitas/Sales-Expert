@@ -205,7 +205,7 @@
                                                             <a href="{{ route('customer_edit',$customers->id) }}" class="btn btn-secondary btn-sm btn-circle">
                                                                 <i class="fas fa-pencil-alt"></i>
                                                             </a>
-                                                            <a href="#" class="btn btn-primary btn-sm btn-circle">
+                                                            <a href="{{ route('customer_shop',$customers->id) }}" class="btn btn-primary btn-sm btn-circle">
                                                                 <i class="fas fa-people-arrows"></i>
                                                             </a>
                                                             <a href="{{ route('customer_warning',$customers->id) }}" class="btn btn-danger btn-sm btn-circle">
