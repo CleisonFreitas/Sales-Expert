@@ -19,11 +19,9 @@ class CompanyController extends Controller
     public function register(CompanyRequest $request){
         $company = Company::create($request->all());
         if($company == false){
-            Alert::toast('Erro ao tentar realizar o cadastro!','error');
-            return redirect()->back();
+            return redirect()->back()->with([input()->Toast()->Error('Erro ao tentar salvar dados da empresa!')->timerProgressBar()]);
         }
-        Alert::toast('Cadastro empresa realizado com sucesso!','success');
-        return redirect()->route('company');
+        return redirect()->route('company')->with([Toast()->Success('Dados da empresa cadastrados com sucesso!')->timerProgressBar()]);
     }
     public function update(CompanyRequest $request,$id){
         

@@ -3,6 +3,11 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use App\Models\Company;
+use Illuminate\Support\Facades\DB;
+
+use Illuminate\Support\Facades\View;
+use Illuminate\Validation\Rules\Exists;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -23,6 +28,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+
+        return View::share('company',Company::all());
+
+     //   Caso contrário, retorne nada
     }
 }

@@ -22,9 +22,9 @@ class EmployerController extends Controller
         $employer = Employer::create($request->all());     
 
         if($employer == true){
-            return redirect()->route('employer')->with('success','Funcionário Cadastrado com sucesso!');
+            return redirect()->route('employer')->withToastSuccess('Funcionário Cadastrado com sucesso!');
         }else{
-            return redirect()->back()->withError('Erro ao tentar realizar cadastro de funcionário!')->withInput();
+            return redirect()->back()->withToastError('Erro ao tentar realizar cadastro de funcionário!')->withInput();
         }
     }
     public function edit($id){
@@ -34,7 +34,7 @@ class EmployerController extends Controller
     public function updt(EmployerRequest $request,$id){
         $employer = Employer::find($id);
         $employer->update($request->all());
-        return redirect()->route('employer')->withSuccess('Cadastro atualizado com sucesso');
+        return redirect()->route('employer')->withToastSuccess('Cadastro atualizado com sucesso');
     }
     public function warning($id){
         $employer = Employer::find($id);
@@ -48,7 +48,7 @@ class EmployerController extends Controller
     public function delete($id){
         $employer = Employer::find($id);
         $employer->delete();
-        return redirect()->route('employer')->withSuccess('Cadastro excluído com sucesso!');
+        return redirect()->route('employer')->withToastSuccess('Cadastro excluído com sucesso!');
        
     }
 }

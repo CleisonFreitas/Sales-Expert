@@ -24,7 +24,7 @@ class EmployerRequest extends FormRequest
     public function rules()
     {
         return [
-            'p_nome' => 'required|min:3|max:80',
+            'nome' => 'required|min:3|max:80',
             'dt_nasc' => 'required',
         ];
     }
