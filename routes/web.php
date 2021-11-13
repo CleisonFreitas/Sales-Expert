@@ -57,7 +57,10 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/payment_method/warning/{id}',      [PaymentMethodController::class, 'warning'])->name('payment_method_warning');
     Route::get('/payment_method/delete/{id}',       [PaymentMethodController::class, 'delete'])->name('payment_method_delete');
 
-
+    //Register - Services
+    Route::get('/services', function(){
+        return view('registers.service.service');
+    })->name('services');
     // Customers - Customer
     Route::get('/customer',                     [CustomerController::class, 'show'])->name('customer');
     Route::post('/customer/create',             [CustomerController::class, 'create'])->name('customer_create');

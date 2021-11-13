@@ -36,44 +36,32 @@
             <div class="row mt-2">
                 <div class="col-12 col-sm-6 col-lg-6">
                     <label for="conta">Conta:</label>
-                    <input type="text" name="conta" list="contas" id="conta" class="form-control" placeholder="Clique para pesquisar">
-                    <datalist id="contas">
-                        <option value="Gasolina">
-                        <option value="Alimentação">
-                    </datalist>
+                    <select name="conta_id" id="" class="custom-select">
+                        <option value="01">Gasolina</option>
+                        <option value="02">Alimentação de Funcionário</option>
+                    </select>
                 </div>
                 <div class="col-12 col-sm-6 col-lg-6">
                     <label for="forma">Forma de Pagamento:</label>
-                    <input type="text" name="formas" list="formas" id="forma" class="form-control" placeholder="Clique para pesquisar">
-                    <datalist id="formas">
-                        <option value="Dinheiro">
-                        <option value="Cartão de Crédito">
-                        <option value="Cartão de Débito">
-                        <option value="Crédito em conta">
-                        <option value="Pix">
-                        <option value="Boleto">
-                    </datalist>
+                    <select name="formpaga_id" id="" class="custom-select">
+                        <option value="">Dinheiro</option>
+                        <option value="">Cartão de Crédito</option>
+                        <option value="">Cartão de Débito</option>
+                        <option value="">Crédito em conta</option>
+                        <option value="">Pix</option>
+                        <option value="">Boleto</option>
+                    </select>
                 </div>
             </div>
             <div class="row mt-3">
-                <div class="col-6 col-sm-4 col-lg-2">
-                    <label for="qtd_parcelas">Parcela(s)</label>
-                    <input type="text" name="" id="" pattern="[1-12]" class="form-control">
-                    <small class="text-form text-muted text-secondary">*Valores de 1 à 12</small>
-                </div>
-                <div class="col-6 col-sm-4 col-lg-2">
-                    <label for="qtd_parcelas">Crédito</label>
-                    <input type="text" name="credito" id="" pattern="[1-100]" class="form-control">
-                    <small class="text-form text-muted">*Dias para Crédito</small>
-                </div>
-                <div class="col-6 col-sm-4 col-lg-2">
+                <div class="col-6 col-sm-4 col-lg-3">
                     <label for="valor">Valor:</label>
                     <div class="input-group">
                         <div class="input-group-prepend">
                             <button class="btn btn-dark">R$</button>
-                        </div> 
-                        <input type="text" name="valor" id="valor" class="form-control">         
-                    </div>    
+                        </div>
+                        <input type="text" name="valor" id="valor" class="form-control">
+                    </div>
                 </div>
             </div>
             <div class="row mt-3">

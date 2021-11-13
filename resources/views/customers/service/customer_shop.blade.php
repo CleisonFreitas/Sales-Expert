@@ -1,4 +1,4 @@
-@extends('/layouts/main')
+@extends('layouts.main')
 
 @section('title','Customer Service')
 
@@ -10,6 +10,7 @@
                 <div class="col-12 col-sm-6 col-lg-6">
                     <h2 class="text-gray-600 mt-2">Procedimento</h2>
                 </div>
+                <!--
                 <div class="col-12 col-sm-12 col-lg-6">
                     <nav class="mx-auto mt-2">
                         <ul class="nav nav-pills justify-content-end" id="pills-tab" role="tablist">
@@ -25,10 +26,10 @@
                             <li class="nav-item" role="presentation">
                                 <a class="nav-link btn-sm" id="nav-parc-tab" data-toggle="pill" href="#nav-parc" role="tab" aria-controls="nav-parc" aria-selected="false">Lançamento de Parcelas</i></a>
                             </li>
-                            
+
                         </ul>
                     </nav>
-                </div>
+                </div>-->
             </div>
         </div>
         <div class="card-body text-danger">
@@ -97,15 +98,67 @@
                                 <input type="text" name="descricao" maxlength="255" id="" class="form-control">
                             </div>
                         </div>
+                        <div class="row mt-2">
+                            <div class="col-12 col-sm-6 col-lg-4">
+                                <!-- Button trigger modal -->
+                                    <button type="button" class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#servico" style="width:100%">
+                                        Serviços
+                                    </button>
+
+                                    <!-- Modal -->
+                                    <div class="modal fade " id="servico" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="servicoLabel" aria-hidden="true">
+                                        <div class="modal-dialog modal-dialog-scrollable">
+                                            <div class="modal-content text-secondary">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="servicoLabel">Serviços</h5>
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <div class="row">
+                                                        <div class="col">
+                                                            <label for="lista">Lista de Serviços</label>
+                                                            <div class="form-check">
+                                                                <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
+                                                                <label class="form-check-label" for="exampleRadios1">
+                                                                  Limpeza de Pele
+                                                                </label>
+
+                                                              </div>
+                                                              <div class="form-check">
+                                                                <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1">
+                                                                <label class="form-check-label" for="exampleRadios1">
+                                                                  Remoção de Cravos
+                                                                </label>
+                                                              </div>
+                                                              <div class="form-check">
+                                                                <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1">
+                                                                <label class="form-check-label" for="exampleRadios1">
+                                                                  Cílios
+                                                                </label>
+                                                              </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Ok!</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                <!-- #Modal -->
+                            </div>
+                        </div>
+                        <div class="row mt-1">
+                            <div class="col">
+                                <small class="text-secondary">*Necessário informar pelo menos um serviço, antes de gravar</small>
+                            </div>
+                        </div>
                         <div class="row mt-3">
                             <div class="col-12 col-sm-12 col-lg-12">
                                 <label for="note">Observação:</label>
                                 <textarea name="observacao" id="" cols="30" rows="5" class="form-control" maxlength="255"></textarea>
-                            </div>      
-                        </div>
-                        <div class="row mt-3">
-                            <div class="col">
-                                <small class="text-secondary">*Necessário informar a forma de pagamento, antes de gravar</small>
                             </div>
                         </div>
                     </div>
@@ -115,14 +168,9 @@
                             <div class="col-12 col-sm-12 col-lg-6 mb-2">
 
                                 <div class="row">
-                                    <div class="col">
-                                        <label for="forma_pagamento">Forma de Pagamento:</label>
-                                        <select name="form_paga_id" id="" class="custom-select">
-                                            <option>Selecionar forma de pagamento</option>
-                                            @foreach ($payment_methods as $payment)
-                                                <option value="{{ $payment->id }}">{{ $payment->descricao }}</option>
-                                            @endforeach
-                                        </select>
+                                    <div class="col-12 col-sm-6 col-lg-6">
+                                        <label for="forma_pagamento">Vencimento:</label>
+                                        <input type="date" name="vencimento" id="" class="form-control">
                                     </div>
                                 </div>
                                 <div class="row mt-2">
@@ -189,10 +237,10 @@
             </form>
         </div>
     </div>
-            
+
                     <!-- #Produto/Serviço -->
 
-                    <!-- Parcelas 
+                    <!-- Parcelas
                     <div class="tab-pane fade" id="nav-parc" role="tabpanel" aria-labelledby="nav-parc">
                         <div class="row mt-3">
                             <div class="col-12 col-sm-12 col-lg-3">

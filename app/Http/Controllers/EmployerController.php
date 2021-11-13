@@ -19,12 +19,12 @@ class EmployerController extends Controller
     }
 
     public function create(EmployerRequest $request){
-        $employer = Employer::create($request->all());     
+        $employer = Employer::create($request->all());
 
         if($employer == true){
-            return redirect()->route('employer')->withToastSuccess('Funcionário Cadastrado com sucesso!');
+            return redirect()->route('employer')->withToastSuccess('Cadastro de profissional realizado com sucesso!');
         }else{
-            return redirect()->back()->withToastError('Erro ao tentar realizar cadastro de funcionário!')->withInput();
+            return redirect()->back()->withToastError('Erro ao tentar cadastrar novo profissional!')->withInput();
         }
     }
     public function edit($id){
@@ -38,7 +38,7 @@ class EmployerController extends Controller
     }
     public function warning($id){
         $employer = Employer::find($id);
-        Alert::alert()->html('Aviso'," Você está prestes a excluir esse cadastro! 
+        Alert::alert()->html('Aviso'," Você está prestes a excluir esse cadastro!
         <br>Tem certeza que deseja fazer isso?<br>
         <br><a class='btn btn-danger' href='/employer/delete/$id')}}'>Sim</a>&nbsp;
         <a class='btn btn-secondary' href='/employer/edit/$id'>Não</a><br>",'warning')
@@ -49,6 +49,6 @@ class EmployerController extends Controller
         $employer = Employer::find($id);
         $employer->delete();
         return redirect()->route('employer')->withToastSuccess('Cadastro excluído com sucesso!');
-       
+
     }
 }

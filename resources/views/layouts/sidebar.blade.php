@@ -7,7 +7,7 @@
             <img src="{{ asset('image/logo.png') }}" class="rounded-circle img-fluid" alt="logo">
         </div>
         <div class="sidebar-brand-text mx-1 "><h5><span class="badge bg-secondary">Sales</h5></span></div>
-        <div class="sidebar-brand-text mt-3"><h4><sub><span class="badge bg-danger">Expert</span><sub></h4></div>                    
+        <div class="sidebar-brand-text mt-3"><h4><sub><span class="badge bg-danger">Expert</span><sub></h4></div>
     </a>
 
     <!-- Divider -->
@@ -42,14 +42,22 @@
                   <i class="fas fa-building mx-1"></i><span>Empresa</span>
                 </a>
                 <a class="collapse-item" href="{{ route('employer') }}">
-                  <i class="fas fa-handshake mx-1"></i><span>Funcionarios</span>
+                  <i class="fas fa-handshake mx-1"></i><span>Profissionais</span>
+                </a>
+                <a class="collapse-item" href="{{route('account.new')}}">
+                    <i class="fas fa-file-invoice-dollar mx-1"></i>
+                    <span>Contas</span>
                 </a>
                 <a class="collapse-item" href="{{ route('supplier') }}">
                     <i class="fas fa-store mx-1"></i><span>Fornecedores</span>
                 </a>
+                <a class="collapse-item" href="{{ route('services') }}">
+                    <i class="fas fa-concierge-bell mx-1"></i><span>Serviços</span>
+                </a>
+
                 <a class="collapse-item" href="{{ route('payment_method') }}">
-                    <i class="far fa-money-bill-alt mx-1"></i>
-                    Formas.pagamento
+                    <i class="fas fa-money-bill-alt mx-1"></i>
+                    <span>Formas.pagamento</span>
                 </a>
             </div>
         </div>
@@ -96,10 +104,6 @@
         <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">Financeiro:</h6>
-                <a class="collapse-item" href="{{route('account.new')}}">
-                    <i class="fas fa-file-invoice-dollar mx-2"></i>
-                    Contas
-                </a>
                 <a class="collapse-item" href="{{route('account.book')}}">
                     <i class="fas fa-piggy-bank mx-2"></i>
                     Caixa
