@@ -11,7 +11,7 @@ use App\Http\Controllers\CustomerServiceController;
 use App\Http\Controllers\AccountBookController;
 use App\Http\Controllers\AccountController;
 use App\Http\Controllers\AccountReferenceController;
-
+use App\Http\Controllers\ServiceController;
 
 /*
 |--------------------------------------------------------------------------
@@ -58,9 +58,11 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/payment_method/delete/{id}',       [PaymentMethodController::class, 'delete'])->name('payment_method_delete');
 
     //Register - Services
-    Route::get('/services', function(){
-        return view('registers.service.service');
-    })->name('services');
+    Route::get('/services',                 [ServiceController::class, 'index'])->name('services');
+    Route::post('services/store',           [ServiceController::class, 'store'])->name('services_create');
+    Route::get('/services/edit/{id}',       [ServiceController::class,'edit'])->name('services_edit');
+    Route::get('/services/delete/{id}',     [ServiceController::class, 'destroy'])->name('services_delete');
+    Route::put('services/update/{id}',      [ServiceController::class, 'update'])->name('services_update');
     // Customers - Customer
     Route::get('/customer',                     [CustomerController::class, 'show'])->name('customer');
     Route::post('/customer/create',             [CustomerController::class, 'create'])->name('customer_create');

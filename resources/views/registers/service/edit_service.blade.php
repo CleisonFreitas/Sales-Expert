@@ -31,8 +31,9 @@
         <div class="tab-content" id="nav-tabContent">
             <!-- Formulário de Cadastro -->
             <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
-                <form action="{{ route('services_create') }}" method="post">
+                <form action="{{ route('services_update',$service->id) }}" method="post">
                     @csrf
+                    @method('PUT')
                         @include('forms.services.service')
                 </form>
             </div>
