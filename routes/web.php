@@ -11,7 +11,9 @@ use App\Http\Controllers\CustomerServiceController;
 use App\Http\Controllers\AccountBookController;
 use App\Http\Controllers\AccountController;
 use App\Http\Controllers\AccountReferenceController;
+use App\Http\Controllers\CustomerReportController;
 use App\Http\Controllers\ServiceController;
+//use alert;
 
 /*
 |--------------------------------------------------------------------------
@@ -74,7 +76,7 @@ Route::middleware(['auth'])->group(function () {
     // Customers - Service
     Route::get('/customers_service',                             [CustomerServiceController::class, 'show'])->name('customer_service');
     Route::get('/customers_service/customer/{id}',               [CustomerServiceController::class, 'shop'])->name('customer_shop');
-    Route::post('/customers_service/create',                     [CustomerServiceController::class, 'store'])->name('service_create');
+    Route::post('/customers_service/create',                     [CustomerServiceController::class, 'store'])->name('customer_service_create');
     Route::get('/customer_service/edit/{ordem}',                 [CustomerServiceController::class, 'edit'])->name('service_edit');
 
     //Oprations - Accounts
@@ -94,6 +96,17 @@ Route::middleware(['auth'])->group(function () {
 
 
     Route::post('/operation/accountability/create',     [AccountReferenceController::class, 'store'])->name('account.reference.create');
+
+    // Archives
+    Route::get('/archives/customer_report', [CustomerReportController::class, 'index'])->name('archive.customer');
+
+    //if route doesn't exist
+    Route::fallback(function () {
+
+        return redirect()->back()->with([toast()->info('Página não encontrada')]);
+    });
+
+
 });
 
 
@@ -117,11 +130,6 @@ Route::get('/customer_service_action', function () {
 })->middleware(['auth'])->name('customer_action');
 
 // Archives
-
-Route::get('/archives/customer_report', function () {
-    return view('archives/customer_report');
-})->middleware(['auth'])->name('archive.customer');
-
 Route::get('/archives/payments_report', function () {
     return view('archives/payment_report');
 })->middleware(['auth'])->name('payment.report');

@@ -2,13 +2,14 @@
 
 namespace App\Http\Controllers;
 
-//use Illuminate\Http\Request;
-use App\Http\Requests\CustomServiceRequest;
+use Illuminate\Http\Request;
+//use App\Http\Requests\CustomServiceRequest;
 use App\Models\CustomerService;
 use App\Models\Employer;
 use App\Models\Customer;
 use App\Models\PaymentMethod;
-use Alert;
+use App\Models\Service;
+use Illuminate\Support\Str;
 use Illuminate\Support\Facades\DB;
 
 class CustomerServiceController extends Controller
@@ -16,7 +17,7 @@ class CustomerServiceController extends Controller
     public function show(){
         $employer = Employer::all();
         $payments = PaymentMethod::all();
-      
+
         $select = DB::table('customer_services')
         ->join('customers','customers.id','=','customer_services.cust_id')
         ->join('employers','employers.id','=','customer_services.resp_id')
@@ -29,29 +30,27 @@ class CustomerServiceController extends Controller
             'payment_methods'=>$payments,
             'customer_services'=>$select
             ]);
-        }   
+        }
 
             return redirect()->back()->with([toast()->info("Você ainda não possui atendimento cadastrado!")]);
     }
     public function shop($id){
-        $employers = Employer::all();
-        $payments = PaymentMethod::all();
-        $customers = Customer::find($id);
+
         return view('customers.service.customer_shop')->with([
-            'employers'=>$employers,
-            'customers'=>$customers,
-            'payment_methods'=>$payments,
+            'employers'=> Employer::all(),
+            'customers'=> Customer::find($id),
+            'payment_methods'=> PaymentMethod::all(),
+            'services' => Service::Where('status','ativo')->get()
         ]);
     }
-    public function store(CustomServiceRequest $request){
-        $customerservice = new CustomerService;
-        $customerservice = CustomerService::create($request->all(),[$customerservice->total = $request->input('valor')]);
-        $id = $customerservice->id;
-        if($customerservice == true){
-            $customerservice->ordem;
-            return redirect()->route('customer_service')->with([toast()->success('Atendimento cadastrado com sucesso!'),$id]);
-        }
-            return redirect()->back()->withError("Erro ao tentar cadastrar atendimento");
+    public function store(Request $request){
+
+        $customer_service = $request->all();
+        $customer_service['valor'] = Str::remove(['R$',' '],str_replace(',','.',$request->valor));
+
+        CustomerService::create($customer_service);
+
+        return redirect()->back()->with([toast()->success('Atendimento registrado com sucesso!')]);
     }
     public function edit($ordem){
         $employer = Employer::all();

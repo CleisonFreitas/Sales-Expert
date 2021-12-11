@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Customer;
 use Alert;
+use RealRashid\SweetAlert\Facades\Alert as FacadesAlert;
 
 class CustomerController extends Controller
 {
@@ -17,7 +18,7 @@ class CustomerController extends Controller
         if($cliente == true){
             return redirect()->route('customer')->with([Toast()->Success('Cliente cadastrado com sucesso!')->timerProgressBar()]);
         }
-            return redirect()->back()->with([input()->toast()->error("Erro ao tentar cadastrar novo cliente")]);
+            return redirect()->back()->with([toast()->error("Erro ao tentar cadastrar novo cliente")]);
     }
     public function edit($id){
         $cliente = Customer::find($id);
@@ -33,7 +34,7 @@ class CustomerController extends Controller
     }
     public function warning($id){
         $cliente = Customer::find($id);
-        Alert::alert()->html('Aviso'," Você está prestes a excluir esse cadastro! 
+        FacadesAlert::alert()->html('Aviso'," Você está prestes a excluir esse cadastro!
         <br>Deseja prosseguir?<br>
         <br><a class='btn btn-danger' href='/customer/delete/$id')}}'>Sim</a>&nbsp;
         <a class='btn btn-secondary' href='/customer/edit/$id'>Não</a><br>",'warning')

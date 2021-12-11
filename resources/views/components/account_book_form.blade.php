@@ -32,7 +32,7 @@
         <input type="text" name="referencia" value="{{date('Y')}}" id="" class="form-control" readonly>
     </div>
     <div class="col-12 col-sm-6 col-lg-2">
-        <label for="lote">Lote:</label>
+        <label for="lote">Contador:</label>
         <input type="text" name="lote" id="" value="{{ $account->lote ?? 1 }}" class="form-control" readonly>
     </div>
 </div>

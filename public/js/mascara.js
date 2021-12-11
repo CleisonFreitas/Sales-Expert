@@ -6,6 +6,52 @@ $(function() {
     $('#valorMenor').maskMoney();
   })
 
+// Calcular valor de Serviço automaticamente
+String.prototype.formatMoney = function() {
+    var v = this;
+
+    if(v.indexOf('.') === -1) {
+        v = v.replace(/([\d]+)/, "$1,00");
+    }
+
+    v = v.replace(/([\d]+)\.([\d]{1})$/, "$1,$20");
+    v = v.replace(/([\d]+)\.([\d]{2})$/, "$1,$2");
+    v = v.replace(/([\d]+)([\d]{3}),([\d]{2})$/, "$1.$2,$3");
+
+    return v;
+};
+String.prototype.toFloat = function() {
+    var v = this;
+
+    if (!v) return 0;
+    return parseFloat(v.replace(/[\D]+/g, '' ).replace(/([\d]+)(\d{2})$/, "$1.$2"));
+};
+(function(){
+    "use strict";
+    var $chs = document.querySelectorAll('input[name="services"]'),
+        $result = document.getElementById('valor'),
+        chsArray = Array.prototype.slice.call($chs);
+
+    chsArray.forEach(function(element, index, array){
+        element.addEventListener("click", function(){
+            var v = this.value,
+                result = 0;
+            v = v.toFloat();
+
+            if (this.checked === true) {
+                result = $result.value.toFloat() + parseFloat(v);
+            } else {
+                result = $result.value.toFloat() - parseFloat(v);
+            }
+
+            $result.value = "R$ " + String(result).formatMoney();
+        });
+    });
+
+
+}());
+// #Serviço -> Necessário utilizar o name="serv_ref[]"
+
 
 // Mask CEP
 function mask_cep(){
@@ -13,6 +59,15 @@ function mask_cep(){
 
     if(n_cep == 5){
         document.getElementById("cep").value = document.getElementById("cep").value+ "-";
+    }
+}
+
+// Mask Horário
+function mask_hora(){
+    var n_hora = document.getElementById("hora_id").value.length;
+
+    if(n_hora == 2){
+        document.getElementById("hora_id").value = document.getElementById("hora_id").value+ ":";
     }
 }
 
@@ -43,7 +98,7 @@ function mask_fone2(){
 // Mask CPF
 function mask_cpf(){
     var n_cpf = document.getElementById("txtCpf").value.length;
-    
+
     if(n_cpf == 3) {
        document.getElementById("txtCpf").value = document.getElementById("txtCpf").value+ "."
     }
@@ -70,7 +125,7 @@ function mask_whats(){
 // Mask CPF
 function mask_cnpj(){
     const n_cpf = document.getElementById("txtCnpj").value.length;
-    
+
     if(n_cpf == 2) {
        document.getElementById("txtCnpj").value = document.getElementById("txtCnpj").value+ "."
     }

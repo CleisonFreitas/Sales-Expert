@@ -13,7 +13,7 @@ class Service extends Model
 
     public function getValorAttribute($valor)
 {
-        return $this->attributes['valor'] = sprintf('R$ %s', number_format($valor, 2));
+        return $this->attributes['valor'] = sprintf('%s', number_format($valor, 2));
 
 }
     protected $table = 'services';

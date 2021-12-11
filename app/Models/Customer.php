@@ -9,10 +9,23 @@ use Carbon\Carbon;
 class Customer extends Model
 {
     use HasFactory;
-    
+
     public function getAgeAttribute(){
         return Carbon::parse($this->attributes['nascimento'])->age;
     }
+
+    public static function aniversariantes(){
+        $dataAtual = Carbon::now();
+
+        $aniversariantes =
+        ['aniversariantes' => Customer::whereMonth('nascimento', $dataAtual->month)
+        ->whereDay('nascimento', $dataAtual->day)
+        ->orderByRaw('day(nascimento) asc')->get()];
+
+        return $aniversariantes;
+    }
+
+
     protected $table = 'customers';
     protected $fillable = [
         'nome',

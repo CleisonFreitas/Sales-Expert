@@ -1,10 +1,10 @@
-@extends('/layouts/main')
+@extends('layouts.main')
 
 @section('title','Relatório de Clientes')
 
 @section('content')
 
-    <div class="card shadow mt-3 mb-4">
+    <div class="card shadow mt-3 mb-4 " style="width:100%">
         <div class="card-header py-1">
             <div class="row">
                 <div class="col-12 col-sm-6 col-lg-6">
@@ -15,7 +15,7 @@
                         <ul class="nav nav-pills justify-content-end" id="pills-tab" role="tablist">
 
                             <li class="nav-item" role="presentation">
-                                <a class="nav-link active btn-sm" id="nav-home-ta" data-toggle="pill" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">Principal</a>
+                                <a class="nav-link active btn-sm" id="nav-home-ta" data-toggle="pill" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">Analítico</a>
                             </li>
 
                             <li class="nav-item" role="presentation">
@@ -140,7 +140,7 @@
                     </div>
                 <div class="tab-pane fade" id="nav-consult" role="tabpanel" aria-labelledby="nav-consult-tab">
                     <div class="table-responsive">
-                        <small>
+
                             <table class="table table-hover" id="dataTable" cellspacing="0" width="100%">
                                 <thead>
                                     <tr>
@@ -151,15 +151,31 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>Cleison Freitas Ferreira</td>
-                                        <td>Rua Alto da Esperança, 1024, Barra do Ceará</td>
-                                        <td>26 anos</td>
-                                        <td>(85) 98698-6581</td>
-                                    </tr>
+                                            @if ($aniversariantes->count())
+                                            @foreach ($aniversariantes as $aniversariantes)
+                                            <div class="row">
+                                                <div class="col-12 col-sm-12 col-lg-12">
+                                                    <tr>
+                                                        <td>{{ $aniversariantes->nome }}</td>
+                                                        <td>{{ $aniversariantes->logradouro }}</td>
+                                                        <td>{{ $aniversariantes->age }}</td>
+                                                        <td>{{ $aniversariantes->ct_num }}</td>
+                                                    </tr>
+                                                </div>
+                                            </div>
+                                            @endforeach
+                                            @else
+                                            <tr>
+                                                <td colspan="4" style="text-align: center"><h5 class="text-secondary">Não existem aniversariantes para essa data</h5></td>
+                                            </tr>
+                                            @endif
+
+
+
+
                                 </tbody>
                             </table>
-                        </small>
+
                     </div>
                 </div>
             </div>

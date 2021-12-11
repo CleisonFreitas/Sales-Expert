@@ -17,6 +17,7 @@ class CreateAccountBooksTable extends Migration
             $table->increments('id');
             $table->integer('caixa_id')->unsigned();
             $table->date('data_aber');
+            $table->string('hora_aber');
             $table->foreign('caixa_id')->references('id')->on('account_references');
             $table->date('data_fech')->nullable();
             $table->string('referencia', 4);

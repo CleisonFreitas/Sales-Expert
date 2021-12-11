@@ -6,7 +6,6 @@ use App\Models\Service;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\ServiceResource;
 use Illuminate\Http\Request;
-use Alert;
 use Illuminate\Support\Str;
 
 class ServiceController extends Controller
@@ -28,7 +27,7 @@ class ServiceController extends Controller
     public function store(Request $request)
     {
         $services = $request->all();
-        $services['valor'] = Str::remove(',',$request->valor);
+        
         Service::create($services);
 
         return redirect()->back()->with([toast()->success('Novo serviço criado com sucesso!')]);

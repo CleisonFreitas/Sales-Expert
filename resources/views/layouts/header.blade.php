@@ -27,6 +27,7 @@
 
     <!-- Short Icon -->
     <link rel="shortcut icon" href="{{ asset('icons/favicon.png') }}">
+    @yield('css')
 </head>
 <body id="page-top">
 

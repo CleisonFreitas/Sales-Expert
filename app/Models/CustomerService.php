@@ -10,7 +10,7 @@ class CustomerService extends Model
     use HasFactory;
 
     public function getValorAttribute($valor){
-        return $this->attributes['valor'] = sprintf("R$",number_format($valor,2,',','.'));
+        return $this->attributes['valor'] = sprintf("%s",number_format($valor,2,',','.'));
     }
 
     protected $table = 'customer_services';
@@ -24,10 +24,8 @@ class CustomerService extends Model
         'resp_id',
         'cust_id',
         'observacao',
-        'form_paga_id',
         'valor',
-        'desconto',
-        'cortesia',
     ];
     public $timestamps = true;
+
 }

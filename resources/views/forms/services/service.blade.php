@@ -26,7 +26,7 @@
     <div class="col-12 col-sm-3 col-lg-3">
         <label for="valor">Valor:</label>
         @if (isset($service->descricao))
-        <input type="text" name="valor" id="valor" value="{{str_replace(',','.',$service->valor)}}" class="form-control">
+        <input type="text" name="valor" id="valor" value="{{$service->valor}}" class="form-control">
         @else
         <input type="text" name="valor" id="valor" value="" class="form-control">
         @endif
