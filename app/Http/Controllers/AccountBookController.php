@@ -18,22 +18,17 @@ class AccountBookController extends Controller
      */
     public function index()
     {
-       
-        $account_reference = AccountReference::all();
+        try{
 
-        $account = AccountBook::latest()->first();
-     
-        if($account){
-            $account->lote = $account->lote +1;
+            $account_reference = AccountReference::all();
+            $account_book = AccountBook::all();
+            $select_account = AccountBook::selectcaix();
+
+        }catch(\Exception $e){
+            return response()->json('Dados não encontrados!');
         }
-        
 
-        $select_account = DB::table('account_books')
-        ->join('account_references','account_books.caixa_id','=','account_references.id')
-        ->select('account_books.*','account_references.descricao')
-        ->where('data_fech','=',null)
-        ->get();
-        return view('operation.open_account_book',compact('select_account','account_reference','account'));
+        return view('operation.open_account_book',compact('account_book','account_reference','select_account'));
     }
 
     /**
@@ -54,16 +49,13 @@ class AccountBookController extends Controller
      */
     public function store(OpenBookRequest $request)
     {
-        $account_bank = $request->all();
-        if($account_bank['data_fech'] == null) {
-            $account_book = AccountBook::create($account_bank);
-            if($account_book == true){
-                return redirect()->back()->with([toast()->success("Caixa aberto com sucesso!")]);
-            }
+        try{
+            $account_book = AccountBook::create($request->all());
+        }catch(\Exception $e){
+            return redirect()->back()->with([toast()->error($e->getMessage())]);
         }
-        else{
-            return redirect()->back()->with([toast()->error("Erro ao tentar abrir caixa")]);
-        }
+
+            return redirect()->back()->with([toast()->success("Caixa aberto com sucesso!")]);
     }
 
     public function show($id)

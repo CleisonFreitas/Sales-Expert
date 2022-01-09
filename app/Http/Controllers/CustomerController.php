@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Customer;
 use Alert;
+use App\Models\CustomerService;
+use Exception;
 use RealRashid\SweetAlert\Facades\Alert as FacadesAlert;
 
 class CustomerController extends Controller
@@ -42,13 +44,18 @@ class CustomerController extends Controller
         return redirect()->back();
     }
     public function delete($id){
-        $cliente = Customer::find($id);
-        $cliente->delete();
 
-        if($cliente == true){
-            return redirect()->route('customer')->withSuccess('Cadastro de cliente excluído com sucesso!');
+    //    $cliente_servico = CustomerService::Where('cust_id',$id)->get();
+        try {
+            $cliente = Customer::find($id);
+            $cliente->delete();
+        }catch (\Exception $e) {
+        //    dd($e);
+            return redirect()->back()->with([toast()->error($e->getMessage())]);
+
         }
-            return redirect()->back()->withToastError('Erro ao tentar excluir cliente');
+        return redirect()->route('customer')->with([toast()->success('Cadastro excluído com sucesso!')]);
+
     }
 
 }

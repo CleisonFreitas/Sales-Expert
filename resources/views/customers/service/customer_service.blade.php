@@ -25,7 +25,7 @@
                             <li class="nav-item" role="presentation">
                                 <a class="nav-link btn-sm" id="nav-parc-tab" data-toggle="pill" href="#nav-parc" role="tab" aria-controls="nav-parc" aria-selected="false">Lançamento de Parcelas</i></a>
                             </li>
-                            
+
                         </ul>
                     </nav>
                 </div>
@@ -46,10 +46,10 @@
                                     <th>hora agendada</th>
                                     <th>Profissional</th>
                                     <th>Status</th>
-                                    <th>Ação</th>
+                                    <th>Procedimento</th>
                                 </tr>
                             </thead>
-                            
+
                             <tbody>
                                 @foreach ($customer_services as $c)
                                 <tr>
@@ -59,17 +59,49 @@
                                     <td>{{ $c->e_nome }}</td>
                                     <td>{{ $c->status }}</td>
                                     <td>
-                                        <a href="{{ route('service_edit',$c->ordem) }}" class="btn btn-secondary btn-sm btn-circle">
+                                        <a href="{{ route('service_edit',$c->ordem) }}" class="btn btn-secondary btn-sm btn-circle" title="Editar atendimento">
                                             <i class="fas fa-pencil-alt"></i>
                                         </a>
-                                        <a href="{{ route('customer_edit',$c->cust_id) }}" class="btn btn-info btn-sm btn-circle">
-                                            <i class="fas fa-people-arrows"></i>
+                                        <a href="#" class="btn btn-info btn-sm btn-circle" data-bs-toggle="modal" data-bs-target="#ordem_{{ $c->ordem}}" title="Reagendar atendimento">
+                                            <i class="far fa-calendar-times"></i>
                                         </a>
-                                        <a href="" class="btn btn-danger btn-sm btn-circle">
+                                        <a href="" class="btn btn-danger btn-sm btn-circle" title="Excluir atendimento">
                                             <i class="fas fa-trash"></i>
                                         </a>
                                     </td>
                                 </tr>
+                                <!-- Modal -->
+                                <div class="modal fade" id="ordem_{{ $c->ordem }}" tabindex="-1" aria-labelledby="{{ $c->ordem }}Label" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                      <div class="modal-content text-secondary">
+                                        <div class="modal-header">
+                                          <h5 class="modal-title " id="{{ $c->ordem }}Label">{{ $c->descricao }}</h5>
+                                          <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                          </button>
+                                        </div>
+                                        <div class="modal-body">
+                                          <div class="row">
+                                              <div class="col">
+                                                  <label for="agendar">Reagendar para:</label>
+                                                  <input type="date" name="reagendar" id="" class="form-control">
+                                                  <input type="hidden" name="{{ $c->cust_id }}">
+                                              </div>
+                                          </div>
+                                          <div class="row mt-1">
+                                              <div class="col">
+                                                <label for="motivo">Motivo:</label>
+                                                <textarea name="motivo" id="" cols="3" rows="3" class="form-control"></textarea>
+                                              </div>
+                                          </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                                          <button type="button" class="btn btn-danger">Gravar</button>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
                                 @endforeach
                             </tbody>
                         </table>
@@ -78,10 +110,10 @@
             <!-- table -->
         </div>
     </div>
-            
+
                     <!-- #Produto/Serviço -->
 
-                    <!-- Parcelas 
+                    <!-- Parcelas
                     <div class="tab-pane fade" id="nav-parc" role="tabpanel" aria-labelledby="nav-parc">
                         <div class="row mt-3">
                             <div class="col-12 col-sm-12 col-lg-3">

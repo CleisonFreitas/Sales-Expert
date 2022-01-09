@@ -50,7 +50,7 @@
                                     <label for="status">Status:</label>
                                     <select name="status" id="" class="custom-select">
                                         <option value="P">Pendente</option>
-                                        <option value="C">Concluído</option>
+                                        <option value="R">Resolvido</option>
                                     </select>
                                 </div>
                             </div>
@@ -65,13 +65,13 @@
                                 </div>
                                 <div class="col-12 col-sm-6 col-lg-3">
                                     <label for="st_hour">Horário:</label>
-                                    <input type="text" name="hora_agend" value="" id="hora_id" class="form-control" maxlength="5" onkeyup="mask_hora();" required placeholder="12:00">
+                                    <input type="text" name="hora_agend" value="{{ old('hora_agend') }}" id="hora_id" class="form-control" maxlength="5" onkeyup="mask_hora();" required placeholder="12:00" pattern="[0-9,:]{5}">
                                 </div>
                             </div>
                             <div class="row mt-3">
                                 <div class="col-12 col-sm-12 col-lg-12">
                                     <label for="service">Responsável pelo atendimento:</label>
-                                    <select name="resp_id" id="" class="custom-select">
+                                    <select name="resp_id" id="" class="custom-select" required>
                                         <option>Selecionar</option>
                                         @foreach ($employers as $e)
                                             <option value="{{ $e->id }}">{{ $e->nome }}</option>
@@ -87,16 +87,16 @@
                             </div>
                             <div class="row">
                                 <div class="col-4 col-sm-4 col-lg-2">
-                                    <input type="text" name="cust_id" id="" value="{{ $customers->id }}" class="form-control" readonly>
+                                    <input type="text" name="cust_id" id="" value="{{ $customers->id ?? old('cust_id')}}" class="form-control" readonly>
                                 </div>
                                 <div class="col-8 col-sm-8 col-lg-10">
-                                    <input type="text" name="ct_nome" value="{{ $customers->nome }}" id="" class="form-control mr-2" readonly>
+                                    <input type="text" name="ct_nome" value="{{ $customers->nome ?? old('ct_nome') }}" id="" class="form-control mr-2" readonly>
                                 </div>
                             </div>
                             <div class="row mt-3">
                                 <div class="col-12 col-sm-12 col-lg-12">
                                     <label for="description">Descrição do tratamento:</label>
-                                    <input type="text" name="descricao" id="" class="form-control"  maxlength="100">
+                                    <input type="text" name="descricao" id="" class="form-control" value="{{ old('descricao') }}" maxlength="100" required>
                                 </div>
                             </div>
                             <div class="row mt-1">
@@ -104,7 +104,7 @@
                                     <!-- Button trigger modal -->
                                     <div class="input-group mb-3">
                                         <div class="input-group-prepend">
-                                          <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#servico" id="basic-addon1"><i class="far fa-list-alt"></i></button>
+                                          <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#servico" id="basic-addon1"><i class="far fa-list-alt" title="Selecionar Serviços"></i></button>
                                         </div>
                                         <input type="text" class="form-control" placeholder="60,00" aria-label="valor" name="valor" id="valor" value="R$ 0,00" aria-describedby="basic-addon1" readonly>
                                     </div>
@@ -149,7 +149,7 @@
                             <div class="row mt-3">
                                 <div class="col-12 col-sm-12 col-lg-12">
                                     <label for="note">Observação:</label>
-                                    <textarea name="observacao" id="" cols="30" rows="5" class="form-control" maxlength="255"></textarea>
+                                    <textarea name="observacao" id="" cols="30" rows="5" class="form-control" maxlength="255">{{ old('observacao') }}</textarea>
                                 </div>
                             </div>
                             <div class="row mt-3">

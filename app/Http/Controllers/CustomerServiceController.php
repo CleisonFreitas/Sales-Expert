@@ -9,8 +9,10 @@ use App\Models\Employer;
 use App\Models\Customer;
 use App\Models\PaymentMethod;
 use App\Models\Service;
+use App\Models\AccountBook;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
 
 class CustomerServiceController extends Controller
 {
@@ -18,11 +20,7 @@ class CustomerServiceController extends Controller
         $employer = Employer::all();
         $payments = PaymentMethod::all();
 
-        $select = DB::table('customer_services')
-        ->join('customers','customers.id','=','customer_services.cust_id')
-        ->join('employers','employers.id','=','customer_services.resp_id')
-        ->select('customer_services.*','employers.nome as e_nome','customers.nome as c_nome')
-        ->get();
+        $select = CustomerService::getService();
 
         if($select == true){
             return view('customers.service.customer_service')->with([
@@ -45,25 +43,51 @@ class CustomerServiceController extends Controller
     }
     public function store(Request $request){
 
-        $customer_service = $request->all();
-        $customer_service['valor'] = Str::remove(['R$',' '],str_replace(',','.',$request->valor));
+        try{
+            if($request->data_agend < date('Y-m-d')){
+                return redirect()->back()
+                    ->with([toast()->info('A data do atendimento não pode ser inferior a data atual')])
+                    ->withInput();
+            }
 
-        CustomerService::create($customer_service);
+            DB::beginTransaction();
 
-        return redirect()->back()->with([toast()->success('Atendimento registrado com sucesso!')]);
+            $customer_service = $request->all();
+            $customer_service['valor'] = Str::remove(['R$',' '],str_replace(',','.',$request->valor));
+
+            if($customer_service['valor'] <= '0' || $customer_service['valor'] === null){
+                return redirect()->back()
+                    ->with([toast()->info('É necessário escolher pelo menus um serviço')])
+                    ->withInput();
+            }
+
+            CustomerService::create($customer_service);
+
+            DB::commit();
+
+
+        }catch(\Exception $e){
+            DB::rollback();
+            return redirect()->back()
+                ->with([toast()->error($e->getMessage())])
+                ->withInput();
+
+        }
+
+        return redirect()->back()
+        ->with([toast()->success('Atendimento registrado com sucesso!')]);
     }
     public function edit($ordem){
         $employer = Employer::all();
         $payments = PaymentMethod::all();
+        $account = AccountBook::selectcaix();
 
         $select = DB::table('customer_services')
         ->join('customers','customers.id','=','customer_services.cust_id')
         ->join('employers','employers.id','=','customer_services.resp_id')
-        ->join('payment_methods','payment_methods.id','=','customer_services.form_paga_id')
         ->select('customer_services.*',
                 'employers.nome as e_nome',
                 'customers.nome as c_nome',
-                'payment_methods.descricao as p_method'
                 )
         ->where('customer_services.ordem',$ordem)
         ->get();
@@ -71,7 +95,8 @@ class CustomerServiceController extends Controller
         return view('customers.service.edit_customer_service')->with([
             'employers'=>$employer,
             'payment_methods'=>$payments,
-            'customer_services'=>$select
+            'customer_services'=>$select,
+            'account' => $account,
             ]);
 
     }

@@ -23,16 +23,8 @@
         <label for="dt_abertura">Data de Abertura:</label>
         <input type="date" name="data_aber" id="" value="{{date('Y-m-d')}}" class="form-control">
     </div>
-    <div class="col-12 col-sm-12 col-md-12 col-lg-4">
-        <label for="dt_fechamento">Data de Fechamento:</label>
-        <input type="date" name="data_fech" id="" class="form-control">
-    </div>
     <div class="col-12 col-sm-6 col-lg-2">
         <label for="anual">Referência:</label>
         <input type="text" name="referencia" value="{{date('Y')}}" id="" class="form-control" readonly>
-    </div>
-    <div class="col-12 col-sm-6 col-lg-2">
-        <label for="lote">Contador:</label>
-        <input type="text" name="lote" id="" value="{{ $account->lote ?? 1 }}" class="form-control" readonly>
     </div>
 </div>

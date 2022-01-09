@@ -16,10 +16,10 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @if(count($select_account) > 0)
+                        @if($select_account->count())
                             @foreach ($select_account as $s)
                                 <tr>
-                                    <td>{{ $s->lote }}-{{ $s->descricao }}</td>
+                                    <td>{{ $s->descricao }}</td>
                                     <td>{{ date('d/m/Y',strtotime($s->data_aber)) }} {{ $s->hora_aber }}</td>
                                     @if(isset($s->data_fech))
                                     <td>{{ date('d/m/Y',strtotime($s->data_fech)) }}</td>
@@ -48,4 +48,3 @@
 <div class="card-footer bg-white">
     <small class="text-secondary"><p>*Listagem de caixas abertos e fechados ordenados por data de abertura</p></small>
 </div>
-    

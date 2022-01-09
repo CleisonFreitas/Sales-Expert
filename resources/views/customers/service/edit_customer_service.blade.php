@@ -1,4 +1,4 @@
-@extends('/layouts/main')
+@extends('layouts.main')
 
 @section('title','Customer Service')
 
@@ -34,7 +34,7 @@
             @foreach ($customer_services as $c )
                 <div class="tab-content" id="nav-tabContent">
                     <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
-                        <form action="{{ route('service_create') }}" method="POST">
+                        <form action=#" method="POST">
                             <div class="row mt-3">
                                 <div class="col-12 col-sm-8 col-lg-3">
                                     <label for="st_date">Cadastro:</label>
@@ -66,7 +66,7 @@
                                 </div>
                                 <div class="col-12 col-sm-6 col-lg-3">
                                     <label for="dt_concl">Agendado para:</label>
-                                    <input type="date" name="data_agend" value="{{ date('Y-m-d',strtotime($c->data_agend)) }}" id="" class="form-control">
+                                    <input type="date" name="data_agend" value="{{ date('Y-m-d',strtotime($c->data_agend)) ?? date('Y-m-d',strtotime(old('data_agend'))) }}" id="" class="form-control">
                                 </div>
                                 <div class="col-12 col-sm-6 col-lg-3">
                                     <label for="st_hour">Horário:</label>
@@ -108,7 +108,7 @@
                                 <div class="col-12 col-sm-12 col-lg-12">
                                     <label for="note">Observação:</label>
                                     <textarea name="observacao" id="" cols="30" rows="5" class="form-control" maxlength="255">{{ $c->observacao }}</textarea>
-                                </div>      
+                                </div>
                             </div>
                             <div class="row mt-3">
                                 <div class="col">
@@ -116,7 +116,7 @@
                                     <button type="reset" class="btn btn-secondary">Limpar</button>
                                 </div>
                             </div>
-                        </form>   
+                        </form>
                     </div>
                     <!-- Produto/Serviço -->
                     <div class="tab-pane fade" id="nav-prdserv" role="tabpanel" aria-labelledby="nav-prdserv-tab">
@@ -126,11 +126,13 @@
                                 <div class="col-12 col-sm-8 col-lg-12">
                                     <label for="caixa">Caixa:</label>
                                     <select name="caix_ref" id="" class="custom-select">
-                                        <option value="#">003 - Caixa Financeiro - {{ date('d/m/Y') }}</option>
+                                        @foreach ($account as $accountbook)
+                                            <option value="{{ $accountbook->id }}">{{ $accountbook->id }} - {{ $accountbook->descricao }} - {{ date('d/m/Y', strtotime($accountbook->data_aber)) }}</option>
+                                        @endforeach
                                     </select>
                                 </div>
                             </div>
-                            
+
                             <div class="row mt-1">
                                 <div class="col-12 col-sm-12 col-lg-6 mb-2">
 
@@ -138,15 +140,15 @@
                                         <div class="col">
                                             <label for="forma_pagamento">Forma de Pagamento:</label>
                                             <select name="form_paga_id" id="" class="custom-select">
-                                                <option value="{{ $c->form_paga_id }}" selected>{{ $c->p_method }} (Atual)</option>
+                                                <option>Escolha uma forma de pagamento</option>
                                                 @foreach ($payment_methods as $payment)
-                                                    <option value="{{ $payment->id }}">{{ $payment->descricao }}</option>
+                                                    <option value="{{ $payment->id }}"></option>
                                                 @endforeach
                                             </select>
                                         </div>
                                     </div>
                                     <div class="row mt-2">
-                                        
+
                                     </div>
 
                                 </div>
@@ -161,26 +163,22 @@
                                                         R$
                                                     </span>
                                                 </div>
-                                                <input type="text" name="valor" value="{{ number_format($c->valor,2,',','.') }}" id="valor" class="form-control" readonly>
+                                                <input type="text" name="valor" value="{{ number_format($c->valor,2,',','.') }}" id="valor" class="form-control" disabled>
                                             </div>
                                         </div>
                                         <div class="col-12 col-sm-6 col-lg-6">
                                             <label for="cortesia">Cortesia: </label>
                                             <select name="cortesia" id="" class="custom-select">
-                                                @switch($c->cortesia)
-                                                    @case('S')
-                                                        <option value="N">Não</option>
-                                                        <option value="S" selected>Sim</option>
-                                                        @break
-                                                    @case('N')
-                                                        <option value="N" selected>Não</option>
-                                                        <option value="S">Sim</option>
-                                                        @break
-                                                    @default
-                                                @endswitch
+                                                <option value="Não" selected>Não</option>
+                                                <option value="Sim">Sim</option>
                                             </select>
                                         </div>
                                     </div>
+                                </div>
+                            </div>
+                            <div class="row mb-1">
+                                <div class="col">
+                                    <small class="text-muted">*Nota: Marcar Cortesia como "Sim" automaticamente irá zerar o valor a ser cobrado no caixa.</small>
                                 </div>
                             </div>
                             <div class="row mt-2">
@@ -192,8 +190,8 @@
                     </div>
                 </div>
             @endforeach
-            
-        </div>       
-    </div>     
-                    
+
+        </div>
+    </div>
+
 @endsection
