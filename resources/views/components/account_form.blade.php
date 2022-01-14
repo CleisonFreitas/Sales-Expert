@@ -9,8 +9,8 @@
     <div class="col-12 col-sm-4 col-lg-3">
         <label for="status">Status:</label>
         <select name="status" id="" class="custom-select">
-            <option value="A">Ativo</option>
-            <option value="I">Inativo</option>
+            <option value="Ativo">Ativo</option>
+            <option value="Inativo">Inativo</option>
         </select>
     </div>
 </div>

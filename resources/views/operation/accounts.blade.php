@@ -27,7 +27,7 @@
 
     <div class="card-body text-danger">
         <div class="card-header bg-gray-300">
-            <h5 class="m-0 font-weight-bold text-secondary">Desenvolvimento e Controle de Contas</h5>
+            <h5 class="m-0 font-weight-bold text-secondary">Controle de Contas</h5>
         </div>
         <div class="tab-content" id="nav-tabContent">
             <!-- Formulário de controle de conta -->

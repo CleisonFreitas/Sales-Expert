@@ -16,10 +16,10 @@ class CreateAccountsTable extends Migration
         Schema::create('accounts', function (Blueprint $table) {
             $table->increments('id');
             $table->string('categoria',1);
-            $table->enum('status',['A','I']);
+            $table->enum('status',['Ativo','Inativo']);
             $table->string('descricao',80);
-            $table->string('tipo',1);
-            $table->string('uso',1);
+            $table->string('tipo',15);
+            $table->string('uso',15);
             $table->integer('pertence')->unsigned()->nullable();
             $table->timestamps();
             $table->integer('operador_id')->unsigned();

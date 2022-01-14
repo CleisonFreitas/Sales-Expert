@@ -4,7 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Models\Account;
-use Illuminate\Http\Request;
+//use Illuminate\Http\Request;
+use App\Http\Requests\AccountRequest;
 
 class AccountController extends Controller
 {
@@ -32,9 +33,15 @@ class AccountController extends Controller
     }
 
 
-    public function store(Request $request)
+    public function store(AccountRequest $request)
     {
-        $account = Account::create($request->all());
+        try{
+            $account = Account::create($request->all());
+
+        }catch(\Exception $e){
+            return redirect()->back()->with([toast()->error($e->getMessage())]);
+        }
+
         return redirect()->back()->with([toast()->success('Nova conta criada com sucesso!')]);
     }
 

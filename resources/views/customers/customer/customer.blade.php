@@ -54,19 +54,19 @@
                                     <option value="Inativo">Inativo</option>
                                 </select>
                             </div>
-                        </div> 
+                        </div>
 
                         <div class="row mb-3">
                             <div class="col-12 col-sm-12 col-lg-12">
                                 <label for="f_name">Nome Completo:</label>
-                                <input type="text" name="nome" id="" class="form-control">
+                                <input type="text" name="nome" id="" class="form-control" placeholder="Ex: Luciano Cavalcante">
                                 <small class="form-text text-secondary">*Campo obrigatório</small>
                             </div>
                         </div>
                         <div class="row mb-3">
                             <div class="col-12 col-sm-12 col-lg-9">
                                 <label for="apelido">Como deseja ser chamado?</label>
-                                <input type="text" name="apelido" maxlength="15" id="" class="form-control">
+                                <input type="text" name="apelido" maxlength="15" id="" class="form-control" placeholder="Ex: Luciano">
                                 <small class="form-text text-secondary">*Campo obrigatório</small>
                             </div>
                             <div class="col-12 col-sm-12 col-lg-3">
@@ -77,11 +77,11 @@
                         <div class="row mb-3">
                             <div class="col-12 col-sm-12 col-lg-4">
                                 <label for="itin">CPF:</label>
-                                <input type="text" name="cpf" id="txtCpf" onkeyup="mask_cpf();" maxlength="14"class="form-control">
+                                <input type="text" name="cpf" id="txtCpf" onkeyup="mask_cpf();" maxlength="14"class="form-control" placeholder="Ex: 145.521.452-37">
                             </div>
                             <div class="col-12 col-sm-6 col-lg-5">
                                 <label for="ssn">RG:</label>
-                                <input type="text" name="rg" id="" class="form-control">
+                                <input type="text" name="rg" id="" class="form-control" placeholder="Ex: 745214-7">
                             </div>
                             <div class="col-12 col-sm-6 col-lg-3">
                                 <label for="gender">Gênero:</label>
@@ -92,7 +92,7 @@
                                 </select>
                             </div>
                         </div>
-                        
+
                         <div class="row mt-2 mb-3">
                             <div class="col">
                                 <h5 class="text-gray-400">Localização*</h5>
@@ -101,29 +101,29 @@
                         <div class="row mt-2 mb-3">
                             <div class="col-12 col-sm-12 col-lg-3">
                                 <label for="zip_code">Cep: </label>
-                                <input type="text" name="cep" id="cep" onkeyup="mask_cep();" maxlength="9" class="form-control" onblur="pesquisacep(this.value);">
+                                <input type="text" name="cep" id="cep" onkeyup="mask_cep();" maxlength="9" class="form-control" onblur="pesquisacep(this.value);" placeholder="Ex: 60.452-141">
                             </div>
                             <div class="col-8 col-sm-9 col-lg-7">
                                 <label for="street">Rua/Avenida: </label>
-                                <input type="text" name="logradouro" id="street" class="form-control">
+                                <input type="text" name="logradouro" id="street" class="form-control" placeholder="Ex: Rua Augusta dos Anjos">
                             </div>
                             <div class="col-4 col-sm-3 col-lg-2">
                                 <label for="n_home">Número: </label>
-                                <input type="text" name="numero" id="" class="form-control">
+                                <input type="text" name="numero" id="" class="form-control" placeholder="Ex: 142">
                             </div>
                         </div>
                         <div class="row mt-2 mb-3">
                             <div class="col-9 col-sm-9 col-lg-4">
                                 <label for="city">Cidade:</label>
-                                <input type="text" name="cidade" id="city" class="form-control">
+                                <input type="text" name="cidade" id="city" class="form-control" placeholder="Ex: São Paulo">
                             </div>
                             <div class="col-3 col-sm-3 col-lg-2">
                                 <label for="state">Estado:</label>
-                                <input type="text" name="estado" id="state" class="form-control">
+                                <input type="text" name="estado" id="state" class="form-control" placeholder="Ex: SP">
                             </div>
                             <div class="col-12 col-sm-12 col-lg-6">
                                 <label for="district">Bairro:</label>
-                                <input type="text" name="bairro" id="district" class="form-control">
+                                <input type="text" name="bairro" id="district" class="form-control" placeholder="Cenpretade">
                             </div>
                         </div>
                         <div class="row mt-2 mb-3">
@@ -134,25 +134,25 @@
                         <div class="row mb-3">
                             <div class="col-12 col-sm-12 col-lg-8">
                                 <label for="email">E-mail</label>
-                                <input type="text" name="email" id="" class="form-control">
+                                <input type="text" name="email" id="" class="form-control" placeholder="Ex: luciano@gmail.com">
                             </div>
                             <div class="col-12 col-sm-12 col-lg-4">
                                 <label for="ct_numb">Telefone:</label>
-                                <input type="text" name="ct_num" id="txtFone" onkeyup="mask_fone();" maxlength="15" class="form-control">
+                                <input type="text" name="ct_num" id="txtFone" onkeyup="mask_fone();" maxlength="15" class="form-control" placeholder="(85) 98541-2345">
                             </div>
                         </div>
                         <div class="row mb-3">
                             <div class="col-12 col-sm-12 col-lg-4">
                                 <label for="whatsapp">WhatsApp:</label>
-                                <input type="text" name="ct_whats" id="txtWhats" onkeyup="mask_whats();" maxlength="15" class="form-control">
+                                <input type="text" name="ct_whats" id="txtWhats" onkeyup="mask_whats();" maxlength="15" class="form-control" placeholder="(85) 98541-2345">
                             </div>
                             <div class="col-12 col-sm-12 col-lg-4">
                                 <label for="facebook">Facebook:</label>
-                                <input type="text" name="facebook" id="" class="form-control">
+                                <input type="text" name="facebook" id="" class="form-control" placeholder="facebook.com/miha.yu.1840">
                             </div>
                             <div class="col">
                                 <label for="col-12 col-sm-12 col-lg-4">Instagram:</label>
-                                <input type="text" name="instagram" id="" class="form-control">
+                                <input type="text" name="instagram" id="" class="form-control" placeholder="@mirna_economirna">
                             </div>
                         </div>
                         <div class="row mt-2 mb-3">
@@ -188,7 +188,7 @@
                                                         <th>Ação</th>
                                                     </tr>
                                                 </thead>
-                                                
+
                                                 <tbody>
                                                     @foreach ($customers as $c)
                                                     <tr>
