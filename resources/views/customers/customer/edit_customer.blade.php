@@ -14,10 +14,10 @@
                     <nav class="mx-auto mt-2">
                         <ul class="nav nav-pills justify-content-end" id="pills-tab" role="tablist">
                             <li class="nav-item" role="presentation">
-                                <a class="nav-link active btn-sm" id="nav-home-ta" data-toggle="pill" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true"><i class="fas fa-user-edit"></i></a>
+                                <a class="nav-link active " id="nav-home-ta" data-toggle="pill" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true"><i class="fas fa-user-edit"></i></a>
                             </li>
                             <li class="nav-item" role="presentation">
-                                <a class="nav-link btn-sm" id="nav-contact-tab" data-toggle="pill" href="#nav-contact" role="tab" aria-controls="nav-contact" aria-selected="false"><i class="fas fa-user-cog"></i></a>
+                                <a class="nav-link " href="{{ route('customer') }}" title="Cadastrar novo"  aria-selected="false"><i class="fas fa-user-plus"></i></a>
                             </li>
                         </ul>
                     </nav>
@@ -35,11 +35,7 @@
                         <div class="card-header bg-gray-300 ">
                             <h5 class="m-0 font-weight-bold text-secondary">Editar cadastro</h5>
                         </div>
-                        <div class="row mt-3">
-                            <div class="col">
-                                <a href="{{ route('customer') }}" class="btn btn-dark"><i class="fas fa-plus-circle"></i>&nbsp;Novo Cliente</a>
-                            </div>
-                        </div>
+
 
                         <div class="row mt-2 mb-3">
                             <div class="col-12 col-sm-12 col-lg-3">
@@ -60,7 +56,7 @@
                                     <option value="Inativo">Inativo</option>
                                 </select>
                             </div>
-                        </div> 
+                        </div>
 
                         <div class="row mb-3">
                             <div class="col-12 col-sm-12 col-lg-12">
@@ -98,7 +94,7 @@
                                 </select>
                             </div>
                         </div>
-                        
+
                         <div class="row mt-2 mb-3">
                             <div class="col">
                                 <h5 class="text-gray-400">Localização*</h5>
@@ -194,7 +190,7 @@
                                                         <th >Ação</th>
                                                     </tr>
                                                 </thead>
-                                                
+
                                                 <tbody>
                                                     <tr>
                                                         <td>{{ $customers->apelido }}</td>

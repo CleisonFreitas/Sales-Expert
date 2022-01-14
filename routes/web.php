@@ -90,7 +90,8 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/operation/accountability/show/{id}',                   [AccountBookController::class, 'show'])->name('account.book.show');
 
     // Operations - posting_account
-    Route::get('/operation/post_account', [AccountBookController::class,'post_index'])->name('posting.book');
+    Route::get('/operation/bills_receive',  [AccountBookController::class,'account_receive_index'])->name('posting.receive');
+    Route::get('/operation/bills_pay',      [AccountBookController::class,'account_pay_index'])->name('posting.pay');
 
 
 

@@ -16,6 +16,8 @@ class AccountBookController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public $route;
+
     public function index()
     {
         try{
@@ -23,12 +25,13 @@ class AccountBookController extends Controller
             $account_reference = AccountReference::all();
             $account_book = AccountBook::all();
             $select_account = AccountBook::selectcaix();
+            $caixa = 'A';
 
         }catch(\Exception $e){
             return response()->json('Dados não encontrados!');
         }
 
-        return view('operation.open_account_book',compact('account_book','account_reference','select_account'));
+        return view('operation.open_account_book',compact('account_book','account_reference','select_account','caixa'));
     }
 
     /**
@@ -60,14 +63,18 @@ class AccountBookController extends Controller
 
     public function show($id)
     {
-        $account = AccountBook::findOrfail($id);
-        $account_reference = AccountReference::all();
-        $select_account = DB::table('account_books')
-        ->join('account_references','account_books.caixa_id','=','account_references.id')
-        ->select('account_books.*','account_references.descricao')
-        ->where('data_fech','=',null)
-        ->get();
-        return view("operation.close_account_book", compact('select_account','account_reference','account'));
+        try{
+            $account = AccountBook::findOrfail($id);
+            $account_reference = AccountReference::all();
+            $select_account = AccountBook::selectcaix();
+            $caixa = 'F';
+
+        }catch(\Exception $e){
+
+            return redirect()->route('dashboard')->with([toast()->info($e->getMessage())]);
+        }
+
+        return view("operation.close_account_book", compact('select_account','account_reference','account','caixa'));
     }
 
     /**
@@ -118,7 +125,11 @@ class AccountBookController extends Controller
         //
     }
 
-    public function post_index(){
-        return view('operation.posting_account');
+    public function account_receive_index(){
+        return view('operation.bills_receive');
+    }
+    public function account_pay_index(){
+        $route;
+        return view('operation.bills_pay');
     }
 }

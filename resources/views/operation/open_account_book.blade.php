@@ -8,7 +8,7 @@
     </div>
     <form action="{{ route('account.book.open') }}" method="POST" class="">
         @csrf
-        
+
         @include("components.account_book_form")
 
         <div class="row mt-2">
@@ -21,13 +21,13 @@
                 <div class="row mt-2">
                     <div class="col">
                         <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#abrirCaixa">Abrir</button>
-                        
+
                     </div>
                 </div>
-            
+
                 <!-- Modal para abertura de caixa -->
                 <div class="modal fade" id="abrirCaixa" tabindex="-1" aria-labelledby="abrirCaixaLabel" aria-hidden="true">
-                    <div class="modal-dialog">
+                    <div class="modal-dialog modal-dialog-centered">
                         <div class="modal-content">
                             <div class="modal-header">
                                 <h5 class="modal-title text-gray-600" id="abrirCaixaLabel">Abertura de caixa</h5>
@@ -51,5 +51,5 @@
                 <!-- #Abertura de caixa -->
                 </form>
             </div>
-    
+
 @endsection

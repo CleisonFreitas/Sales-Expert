@@ -108,9 +108,13 @@
                     <i class="fas fa-piggy-bank mx-2"></i>
                     Caixa
                 </a>
-                <a class="collapse-item" href="{{route('posting.book')}}">
-                    <i class="fas fa-wallet mx-2"></i>
-                    Lançamentos
+                <a class="collapse-item" href="{{route('posting.receive')}}">
+                    <i class="fas fa-receipt mx-2"></i>
+                    Contas à Receber
+                </a>
+                <a class="collapse-item" href="{{route('posting.pay')}}">
+                    <i class="fas fa-file-invoice-dollar mx-2"></i>
+                    Contas à Pagar
                 </a>
             </div>
         </div>

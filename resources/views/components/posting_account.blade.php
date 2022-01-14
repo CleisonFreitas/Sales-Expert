@@ -1,14 +1,8 @@
-@extends('layouts.main')
-
-@section('title','Lançamentos')
-
-@section('content')
-
-<div class="card shadow mt-3">
-    <div class="card-header py-1">
-        <h2 class="mb-4 text-gray-800 mt-2">Lançamento de Contas</h2>
+<div class="tab-content" id="nav-tabContent">
+    <div class="tab-pane fade show" id="nav-list" role="tabpanel" aria-labelledby="nav-list-tab">
+        ...
     </div>
-    <div class="card-body text-danger">
+    <div class="tab-pane fade show active" id="nav-new" role="tabpanel" aria-labelledby="nav-new-tab">
         <div class="card-header bg-gray-300">
             <h5 class="m-0 font-weight-bold text-secondary">Gerenciamento de Contas</h5>
         </div>
@@ -80,4 +74,3 @@
         </form>
     </div>
 </div>
-@endsection

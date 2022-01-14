@@ -19,10 +19,21 @@
     </div>
 </div>
 <div class="row mt-2">
+    @if ($caixa == 'A')
     <div class="col-12 col-sm-12 col-md-12 col-lg-4">
         <label for="dt_abertura">Data de Abertura:</label>
-        <input type="date" name="data_aber" id="" value="{{date('Y-m-d')}}" class="form-control">
+        <input type="date" name="data_aber" id="" value="" class="form-control" required>
     </div>
+    @else
+    <div class="col-12 col-sm-12 col-md-12 col-lg-4">
+        <label for="dt_abertura">Data de Fechamento:</label>
+        <input type="date" name="data_fech" id="" value="" class="form-control" required>
+    </div>
+    <div class="col-12 col-sm-6 col-lg-2">
+        <label for="anual">Valor:</label>
+        <input type="text" name="referencia" value="0.00" id="" class="form-control" readonly>
+    </div>
+    @endif
     <div class="col-12 col-sm-6 col-lg-2">
         <label for="anual">Referência:</label>
         <input type="text" name="referencia" value="{{date('Y')}}" id="" class="form-control" readonly>
