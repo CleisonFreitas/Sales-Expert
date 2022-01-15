@@ -26,7 +26,17 @@ class AccountRequest extends FormRequest
         return [
             'descricao' => ['bail','required','max:80'],
             'tipo' =>['required'],
-            'pertence' => ['required']
+            'pertence' => ['required_unless:categoria,G']
         ];
     }
+
+    public function messages()
+    {
+        return [
+            'pertence.required_unless' => 'Informe à qual grupo pertence essa conta',
+            'tipo.required' => 'É obrigatório informar o tipo',
+            'descricao.required' => 'É obrigatório informar uma descrição'
+        ];
+    }
+
 }

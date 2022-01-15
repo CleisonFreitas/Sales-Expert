@@ -17,19 +17,25 @@
 <div class="row mt-1">
     <div class="col-12 col-sm-12 col-lg-12">
         <label for="descricao">Descrição:</label>
-        <input type="text" name="descricao" id="" class="form-control" placeholder="Descrição da Conta" required>
+        <input type="text" name="descricao" id="" value="{{ old('descricao') }}" class="form-control" placeholder="Descrição da Conta" required>
+        @error('descricao')
+            <small class="text-danger">{{ $message }}</small>
+        @enderror
     </div>
 </div>
 <div class="row mt-1">
     <div class="col-12 col-sm-6 col-lg-6">
         <label for="tipo">Tipo:</label>
         <select name="tipo" id="" class="custom-select">
-            <option>Escolha um tipo</option>
-            <option value="R">Receita</option>
-            <option value="D">Despesa</option>
-            <option value="C">Passivo</option>
-            <option value="I">Investimento</option>
+            <option value="">Escolha um tipo</option>
+            <option value="Receita">Receita</option>
+            <option value="Despesa">Despesa</option>
+            <option value="Passivo">Passivo</option>
+            <option value="Investimento">Investimento</option>
         </select>
+        @error('tipo')
+            <small class="text-danger">{{ $message }}</small>
+        @enderror
     </div>
     <div class="col-12 col-sm-6 col-lg-6">
         <label for="uso">Uso: </label>
@@ -48,6 +54,9 @@
                 <option value="{{ $g->id }}">{{ $g->descricao }}</option>
             @endforeach
         </select>
+        @error('pertence')
+            <small class="text-danger">{{ $message }}</small>
+        @enderror
         <input type="hidden" name="operador_id" value="{{ Auth::user()->id }}">
         <input type="hidden" name="operador_nome" value="{{ Auth::user()->name }}">
     </div>

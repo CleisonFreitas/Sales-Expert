@@ -27,7 +27,7 @@
 
     <div class="card-body text-danger">
         <div class="card-header bg-gray-300">
-            <h5 class="m-0 font-weight-bold text-secondary">Controle de Contas</h5>
+            <h5 class="m-0 font-weight-bold text-secondary">Controle de Contas </h5>
         </div>
         <div class="tab-content" id="nav-tabContent">
             <!-- Formulário de controle de conta -->
@@ -44,7 +44,7 @@
                     <table class="table table-hover" id="dataTable" width="100%" cellspacing="0">
                         <thead>
                             <tr>
-                                <th>Descrição</th>
+                                <th>Grupo</th>
                                 <th>Status</th>
                                 <th>Operador</th>
                                 <th>Editar</th>
@@ -58,7 +58,7 @@
                                         <td>{{ $g->operador_nome }}</td>
                                         <td>
                                             <div class="row">
-                                                <a href="#" class="btn btn-dark btn-sm mx-1"><i class="fas fa-edit"></i></a>
+                                                <a href="#" class="btn btn-primary btn-sm mx-1"><i class="fas fa-edit"></i></a>
                                                 <!-- Button trigger modal -->
                                                 <button type="button" class="btn btn-info btn-sm " data-toggle="modal" data-target="#modal{{ $g->id }}">
                                                     <i class="fas fa-list-alt"></i>
@@ -89,7 +89,7 @@
                                                                                         <tr>
                                                                                             <td>{{ $c->id }} - {{ $c->descricao }}</td>
                                                                                             <td>
-                                                                                                <a href="#" class="btn btn-dark btn-sm"><i class="fas fa-edit"></i></a>
+                                                                                                <a href="#" class="btn btn-primary btn-sm"><i class="fas fa-edit"></i></a>
                                                                                                 <a href="#" class="btn btn-danger btn-sm"><i class="fas fa-trash-alt"></i></a>
                                                                                             </td>
                                                                                         </tr>

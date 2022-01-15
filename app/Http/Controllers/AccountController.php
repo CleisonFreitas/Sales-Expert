@@ -39,7 +39,9 @@ class AccountController extends Controller
             $account = Account::create($request->all());
 
         }catch(\Exception $e){
-            return redirect()->back()->with([toast()->error($e->getMessage())]);
+            return redirect()->back()
+            ->with([toast()->error($e->getMessage())])
+            ->withInput();
         }
 
         return redirect()->back()->with([toast()->success('Nova conta criada com sucesso!')]);
