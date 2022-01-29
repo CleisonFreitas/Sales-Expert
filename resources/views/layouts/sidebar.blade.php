@@ -2,12 +2,12 @@
 <ul class="navbar-nav bg-gradient-dark sidebar sidebar-dark accordion" id="accordionSidebar">
 
     <!-- Sidebar - Brand -->
-    <a class="sidebar-brand d-flex align-items-center justify-content-center  " href="#">
+    <a class="sidebar-brand d-flex align-items-center justify-content-center  " href="{{ route('dashboard') }}">
         <div class="sidebar-brand-icon">
-            <img src="{{ asset('image/logo.png') }}" class="rounded-circle img-fluid" alt="logo">
+            <img src="{{ asset('image/logo.png') }}" class="rounded-circle " alt="logo" style="width:83%">
         </div>
-        <div class="sidebar-brand-text mx-1 "><h5><span class="badge bg-secondary">Sales</h5></span></div>
-        <div class="sidebar-brand-text mt-3"><h4><sub><span class="badge bg-danger">Expert</span><sub></h4></div>
+        <div class="sidebar-brand-text mx-1 "><h5><span class="badge bg-secondary">Inter</h5></span></div>
+        <div class="sidebar-brand-text mt-3"><h4><sub><span class="badge bg-danger">Note</span><sub></h4></div>
     </a>
 
     <!-- Divider -->

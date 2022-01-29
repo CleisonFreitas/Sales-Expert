@@ -14,11 +14,11 @@
                     <ul class="nav nav-pills justify-content-end" id="pills-tab" role="tablist">
 
                         <li class="nav-item" role="presentation">
-                            <a class="nav-link active btn-sm" id="nav-home-ta" data-toggle="pill" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">Novo</a>
+                            <a class="nav-link active btn-sm" id="nav-home-ta" data-toggle="pill" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true"><i class="fas fa-concierge-bell"></i></a>
                         </li>
 
                         <li class="nav-item" role="presentation">
-                            <a class="nav-link btn-sm" id="nav-consult-tab" data-toggle="pill" href="#nav-consult" role="tab" aria-controls="nav-consult" aria-selected="false">Consultar</i></a>
+                            <a class="nav-link btn-sm" id="nav-consult-tab" data-toggle="pill" href="#nav-consult" role="tab" aria-controls="nav-consult" aria-selected="false"><i class="fab fa-searchengin"></i></i></a>
                         </li>
 
                     </ul>

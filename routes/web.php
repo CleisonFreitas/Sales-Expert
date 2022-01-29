@@ -12,6 +12,7 @@ use App\Http\Controllers\AccountBookController;
 use App\Http\Controllers\AccountController;
 use App\Http\Controllers\AccountReferenceController;
 use App\Http\Controllers\CustomerReportController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ServiceController;
 //use alert;
 
@@ -32,6 +33,12 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/company',              [CompanyController::class, 'show'])->name('company');
     Route::post('/company/create',      [CompanyController::class, 'register'])->name('company_register');
     Route::put('/company/update/{id}',  [CompanyController::class, 'update'])->name('company_updt');
+
+    Route::get('/dashboard',                    [HomeController::class, 'index'])->name('dashboard');
+    Route::post('/search',                      [HomeController::class,'search'])->name('search');
+    Route::post('dashboard/note',               [HomeController::class,'nota'])->name('note_create');
+    Route::put('dashboard/note/update/{id}',    [HomeController::class,'nota_update'])->name('note_update');
+    Route::get('dashboard/note/delete/{id}',    [HomeController::class,'nota_delete'])->name('note_delete');
 
 
 
@@ -78,6 +85,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/customers_service/customer/{id}',               [CustomerServiceController::class, 'shop'])->name('customer_shop');
     Route::post('/customers_service/create',                     [CustomerServiceController::class, 'store'])->name('customer_service_create');
     Route::get('/customer_service/edit/{ordem}',                 [CustomerServiceController::class, 'edit'])->name('service_edit');
+    Route::post('/customer_service/payment',                     [CustomerServiceController::class, 'payment'])->name('service_payment');
 
     //Oprations - Accounts
     Route::get('/operation/accounts',           [AccountController::class,'index'])->name('account.new');
@@ -114,11 +122,11 @@ Route::middleware(['auth'])->group(function () {
 Route::get('/', function () {
     return view('welcome');
 });
-
+/*
 Route::get('/dashboard', function () {
     return view('reports/dashboard');
 })->middleware(['auth'])->name('dashboard');
-
+*/
 
 Route::get('/product&service', function () {
     return view('registers/service');

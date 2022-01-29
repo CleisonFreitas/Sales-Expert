@@ -30,22 +30,11 @@
             <option value="">Escolha um tipo</option>
             <option value="Receita">Receita</option>
             <option value="Despesa">Despesa</option>
-            <option value="Passivo">Passivo</option>
-            <option value="Investimento">Investimento</option>
         </select>
         @error('tipo')
             <small class="text-danger">{{ $message }}</small>
         @enderror
     </div>
-    <div class="col-12 col-sm-6 col-lg-6">
-        <label for="uso">Uso: </label>
-        <select name="uso" id="" class="custom-select">
-            <option value="N">Normal</option>
-            <option value="E">Específico</option>
-        </select>
-    </div>
-</div>
-<div class="row mt-2">
     <div class="col-12 col-sm-6 col-lg-6">
         <label for="parente">Pertence à:</label>
         <select name="pertence" class="custom-select">
@@ -61,6 +50,7 @@
         <input type="hidden" name="operador_nome" value="{{ Auth::user()->name }}">
     </div>
 </div>
+
 
 <div class="row mt-2">
     <div class="col-12">

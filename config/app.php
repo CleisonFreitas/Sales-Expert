@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'name' => env('APP_NAME', 'SalesExpert'),
+    'name' => env('APP_NAME', 'InterNote'),
 
     /*
     |--------------------------------------------------------------------------
@@ -67,7 +67,7 @@ return [
     |
     */
 
-    'timezone' => 'America/Sao_Paulo',
+    'timezone' => 'America/Fortaleza',
 
     /*
     |--------------------------------------------------------------------------

@@ -9,12 +9,12 @@
         <h5 class="my-2 my-md-0 mw-100"><i class="far fa-building"></i>&nbsp;{{ $company->empr_nome }}</h5>
         @endforeach
         <!-- Topbar Search -->
-        <form action ="#" method="GET" 
+        <form action ="{{ route('search') }}" method="POST"
         class="d-none d-sm-inline-block form-inline ml-auto my-2 my-md-0 mw-100 navbar-search">
             @csrf
             <div class="input-group">
-                <input type="text" class="form-control bg-light border-1 small" list="ContentList" 
-                placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
+                <input type="text" class="form-control bg-light border-1 small" list="ContentList"
+                placeholder="Pesquisar..." aria-label="Search" name="search" aria-describedby="basic-addon2">
                 <div class="input-group-append">
                     <button class="btn btn-danger" type="submit">
                         <i class="fas fa-search fa-sm"></i>
@@ -25,15 +25,16 @@
                 <option value="Fornecedores">
                 <option value="Clientes">
                 <option value="Atendimento">
-                <option value="Pagamentos">
-                <option value="Resultados">
+                <option value="Caixa">
+                <option value="Contas(Receber)">
+                <option value="Contas(Pagar)">
               </datalist>
         </form>
 
         <!-- Topbar Navbar -->
-        <ul class="navbar-nav ml-auto">             
+        <ul class="navbar-nav ml-auto">
 
-            
+
 
             <div class="topbar-divider d-none d-sm-block"></div>
 
@@ -44,7 +45,7 @@
                     <span class="mr-2 d-none d-lg-inline text-gray-800">{{ Auth::user()->name }}</span>
                     <img class="img-profile"
                         src="{{ asset('image/undraw_profile.svg') }}">
-                        
+
                 </a>
                 <!-- Dropdown - User Information -->
                 <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"

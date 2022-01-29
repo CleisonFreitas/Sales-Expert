@@ -144,8 +144,12 @@ class AccountBookController extends Controller
     public function account_receive_index(){
         return view('operation.bills_receive');
     }
+
     public function account_pay_index(){
         $route;
         return view('operation.bills_pay');
     }
+
+    
+
 }

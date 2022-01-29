@@ -29,12 +29,12 @@
         </div>
         <div class="card-body text-danger">
             <div class="card-header bg-gray-300 ">
-                <h5 class="m-0 font-weight-bold text-secondary">Registrar novo atendimento</h5>
+                <h5 class="m-0 font-weight-bold text-secondary">Atendimento</h5>
             </div>
             @foreach ($customer_services as $c )
                 <div class="tab-content" id="nav-tabContent">
                     <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
-                        <form action=#" method="POST">
+                        <form action="#" method="POST">
                             <div class="row mt-3">
                                 <div class="col-12 col-sm-8 col-lg-3">
                                     <label for="st_date">Cadastro:</label>

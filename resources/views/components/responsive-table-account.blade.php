@@ -20,7 +20,7 @@
                             @foreach ($select_account as $s)
                                 <tr>
                                     <td>{{ $s->descricao }}</td>
-                                    <td>{{ date('d/m/Y',strtotime($s->data_aber)) }} {{ $s->hora_aber }}</td>
+                                    <td>{{ date('d/m/Y',strtotime($s->data_aber)) }}</td>
                                     @if(isset($s->data_fech))
                                     <td>{{ date('d/m/Y',strtotime($s->data_fech)) }}</td>
                                     @else

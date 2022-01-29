@@ -100,4 +100,18 @@ class CustomerServiceController extends Controller
             ]);
 
     }
+    
+
+    public function update($ordem)
+    {
+        try{
+            $customer_service = CustomerService::find($ordem);
+            $customer_service->update($request->all());
+
+        }catch(\Exception $e){
+            return redirect()->back()->with([toast()->error($e->getMessage())]);
+        }
+
+        return redirect()->back()->with([toast()->info('Atualização de serviço realizada com sucesso!')]);
+    }
 }

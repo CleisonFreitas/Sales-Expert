@@ -62,6 +62,7 @@ return array(
     'App\\Models\\CustomerService' => $baseDir . '/app/Models/CustomerService.php',
     'App\\Models\\Employer' => $baseDir . '/app/Models/Employer.php',
     'App\\Models\\PaymentMethod' => $baseDir . '/app/Models/PaymentMethod.php',
+    'App\\Models\\Payments' => $baseDir . '/app/Models/Payments.php',
     'App\\Models\\Service' => $baseDir . '/app/Models/Service.php',
     'App\\Models\\Supplier' => $baseDir . '/app/Models/Supplier.php',
     'App\\Models\\User' => $baseDir . '/app/Models/User.php',

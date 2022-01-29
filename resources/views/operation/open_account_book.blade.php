@@ -1,4 +1,4 @@
-@extends("layouts/account_book")
+@extends("layouts.account_book")
 
 @section('caixa')
 

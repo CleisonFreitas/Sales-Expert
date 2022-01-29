@@ -46,7 +46,7 @@
                             <tr>
                                 <th>Grupo</th>
                                 <th>Status</th>
-                                <th>Operador</th>
+                                <th>Tipo</th>
                                 <th>Editar</th>
                             </tr>
                         </thead>
@@ -55,7 +55,7 @@
                                     <tr>
                                         <td>{{ $g->descricao }}</td>
                                         <td>{{ $g->status }}</td>
-                                        <td>{{ $g->operador_nome }}</td>
+                                        <td>{{ $g->tipo }}</td>
                                         <td>
                                             <div class="row">
                                                 <a href="#" class="btn btn-primary btn-sm mx-1"><i class="fas fa-edit"></i></a>
@@ -80,6 +80,7 @@
                                                                         <thead>
                                                                             <tr>
                                                                                 <th>Conta</th>
+                                                                                <th>Tipo</th>
                                                                                 <th>Editar/Excluir</th>
                                                                             </tr>
                                                                         </thead>
@@ -87,10 +88,11 @@
                                                                                 @foreach ($conta as $c)
                                                                                     @if ($c->pertence == $g->id)
                                                                                         <tr>
-                                                                                            <td>{{ $c->id }} - {{ $c->descricao }}</td>
+                                                                                            <td>{{ $c->descricao }}</td>
+                                                                                            <td>{{ $c->tipo }}</td>
                                                                                             <td>
-                                                                                                <a href="#" class="btn btn-primary btn-sm"><i class="fas fa-edit"></i></a>
-                                                                                                <a href="#" class="btn btn-danger btn-sm"><i class="fas fa-trash-alt"></i></a>
+                                                                                                <a href="#" class="btn btn-sm"><i class="fas fa-edit" style="color: blue;"></i></a>
+                                                                                                <a href="#" class="btn  btn-sm"><i class="fas fa-trash-alt" style="color:red;"></i></a>
                                                                                             </td>
                                                                                         </tr>
                                                                                     @endif
