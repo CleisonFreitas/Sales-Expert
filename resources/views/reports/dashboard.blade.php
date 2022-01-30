@@ -1,6 +1,6 @@
 @extends('/layouts/main')
 
-@section('title','dashboard')
+@section('title','Dashboard')
 
 @section('content')
         <!-- Page Heading -->
@@ -39,7 +39,7 @@
                             <div class="col mr-2">
                                 <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
                                     Previsão de entradas</div>
-                                <div class="h5 mb-0 font-weight-bold text-gray-800">R$ 215,000</div>
+                                <div class="h5 mb-0 font-weight-bold text-gray-800">R$ 215,00</div>
                             </div>
                             <div class="col-auto">
                                 <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
@@ -57,7 +57,7 @@
                             <div class="col mr-2">
                                 <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
                                     Ganhos atuais</div>
-                                <div class="h5 mb-0 font-weight-bold text-gray-800">R$ 90</div>
+                                <div class="h5 mb-0 font-weight-bold text-gray-800">R$ 90,00</div>
                             </div>
                             <div class="col-auto">
                                 <i class="fas fa-money-bill-wave fa-2x text-gray-300"></i>
@@ -99,7 +99,7 @@
                                 </div>
                                 <div class="row no-gutters align-items-center">
                                     <div class="col-auto">
-                                        <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">R$ 400</div>
+                                        <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">R$ 400,00</div>
                                     </div>
                                 </div>
                             </div>
@@ -121,7 +121,7 @@
                                 </div>
                                 <div class="row no-gutters align-items-center">
                                     <div class="col-auto">
-                                        <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">R$ 137</div>
+                                        <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">R$ 137,00</div>
                                     </div>
                                 </div>
                             </div>
@@ -153,7 +153,8 @@
             </div>
             <div class="card-body">
                 <div class="table-responsive">
-                    <table class="table table-hover" width="100%" cellspacing="0">
+                    <table class="table table-hover" width="100%" cellspacing="0" id="dataTable">
+                        @if ($notas->count())
                         <thead>
                             <tr>
                                 <th>Descrição</th>
@@ -162,8 +163,8 @@
                             </tr>
                         </thead>
                         <tbody>
+                            @foreach ($notas as $nota)
                             <tr>
-                                @foreach ($notas as $nota)
                                 <td>{{$nota->descricao}}</td>
                                 <td>{{date('d/m/Y', strtotime($nota->previsao))}}</td>
                                 <td><!-- Editar Registro -->
@@ -174,7 +175,7 @@
                                         <i class="fas fa-trash-alt"></i>
                                     </a>
                                 </td>
-
+                            </tr>
                                 <!-- Editar nota -->
                                     <div class="modal fade" id="nota_edit{{ $nota->id }}" tabindex="-1" aria-labelledby="nota_edit{{ $nota->descricao }}Label" aria-hidden="true">
                                         <div class="modal-dialog modal-dialog-centered">
@@ -249,8 +250,16 @@
 
                                 <!-- #Excluir -->
                                 @endforeach
+                            </tbody>
+                        @else
+                        <tbody>
+                            <tr>
+                                <td style="text-align: center;">Nenhum registro pendente</td>
                             </tr>
                         </tbody>
+
+                        @endif
+
                     </table>
                 </div>
             </div>
