@@ -34,11 +34,12 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/company/create',      [CompanyController::class, 'register'])->name('company_register');
     Route::put('/company/update/{id}',  [CompanyController::class, 'update'])->name('company_updt');
 
-    Route::get('/dashboard',                    [HomeController::class, 'index'])->name('dashboard');
-    Route::post('/search',                      [HomeController::class,'search'])->name('search');
+    Route::get('dashboard',                    [HomeController::class, 'index'])->name('dashboard');
+    Route::post('search',                      [HomeController::class,'search'])->name('search');
     Route::post('dashboard/note',               [HomeController::class,'nota'])->name('note_create');
     Route::put('dashboard/note/update/{id}',    [HomeController::class,'nota_update'])->name('note_update');
     Route::get('dashboard/note/delete/{id}',    [HomeController::class,'nota_delete'])->name('note_delete');
+    Route::get('dashboard/relatorio-pdf',       [HomeController::class,'dashpdf'])->name('dashboard_pdf');
 
 
 

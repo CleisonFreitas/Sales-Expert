@@ -2,8 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Customer;
+use App\Models\CustomerService;
 use App\Models\Note;
 use Illuminate\Http\Request;
+use Barryvdh\DomPDF\Facade\Pdf;
+use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
 {
@@ -105,5 +110,40 @@ class HomeController extends Controller
         }
 
         return redirect()->route('dashboard')->with([toast()->info('Nota excluída com sucesso!')]);
+    }
+
+    public function dashpdf()
+    {
+        try{
+            $atendimentos = CustomerService::Where([
+                'data_agend' => date('Y-m-d'),
+                'status' => 'P'
+                ])->get();
+
+            $contanivers = Customer::contanivers();
+
+            $entradas = CustomerService::Where([
+                'data_agend' => date('Y-m-d'),
+                'status' => 'P'
+                ])->sum('valor');
+
+            $arrecadacao = CustomerService::Where([
+                'data_agend' => date('Y-m-d'),
+                'status' => 'C'
+                ])->sum('valor');
+
+        }catch(\Exception $e){
+            return response()->json($e->getMessage());
+        }
+
+
+        return PDF::loadview('pdf.dashboard',[
+            'atendimentos' => $atendimentos,
+            'aniversariantes' => $contanivers,
+            'entradas' => $entradas,
+            'arrecadacao' => $arrecadacao,
+        ])
+            ->setPaper('a4','landscape')
+            ->stream('relatorio-dashboard.pdf');
     }
 }

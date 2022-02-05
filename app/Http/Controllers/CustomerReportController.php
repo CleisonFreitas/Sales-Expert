@@ -14,6 +14,7 @@ class CustomerReportController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    // Para o menu relatório archives/customer_reports
     public function index()
     {
         $aniversariantes = Customer::aniversariantes();

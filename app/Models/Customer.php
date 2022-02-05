@@ -25,6 +25,28 @@ class Customer extends Model
         return $aniversariantes;
     }
 
+    public static function contanivers(){
+        $dataAtual = Carbon::now();
+
+        $contanivers =
+        ['aniversariantes' => Customer::whereMonth('nascimento', $dataAtual->month)
+        ->whereDay('nascimento', $dataAtual->day)
+        ->orderByRaw('day(nascimento) asc')
+        ->count()
+        ];
+
+        foreach($contanivers as $aniver){
+            if($aniver){
+                $contagem = $aniver;
+            }else{
+                $contagem = 0;
+            }
+
+        }
+
+        return $contagem;
+    }
+
 
     protected $table = 'customers';
     protected $fillable = [
