@@ -41,7 +41,6 @@ class Customer extends Model
             }else{
                 $contagem = 0;
             }
-
         }
 
         return $contagem;

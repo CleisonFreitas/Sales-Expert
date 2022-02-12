@@ -21,46 +21,10 @@
                             <div class="col mr-2">
                                 <div class="text-xs font-weight-bold text-dark text-uppercase mb-1">
                                     Atendimentos (Atual)</div>
-                                <div class="h5 mb-0 font-weight-bold text-gray-800">10</div>
+                                <div class="h5 mb-0 font-weight-bold text-gray-800">{{count($atendimentos)}}</div>
                             </div>
                             <div class="col-auto">
                                 <i class="fas fa-clipboard-list fa-2x text-gray-300"></i>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Previsão Card  -->
-            <div class="col-xl-3 col-md-6 mb-4">
-                <div class="card border-left-success shadow h-100 py-2">
-                    <div class="card-body">
-                        <div class="row no-gutters align-items-center">
-                            <div class="col mr-2">
-                                <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
-                                    Previsão de entradas</div>
-                                <div class="h5 mb-0 font-weight-bold text-gray-800">R$ 215,00</div>
-                            </div>
-                            <div class="col-auto">
-                                <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!--Ganhos atuais -->
-            <div class="col-xl-3 col-md-6 mb-4">
-                <div class="card border-left-warning shadow h-100 py-2">
-                    <div class="card-body">
-                        <div class="row no-gutters align-items-center">
-                            <div class="col mr-2">
-                                <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
-                                    Ganhos atuais</div>
-                                <div class="h5 mb-0 font-weight-bold text-gray-800">R$ 90,00</div>
-                            </div>
-                            <div class="col-auto">
-                                <i class="fas fa-money-bill-wave fa-2x text-gray-300"></i>
                             </div>
                         </div>
                     </div>
@@ -77,7 +41,7 @@
                                 </div>
                                 <div class="row no-gutters align-items-center">
                                     <div class="col-auto">
-                                        <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">2</div>
+                                        <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">{{$aniversariantes}}</div>
                                     </div>
                                 </div>
                             </div>
@@ -89,27 +53,24 @@
                 </div>
             </div>
 
-            <!-- Contas(Receber) Card -->
+            <!-- Previsão Card  -->
             <div class="col-xl-3 col-md-6 mb-4">
-                <div class="card border-left-info shadow h-100 py-2">
+                <div class="card border-left-success shadow h-100 py-2">
                     <div class="card-body">
                         <div class="row no-gutters align-items-center">
                             <div class="col mr-2">
-                                <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Contas(Receber)
-                                </div>
-                                <div class="row no-gutters align-items-center">
-                                    <div class="col-auto">
-                                        <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">R$ 400,00</div>
-                                    </div>
-                                </div>
+                                <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+                                    Entradas</div>
+                                <div class="h5 mb-0 font-weight-bold text-gray-800">R$ {{number_format($entradas,2,',','.')}}</div>
                             </div>
                             <div class="col-auto">
-                                <i class="fas fa-receipt fa-2x text-gray-300"></i>
+                                <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+
 
             <!-- Contas(Pagar) Card -->
             <div class="col-xl-3 col-md-6 mb-4">
@@ -117,11 +78,11 @@
                     <div class="card-body">
                         <div class="row no-gutters align-items-center">
                             <div class="col mr-2">
-                                <div class="text-xs font-weight-bold text-danger text-uppercase mb-1">Contas(Pagar)
+                                <div class="text-xs font-weight-bold text-danger text-uppercase mb-1">Saídas
                                 </div>
                                 <div class="row no-gutters align-items-center">
                                     <div class="col-auto">
-                                        <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">R$ 137,00</div>
+                                        <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">R$ 0,00</div>
                                     </div>
                                 </div>
                             </div>

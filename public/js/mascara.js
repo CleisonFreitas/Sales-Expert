@@ -52,6 +52,19 @@ String.prototype.toFloat = function() {
 }());
 // #Serviço -> Necessário utilizar o name="serv_ref[]"
 
+// Criando select personalizado para busca de valores
+
+$(document).ready(function() {
+
+    $(".check-run"). click(function() {
+        if( $(this).prop( "checked") == true){
+            console.log("flegado");
+        } else {
+            console.log("vazio");
+        }
+    })
+})
+
 
 // Mask CEP
 function mask_cep(){

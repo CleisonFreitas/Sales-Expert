@@ -32,10 +32,20 @@
         <div class="tab-content" id="nav-tabContent">
             <!-- Formulário de controle de conta -->
             <div class="tab-pane fade show active" id="nav-create" role="tabpanel" aria-labelledby="nav-create-tab">
+                @if(isset($account))
+                <form action="{{ route('account.edit',$account->id) }}" method="post">
+                    @method('PUT')
+                    @csrf
+                         @include('components.account_form')
+                 </form>
+                @else
                 <form action="{{ route('account.store') }}" method="post">
                     @csrf
                          @include('components.account_form')
                  </form>
+
+                @endif
+
             </div>
 
             <!-- Lista de Contas -->
@@ -58,7 +68,7 @@
                                         <td>{{ $g->tipo }}</td>
                                         <td>
                                             <div class="row">
-                                                <a href="#" class="btn btn-primary btn-sm mx-1"><i class="fas fa-edit"></i></a>
+                                                <a href="{{ route('account.edit',$g->id)}}" class="btn btn-primary btn-sm mx-1"><i class="fas fa-edit"></i></a>
                                                 <!-- Button trigger modal -->
                                                 <button type="button" class="btn btn-info btn-sm " data-toggle="modal" data-target="#modal{{ $g->id }}">
                                                     <i class="fas fa-list-alt"></i>
@@ -91,7 +101,7 @@
                                                                                             <td>{{ $c->descricao }}</td>
                                                                                             <td>{{ $c->tipo }}</td>
                                                                                             <td>
-                                                                                                <a href="#" class="btn btn-sm"><i class="fas fa-edit" style="color: blue;"></i></a>
+                                                                                                <a href="{{ route('account.edit',$c->id)}}" class="btn btn-sm"><i class="fas fa-edit" style="color: blue;"></i></a>
                                                                                                 <a href="#" class="btn  btn-sm"><i class="fas fa-trash-alt" style="color:red;"></i></a>
                                                                                             </td>
                                                                                         </tr>

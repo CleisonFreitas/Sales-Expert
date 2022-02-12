@@ -25,8 +25,35 @@ class HomeController extends Controller
      */
     public function index()
     {
+
+        try{
+            $atendimentos = CustomerService::Where([
+                'data_agend' => date('Y-m-d'),
+                'status' => 'P'
+                ])->get();
+
+            $contanivers = Customer::contanivers();
+
+            $entradas = CustomerService::Where([
+                'data_agend' => date('Y-m-d'),
+                'status' => 'P'
+                ])->sum('valor');
+
+            $arrecadacao = CustomerService::Where([
+                'data_agend' => date('Y-m-d'),
+                'status' => 'C'
+                ])->sum('valor');
+
+        }catch(\Exception $e){
+            return response()->json($e->getMessage());
+        }
+
         return view('reports.dashboard',[
             'notas' => Note::all(),
+            'atendimentos' => $atendimentos,
+            'aniversariantes' => $contanivers,
+            'entradas' => $entradas,
+            'arrecadacao' => $arrecadacao,
         ]);
     }
 

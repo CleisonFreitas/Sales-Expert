@@ -91,7 +91,7 @@ Route::middleware(['auth'])->group(function () {
     //Oprations - Accounts
     Route::get('/operation/accounts',           [AccountController::class,'index'])->name('account.new');
     Route::post('/operation/accounts/store',    [AccountController::class, 'store'])->name('account.store');
-
+    Route::get('/operation/accounts/{id}',      [AccountController::class, 'edit'])->name('account.edit');
     // Operations - Account_Book
     Route::get('/operation/accountability',                             [AccountBookController::class, 'index'])->name('account.book');
     Route::post('/operation/accountability/open',                       [AccountBookController::class, 'store'])->name('account.book.open');
@@ -99,9 +99,8 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/operation/accountability/show/{id}',                   [AccountBookController::class, 'show'])->name('account.book.show');
 
     // Operations - posting_account
-    Route::get('/operation/bills_receive',  [AccountBookController::class,'account_receive_index'])->name('posting.receive');
-    Route::get('/operation/bills_pay',      [AccountBookController::class,'account_pay_index'])->name('posting.pay');
-
+    Route::get('/operation/transitions',        [AccountBookController::class,'account_transition'])->name('posting.account');
+    Route::post('/operation/transitions/store', [AccountBookController::class, 'transition_store'])->name('posting.account.store');
 
 
 
@@ -144,10 +143,6 @@ Route::get('/archives/payments_report', function () {
     return view('archives/payment_report');
 })->middleware(['auth'])->name('payment.report');
 
-// Operation
 
-Route::get('/operation/posting account', function () {
-    return view('operation/posting_account');
-})->middleware(['auth'])->name('posting.account');
 
 require __DIR__.'/auth.php';

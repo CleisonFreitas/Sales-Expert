@@ -1,10 +1,12 @@
 <?php
 
+// Utilizado para criação de contas
+
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Models\Account;
-//use Illuminate\Http\Request;
+use Illuminate\Http\Request;
 use App\Http\Requests\AccountRequest;
 
 class AccountController extends Controller
@@ -66,7 +68,12 @@ class AccountController extends Controller
      */
     public function edit($id)
     {
-        //
+        $account = Account::findOrfail($id);
+
+        $grupo = Account::Where('categoria','=','G')->get();
+        $conta = Account::Where('categoria','=','C')->get();
+
+        return view('operation.accounts',compact('account','grupo','conta'));
     }
 
     /**

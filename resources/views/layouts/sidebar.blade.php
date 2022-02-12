@@ -73,10 +73,10 @@
         <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
             data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
-                <h6 class="collapse-header">Cadastro de Clientes:</h6>
+                <h6 class="collapse-header">Cadastro/Atendimentos:</h6>
                 <a class="collapse-item" href="{{ route('customer') }}">
                     <i class="fas fa-users mx-2"></i>
-                    Cadastrar
+                    Clientes
                 </a>
                 <a class="collapse-item" href="{{ route('customer_service') }}">
                     <i class="fas fa-hand-holding-heart mx-2"></i>
@@ -108,13 +108,9 @@
                     <i class="fas fa-piggy-bank mx-2"></i>
                     Caixa
                 </a>
-                <a class="collapse-item" href="{{route('posting.receive')}}">
+                <a class="collapse-item" href="{{route('posting.account')}}">
                     <i class="fas fa-receipt mx-2"></i>
-                    Contas à Receber
-                </a>
-                <a class="collapse-item" href="{{route('posting.pay')}}">
-                    <i class="fas fa-file-invoice-dollar mx-2"></i>
-                    Contas à Pagar
+                    Movimentações
                 </a>
             </div>
         </div>

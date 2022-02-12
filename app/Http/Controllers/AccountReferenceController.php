@@ -1,5 +1,7 @@
 <?php
 
+// Utilizado para criação de caixas
+
 namespace App\Http\Controllers;
 
 use App\Models\AccountReference;

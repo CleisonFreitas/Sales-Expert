@@ -18,7 +18,8 @@ class AccountBook extends Model
         'data_fech',
         'referencia',
     ];
-    public static function selectcaix(){
+    public static function selectcaix()
+    {
         $select_account = DB::table('account_books')
         ->join('account_references','account_books.caixa_id','=','account_references.id')
         ->select('account_books.*','account_references.descricao')
@@ -28,4 +29,6 @@ class AccountBook extends Model
         return $select_account;
     }
     public $timestamps = true;
+
+
 }

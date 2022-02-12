@@ -1,5 +1,7 @@
 <?php
 
+// Utilizado para controle de abertura e fechamento de caixas
+
 namespace App\Http\Controllers;
 
 use App\Models\AccountBook;
@@ -8,6 +10,9 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Requests\OpenBookRequest;
+use App\Models\Account;
+use App\Models\AccountTransitions;
+use App\Models\PaymentMethod;
 
 class AccountBookController extends Controller
 {
@@ -31,7 +36,10 @@ class AccountBookController extends Controller
             return response()->json('Dados não encontrados!');
         }
 
-        return view('operation.open_account_book',compact('account_book','account_reference','select_account','caixa'));
+        return view('operation.open_account_book',compact('account_book',
+                                                          'account_reference',
+                                                          'select_account',
+                                                          'caixa'));
     }
 
     /**
@@ -108,7 +116,7 @@ class AccountBookController extends Controller
             $account_book->update();
             DB::commit();
 
-        }catch(Exception $e){
+        }catch(\Exception $e){
             DB::rollback();
             return redirect()->back()->with([toast()->error($e->getMessage())]);
         }
@@ -141,15 +149,31 @@ class AccountBookController extends Controller
         //
     }
 
-    public function account_receive_index(){
-        return view('operation.bills_receive');
+    public function account_transition(){
+
+        // Lançar conta à receber
+        $accountbook = AccountBook::selectcaix();
+        $paymethod = PaymentMethod::all();
+        $accounts = Account::Where([
+            ['categoria','=','C'],
+        ])->get();
+
+        return view('operation.posting_account',compact('accountbook','accounts','paymethod'));
     }
 
-    public function account_pay_index(){
-        $route;
-        return view('operation.bills_pay');
+    public function transition_store(Request $request)
+    {
+        try{
+
+            $transition = AccountTransitions::create($request->all());
+
+        }catch(\Exception $ex){
+            return redirect()->back()->with([toast()->error($ex->getMessage())]);
+        }
+
+        return redirect()->route('posting.account')->with([toast()->success('Lançamento Realizado com sucesso!')]);
     }
 
-    
+
 
 }

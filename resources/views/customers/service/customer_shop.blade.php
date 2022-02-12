@@ -3,6 +3,7 @@
 @section('title','Customer Service')
 
 
+
 @section('content')
 
     <div class="card shadow mt-3 mb-4">
@@ -94,9 +95,13 @@
                                 </div>
                             </div>
                             <div class="row mt-3">
-                                <div class="col-12 col-sm-12 col-lg-12">
-                                    <label for="description">Descrição do tratamento:</label>
-                                    <input type="text" name="descricao" id="" class="form-control" value="{{ old('descricao') }}" maxlength="100" required>
+                                <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+                                    <label for="description">Serviços:</label>
+                                    <select name="teste" class="custom-select" id="field2" multiple multiselect-search="true" multiselect-select-all="true" >
+                                        @foreach ($services as $service)
+                                            <option value="{{$service->id}}">{{$service->descricao}}</option>
+                                        @endforeach
+                                    </select>
                                 </div>
                             </div>
                             <div class="row mt-1">
@@ -148,7 +153,7 @@
                             </div>
                             <div class="row mt-3">
                                 <div class="col-12 col-sm-12 col-lg-12">
-                                    <label for="note">Observação:</label>
+                                    <label for="note">Descrição:</label>
                                     <textarea name="observacao" id="" cols="30" rows="5" class="form-control" maxlength="255">{{ old('observacao') }}</textarea>
                                 </div>
                             </div>
@@ -167,5 +172,9 @@
                 </div>
             </div>
     </div>
+
+    @section('js')
+        <script src="{{asset('js/multiselect-dropdown.js')}}"></script>
+    @stop
 
 @endsection

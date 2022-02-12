@@ -634,6 +634,7 @@ class ComposerStaticInitf9a432eda49f6961ec10dd5e160af0fa
         'App\\Models\\Account' => __DIR__ . '/../..' . '/app/Models/Account.php',
         'App\\Models\\AccountBook' => __DIR__ . '/../..' . '/app/Models/AccountBook.php',
         'App\\Models\\AccountReference' => __DIR__ . '/../..' . '/app/Models/AccountReference.php',
+        'App\\Models\\AccountTransitions' => __DIR__ . '/../..' . '/app/Models/AccountTransitions.php',
         'App\\Models\\Company' => __DIR__ . '/../..' . '/app/Models/Company.php',
         'App\\Models\\Customer' => __DIR__ . '/../..' . '/app/Models/Customer.php',
         'App\\Models\\CustomerService' => __DIR__ . '/../..' . '/app/Models/CustomerService.php',

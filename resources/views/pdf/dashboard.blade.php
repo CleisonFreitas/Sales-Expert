@@ -44,21 +44,12 @@
                         <td>{{count($atendimentos)}}</td>
                     </tr>
                     <tr>
-                        <td>Entradas(Prevista)</td>
+                        <td>Entradas</td>
                         <td>R$ {{number_format($entradas,2,',','.')}}</td>
                     </tr>
                     <tr>
-                        <td>Ganhos atuais</td>
-                        <td>R$ {{number_format($arrecadacao,2,',','.')}}</td>
-                    </tr>
-
-                    <tr>
-                        <td>Contas à Receber</td>
-                        <td>R$ 400,00</td>
-                    </tr>
-                    <tr>
-                        <td>Contas à Pagar</td>
-                        <td>R$ 137,00</td>
+                        <td>Saídas</td>
+                        <td>R$ 0,00</td>
                     </tr>
                 </tbody>
             </table>

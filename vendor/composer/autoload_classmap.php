@@ -58,6 +58,7 @@ return array(
     'App\\Models\\Account' => $baseDir . '/app/Models/Account.php',
     'App\\Models\\AccountBook' => $baseDir . '/app/Models/AccountBook.php',
     'App\\Models\\AccountReference' => $baseDir . '/app/Models/AccountReference.php',
+    'App\\Models\\AccountTransitions' => $baseDir . '/app/Models/AccountTransitions.php',
     'App\\Models\\Company' => $baseDir . '/app/Models/Company.php',
     'App\\Models\\Customer' => $baseDir . '/app/Models/Customer.php',
     'App\\Models\\CustomerService' => $baseDir . '/app/Models/CustomerService.php',
