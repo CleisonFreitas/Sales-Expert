@@ -13,6 +13,7 @@ use App\Http\Requests\OpenBookRequest;
 use App\Models\Account;
 use App\Models\AccountTransitions;
 use App\Models\PaymentMethod;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class AccountBookController extends Controller
 {
@@ -149,16 +150,37 @@ class AccountBookController extends Controller
         //
     }
 
+    // Contas do Caixa(Movimentações)
     public function account_transition(){
 
         // Lançar conta à receber
         $accountbook = AccountBook::selectcaix();
+        $allbooks = AccountBook::with(['livrocaixa','CaixaReferencia'])->get();
         $paymethod = PaymentMethod::all();
         $accounts = Account::Where([
             ['categoria','=','C'],
         ])->get();
 
-        return view('operation.posting_account',compact('accountbook','accounts','paymethod'));
+      //  echo json_encode([$allbooks]);die;
+      //  dd($allbooks);die;
+        foreach($allbooks as $i => $livroconta){
+            $resultado[$i] = [
+                'Caixa_id' =>$livroconta->caixa_id,
+                'Caixa' => $livroconta->CaixaReferencia->descricao,
+                'Conta_Caixa' => [],
+            ];
+            foreach($livroconta->livrocaixa as $k => $contacaixa){
+                $resultado[$i]['Conta_Caixa'][$k] = [
+                    'id' => $contacaixa->conta_id,
+                    'valor' => $contacaixa->valor,
+                    'observação' => $contacaixa->observacao
+                ];
+            }
+
+        }
+
+        dd([$resultado]);die;
+        return view('operation.posting_account',compact('accountbook','accounts','paymethod','allbooks'));
     }
 
     public function transition_store(Request $request)
@@ -172,6 +194,16 @@ class AccountBookController extends Controller
         }
 
         return redirect()->route('posting.account')->with([toast()->success('Lançamento Realizado com sucesso!')]);
+    }
+
+    public function warning($id){
+        $cliente = AccountTransitions::find($id);
+        Alert::alert()->html('Aviso'," Você está prestes esse lançamento!
+        <br>Deseja prosseguir?<br>
+        <br><a class='btn btn-danger' href='/customer/delete/$id')}}'>Sim</a>&nbsp;
+        <a class='btn btn-secondary' href='/customer/edit/$id'>Não</a><br>",'warning')
+        ->autoClose(20000);
+        return redirect()->back();
     }
 
 

@@ -18,7 +18,8 @@
     <link rel="shortcut icon" href="{{ public_path('icons/favicon.png') }}">
 </head>
 <body>
-    <div class="container">
+    @include('pdf.header')
+    <div class="container mb-3">
         <div class="row">
             <div class="col">
                 <h1 style="text-align: center;">Relatório geral</h1>

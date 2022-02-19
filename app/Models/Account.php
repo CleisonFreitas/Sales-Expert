@@ -21,5 +21,10 @@ class Account extends Model
         'operador_id',
         'operador_nome'
     ];
+
+    public function accountransition()
+    {
+        return $this->hasMany(AccountTransitions::class,'conta_id');
+    }
     public $timestamps = true;
 }

@@ -16,6 +16,7 @@
 
     <link href="{{ asset('vendor/fontawesome-free/css/all.min.css') }}" rel="stylesheet" type="text/css">
 
+
     <link href="{{ asset('css/googleapi.css') }}" rel="stylesheet">
 
     <!-- Custom styles for this template-->

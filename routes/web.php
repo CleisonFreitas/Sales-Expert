@@ -99,8 +99,10 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/operation/accountability/show/{id}',                   [AccountBookController::class, 'show'])->name('account.book.show');
 
     // Operations - posting_account
-    Route::get('/operation/transitions',        [AccountBookController::class,'account_transition'])->name('posting.account');
-    Route::post('/operation/transitions/store', [AccountBookController::class, 'transition_store'])->name('posting.account.store');
+    Route::get('/operation/transitions',                [AccountBookController::class,'account_transition'])->name('posting.account');
+    Route::post('/operation/transitions/store',         [AccountBookController::class, 'transition_store'])->name('posting.account.store');
+    Route::get('/operation/transitions/delete/{id}',    [AccountBookController::class, 'transition_warning'])->name('posting.account.delete');
+
 
 
 

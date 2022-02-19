@@ -22,5 +22,15 @@ class AccountTransitions extends Model
         'observacao'
     ];
 
+    public function account()
+    {
+        return $this->belongsToMany(Account::class,'conta_id');
+    }
+
+    public function livrocaixa()
+    {
+        return $this->belongsTo(AccountBook::class, 'livro_caixa_id');
+    }
+
     public $timestamps = true;
 }

@@ -14,4 +14,9 @@ class AccountReference extends Model
         'descricao'
     ];
     public $timestamps = true;
+
+    public function CaixaReferencia()
+    {
+        return $this->hasMany(AccountBook::class,'caixa_id');
+    }
 }

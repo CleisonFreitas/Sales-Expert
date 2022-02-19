@@ -28,7 +28,27 @@ class AccountBook extends Model
 
         return $select_account;
     }
+
+    //Selecionar todos os caixas com sua descrição
+    public static function allcaix()
+    {
+        $select_book = DB::table('account_books')
+        ->join('account_references','account_books.caixa_id','=','account_references.id')
+        ->select('account_books.*','account_references.descricao')
+        ->get();
+
+        return $select_book;
+    }
     public $timestamps = true;
 
+    public function livrocaixa()
+    {
+        return $this->hasMany(AccountTransitions::class, 'livro_caixa_id');
+    }
+
+    public function CaixaReferencia()
+    {
+        return $this->belongsTo(AccountReference::class,'caixa_id');
+    }
 
 }

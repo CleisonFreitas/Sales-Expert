@@ -61,6 +61,7 @@
 
     <!-- Custom scripts for all pages-->
     <script src="{{ asset('js/internote.js') }}"></script>
+    <script src="{{ asset('js/fontawesome.js') }}"></script>
 
     <!-- Masks -->
     <script src="{{ asset('js/mascara.js') }}"></script>
