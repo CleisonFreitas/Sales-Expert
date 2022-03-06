@@ -20,6 +20,7 @@ class CreateAccountTransitionsTable extends Migration
             $table->integer('caixa_id')->unsigned();
             $table->integer('conta_id')->unsigned();
             $table->integer('form_pagamento_id')->unsigned();
+            $table->integer('livro_caixa_id')->unsigned();
             $table->double('valor',10,2);
             $table->string('observacao')->nullable();
             $table->foreign('livro_caixa_id')->references('id')->on('account_books');

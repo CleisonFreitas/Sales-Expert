@@ -10,6 +10,7 @@ use App\Models\Customer;
 use App\Models\PaymentMethod;
 use App\Models\Service;
 use App\Models\AccountBook;
+use App\Models\Payments;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
@@ -52,7 +53,30 @@ class CustomerServiceController extends Controller
 
             DB::beginTransaction();
 
-            $customer_service = $request->all();
+            $request_all = $request->all();
+            $request_all['service_id'] = collect($request->service_id);
+            $request_all['valor'] = 0;
+            $request_all['descricao'] = [];
+
+       //     dd($request_all['service_id']);die;
+
+            foreach($request->service_id as $id) {
+                $request_all['valor'] += Service::Where('id',$id)->sum('valor');
+                $request_all['descricao'][] = Service::Where('id',$id)->select('descricao')->get();
+
+                foreach([$request_all['descricao']] as $i => $descricao){
+                    $nota[$i] = [
+                        "Servicos" => $descricao,
+                    ];
+                }
+            };
+
+            $request_all['descricao'] = Str::remove(['Servicos',']','[[{','}}','[','{""','}',',"descricao",','{"descricao",','"'],str_replace(':',',',collect($nota)));
+        //    dd($request_all['descricao']);die;
+            CustomerService::create($request_all);
+
+          //  $customer_service['valor'] = $valor;
+           /*
             $customer_service['valor'] = Str::remove(['R$',' '],str_replace(',','.',$request->valor));
 
             if($customer_service['valor'] <= '0' || $customer_service['valor'] === null){
@@ -60,8 +84,7 @@ class CustomerServiceController extends Controller
                     ->with([toast()->info('É necessário escolher pelo menus um serviço')])
                     ->withInput();
             }
-
-            CustomerService::create($customer_service);
+            */
 
             DB::commit();
 
@@ -80,7 +103,7 @@ class CustomerServiceController extends Controller
     public function edit($ordem){
         $employer = Employer::all();
         $payments = PaymentMethod::all();
-        $account = AccountBook::selectcaix();
+        $accountbook = AccountBook::selectcaix();
 
         $select = DB::table('customer_services')
         ->join('customers','customers.id','=','customer_services.cust_id')
@@ -96,13 +119,13 @@ class CustomerServiceController extends Controller
             'employers'=>$employer,
             'payment_methods'=>$payments,
             'customer_services'=>$select,
-            'account' => $account,
+            'accountbook' => $accountbook,
             ]);
 
     }
-    
 
-    public function update($ordem)
+
+    public function update(Request $request,$ordem)
     {
         try{
             $customer_service = CustomerService::find($ordem);
@@ -114,4 +137,31 @@ class CustomerServiceController extends Controller
 
         return redirect()->back()->with([toast()->info('Atualização de serviço realizada com sucesso!')]);
     }
+
+    public function payment(Request $request) {
+        try{
+            DB::beginTransaction();
+
+            $payment = $request->all();
+
+            $payment['valor'] = str_replace(',','.',$request->valor);
+
+            if($request->cortesia == "Sim") {
+                $payment['valor'] = 0;
+            }
+
+            // Verificando se o pagamento já existe.
+          //  dd($payment,$select_pay);die;
+
+            Payments::create($request->all());
+
+        }catch(\Exception $ex){
+            DB::rollback();
+
+            return redirect()->back()->with([toast()->error($ex->getMessage())]);
+        }
+        DB::commit();
+        return redirect()->back()->with([toast()->success('Baixa realizada com sucesso!')]);
+    }
+
 }

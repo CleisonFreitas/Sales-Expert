@@ -217,5 +217,11 @@ if (cep != "") {
 else {
     //cep sem valor, limpa formulário.
     limpa_formulário_cep();
-}
+    }
 };
+
+// Customer
+
+function apelidoDisplay() {
+    document.getElementById("apelido").value = document.getElementById("nome").value.slice(0,13);
+}

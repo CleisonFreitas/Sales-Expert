@@ -15,7 +15,7 @@
                         <ul class="nav nav-pills justify-content-end" id="pills-tab" role="tablist">
 
                             <li class="nav-item" role="presentation">
-                                <a class="nav-link active btn-sm" id="nav-home-ta" data-toggle="pill" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">Novo</a>
+                                <a class="nav-link active btn-sm" id="nav-home-ta" data-toggle="pill" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">Informações</a>
                             </li>
 
                             <li class="nav-item" role="presentation">
@@ -98,12 +98,14 @@
                                     <input type="text" name="ct_nome" value="{{ $c->c_nome }}" id="" class="form-control" readonly>
                                 </div>
                             </div>
+
                             <div class="row mt-3">
-                                <div class="col-12 col-sm-12 col-lg-12">
-                                    <label for="description">Descrição:</label>
-                                    <input type="text" name="descricao" value="{{ $c->descricao }}" maxlength="255" id="" class="form-control">
+                                <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+                                    <label for="description">Serviços:</label>
+                                    <input type="text" value="{{ $c->descricao }}" name="" id="" class="form-control" readonly>
                                 </div>
                             </div>
+
                             <div class="row mt-3">
                                 <div class="col-12 col-sm-12 col-lg-12">
                                     <label for="note">Observação:</label>
@@ -120,13 +122,15 @@
                     </div>
                     <!-- Produto/Serviço -->
                     <div class="tab-pane fade" id="nav-prdserv" role="tabpanel" aria-labelledby="nav-prdserv-tab">
-                        <form action="#" method="POST">
+                        <form action="{{ route('service_payment') }}" method="POST">
                             @csrf
+                            <input type="hidden" name="customer_id" value="{{ $c->cust_id }}"><!-- ID do cliente -->
+                            <input type="hidden" name="customer_services_id" value="{{ $c->ordem }}"><!-- ID do cliente -->
                             <div class="row mt-1">
                                 <div class="col-12 col-sm-8 col-lg-12">
                                     <label for="caixa">Caixa:</label>
                                     <select name="caix_ref" id="" class="custom-select">
-                                        @foreach ($account as $accountbook)
+                                        @foreach ($accountbook as $accountbook)
                                             <option value="{{ $accountbook->id }}">{{ $accountbook->id }} - {{ $accountbook->descricao }} - {{ date('d/m/Y', strtotime($accountbook->data_aber)) }}</option>
                                         @endforeach
                                     </select>
@@ -142,7 +146,7 @@
                                             <select name="form_paga_id" id="" class="custom-select">
                                                 <option>Escolha uma forma de pagamento</option>
                                                 @foreach ($payment_methods as $payment)
-                                                    <option value="{{ $payment->id }}"></option>
+                                                    <option value="{{ $payment->id }}">{{ $payment->descricao }}</option>
                                                 @endforeach
                                             </select>
                                         </div>
@@ -163,7 +167,7 @@
                                                         R$
                                                     </span>
                                                 </div>
-                                                <input type="text" name="valor" value="{{ number_format($c->valor,2,',','.') }}" id="valor" class="form-control" disabled>
+                                                <input type="text" name="valor" value="{{ number_format($c->valor,2,',','.') }}" id="valor" class="form-control" readonly>
                                             </div>
                                         </div>
                                         <div class="col-12 col-sm-6 col-lg-6">

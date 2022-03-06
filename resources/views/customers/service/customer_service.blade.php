@@ -59,8 +59,8 @@
                                     <td>{{ $c->e_nome }}</td>
                                     <td>{{ $c->status }}</td>
                                     <td>
-                                        <a href="{{ route('service_edit',$c->ordem) }}" class="btn btn-secondary btn-sm btn-circle" title="Editar atendimento">
-                                            <i class="fas fa-pencil-alt"></i>
+                                        <a href="{{ route('service_edit',$c->ordem) }}" class="btn btn-success btn-sm btn-circle" title="Pagamento">
+                                            <i class="fas fa-money-bill-alt"></i>
                                         </a>
                                         <a href="#" class="btn btn-info btn-sm btn-circle" data-bs-toggle="modal" data-bs-target="#ordem_{{ $c->ordem}}" title="Reagendar atendimento">
                                             <i class="far fa-calendar-times"></i>
@@ -75,7 +75,7 @@
                                     <div class="modal-dialog">
                                       <div class="modal-content text-secondary">
                                         <div class="modal-header">
-                                          <h5 class="modal-title " id="{{ $c->ordem }}Label">{{ $c->descricao }}</h5>
+                                          <h5 class="modal-title " id="{{ $c->ordem }}Label">{{ $c->observacao }}</h5>
                                           <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                                             <span aria-hidden="true">&times;</span>
                                           </button>

@@ -155,15 +155,16 @@ class AccountBookController extends Controller
 
         // Lançar conta à receber
         $accountbook = AccountBook::selectcaix();
-        $allbooks = AccountBook::with(['livrocaixa','CaixaReferencia'])->get();
+     //   $allbooks = AccountBook::with(['livrocaixa','CaixaReferencia'])
+    //    ->join('accounts','account_transitions.conta_id','=','accounts.id')->get();
         $paymethod = PaymentMethod::all();
         $accounts = Account::Where([
             ['categoria','=','C'],
         ])->get();
 
-      //  echo json_encode([$allbooks]);die;
+     //   echo json_encode([$allbooks]);die;
       //  dd($allbooks);die;
-        foreach($allbooks as $i => $livroconta){
+    /*    foreach($allbooks as $i => $livroconta){
             $resultado[$i] = [
                 'Caixa_id' =>$livroconta->caixa_id,
                 'Caixa' => $livroconta->CaixaReferencia->descricao,
@@ -177,10 +178,10 @@ class AccountBookController extends Controller
                 ];
             }
 
-        }
+        }*/
 
-        dd([$resultado]);die;
-        return view('operation.posting_account',compact('accountbook','accounts','paymethod','allbooks'));
+       // dd([$resultado]);die;
+        return view('operation.posting_account',compact('accountbook','accounts','paymethod'));
     }
 
     public function transition_store(Request $request)

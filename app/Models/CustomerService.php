@@ -36,7 +36,17 @@ class CustomerService extends Model
         'cust_id',
         'observacao',
         'valor',
+        'service_id',
     ];
+    protected $cast = [
+        'service_id' => 'array',
+    ];
+
+
     public $timestamps = true;
+
+    public function Service() {
+        return $this->belongsTo(Service::class,'service_id');
+    }
 
 }

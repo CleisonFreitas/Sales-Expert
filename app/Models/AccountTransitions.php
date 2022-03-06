@@ -15,7 +15,7 @@ class AccountTransitions extends Model
         'id',
         'operador',
         'lancamento',
-        'caixa_id',
+        'livro_caixa_id',
         'conta_id',
         'form_pagamento_id',
         'valor',

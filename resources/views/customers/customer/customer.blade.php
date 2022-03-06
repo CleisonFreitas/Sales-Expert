@@ -59,14 +59,14 @@
                         <div class="row mb-3">
                             <div class="col-12 col-sm-12 col-lg-12">
                                 <label for="f_name">Nome Completo:</label>
-                                <input type="text" name="nome" id="" class="form-control" placeholder="Ex: Luciano Cavalcante">
+                                <input type="text" name="nome" onblur="apelidoDisplay()" id="nome" class="form-control" placeholder="Ex: Luciano Cavalcante">
                                 <small class="form-text text-secondary">*Campo obrigatório</small>
                             </div>
                         </div>
                         <div class="row mb-3">
                             <div class="col-12 col-sm-12 col-lg-9">
                                 <label for="apelido">Como deseja ser chamado?</label>
-                                <input type="text" name="apelido" maxlength="15" id="" class="form-control" placeholder="Ex: Luciano">
+                                <input type="text" name="apelido" maxlength="15" id="apelido" class="form-control" placeholder="Ex: Luciano">
                                 <small class="form-text text-secondary">*Campo obrigatório</small>
                             </div>
                             <div class="col-12 col-sm-12 col-lg-3">

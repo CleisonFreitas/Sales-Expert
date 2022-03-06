@@ -12,7 +12,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($allbooks as $book)
+                    @foreach ($accountbook as $book)
                     <tr>
                         <td>{{$book->caixa_id}}</td>
                         <td>{{$book->descricao}}</td>
@@ -91,7 +91,7 @@
                                                    <h6></h6>
                                                </div>
                                                <div class="col col-md-10 col-lg-3">
-                                                   <h6 class="">{{$book->valor}}<a href="#" id="delete" style="color:red;"><i class="fas fa-trash-alt mx-2"></i></a></h6>
+                                                   <h6 class="">60 R$<a href="#" id="delete" style="color:red;"><i class="fas fa-trash-alt mx-2"></i></a></h6>
                                                </div>
                                             </div>
                                             <div class="row">
@@ -137,7 +137,7 @@
             <div class="row mt-2">
                 <div class="col-12 col-sm-12 col-lg-12">
                     <label for="caixa">Caixa:</label>
-                    <select name="caixa_id" id="" class="custom-select">
+                    <select name="livro_caixa_id" id="" class="custom-select">
                         @foreach ($accountbook as $accountbook)
                             <option value="{{ $accountbook->id }}">{{ $accountbook->id }} - {{ $accountbook->descricao }}</option>
                         @endforeach

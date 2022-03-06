@@ -51,4 +51,9 @@ class AccountBook extends Model
         return $this->belongsTo(AccountReference::class,'caixa_id');
     }
 
+    public function ContaDescricao()
+    {
+        return $this->hasManyThrough(Account::class,AccountTransitions::class,'livro_caixa_id','conta_id','id','id');
+    }
+
 }

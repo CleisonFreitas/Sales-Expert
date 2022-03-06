@@ -72,7 +72,7 @@
                             <div class="row mt-3">
                                 <div class="col-12 col-sm-12 col-lg-12">
                                     <label for="service">Responsável pelo atendimento:</label>
-                                    <select name="resp_id" id="" class="custom-select" required>
+                                    <select name="resp_id" id="resp_id" class="custom-select" required>
                                         <option>Selecionar</option>
                                         @foreach ($employers as $e)
                                             <option value="{{ $e->id }}">{{ $e->nome }}</option>
@@ -97,55 +97,14 @@
                             <div class="row mt-3">
                                 <div class="col-12 col-sm-12 col-md-12 col-lg-12">
                                     <label for="description">Serviços:</label>
-                                    <select name="teste" class="custom-select" id="field2" multiple multiselect-search="true" multiselect-select-all="true" >
+                                    <select name="service_id[]" class="custom-select" onblur="nomeDisplay()" id="field2" multiple multiselect-search="true" multiselect-select-all="true" >
                                         @foreach ($services as $service)
-                                            <option value="{{$service->id}}">{{$service->descricao}}</option>
+                                            <option value="{{$service->id}}" id="servico">{{$service->descricao}}</option>
                                         @endforeach
                                     </select>
                                 </div>
                             </div>
-                            <div class="row mt-1">
-                                <div class="col-12 col-sm-6 col-lg-3">
-                                    <!-- Button trigger modal -->
-                                    <div class="input-group mb-3">
-                                        <div class="input-group-prepend">
-                                          <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#servico" id="basic-addon1"><i class="far fa-list-alt" title="Selecionar Serviços"></i></button>
-                                        </div>
-                                        <input type="text" class="form-control" placeholder="60,00" aria-label="valor" name="valor" id="valor" value="R$ 0,00" aria-describedby="basic-addon1" readonly>
-                                    </div>
 
-                                        <!-- Modal -->
-                                        <div class="modal fade " id="servico" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="servicoLabel" aria-hidden="true">
-                                            <div class="modal-dialog modal-dialog-scrollable">
-                                                <div class="modal-content text-secondary">
-                                                    <div class="modal-header">
-                                                        <h5 class="modal-title" id="servicoLabel">Serviços</h5>
-                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                            <span aria-hidden="true">&times;</span>
-                                                        </button>
-                                                    </div>
-                                                    <div class="modal-body">
-                                                        <div class="row">
-                                                            <div class="col">
-                                                                <label for="lista">Lista de Serviços</label>
-                                                                @foreach ($services as $service)
-                                                                <div class="custom-control custom-checkbox">
-                                                                    <input type="checkbox" class="custom-control-input" id="check{{ $service->id }}" name="services" value="{{ $service->valor }}">
-                                                                    <label class="custom-control-label" for="check{{ $service->id }}">{{ $service->descricao }} - R$ {{ str_replace('.',',',$service->valor) }}</label>
-                                                                </div>
-                                                                @endforeach
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="modal-footer">
-                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Ok</button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    <!-- #Modal -->
-                                </div>
-                            </div>
                             <div class="row mt-1">
                                 <div class="col">
                                     <small class="text-secondary">*Necessário informar pelo menos um serviço, antes de gravar</small>
@@ -154,7 +113,7 @@
                             <div class="row mt-3">
                                 <div class="col-12 col-sm-12 col-lg-12">
                                     <label for="note">Descrição:</label>
-                                    <textarea name="observacao" id="" cols="30" rows="5" class="form-control" maxlength="255">{{ old('observacao') }}</textarea>
+                                    <textarea name="observacao" id="descricao" cols="30" rows="5" class="form-control" maxlength="255"></textarea>
                                 </div>
                             </div>
                             <div class="row mt-3">
@@ -174,7 +133,11 @@
     </div>
 
     @section('js')
+    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
         <script src="{{asset('js/multiselect-dropdown.js')}}"></script>
+        <script>
+
+        </script>
     @stop
 
 @endsection

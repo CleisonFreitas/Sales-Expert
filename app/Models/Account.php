@@ -26,5 +26,10 @@ class Account extends Model
     {
         return $this->hasMany(AccountTransitions::class,'conta_id');
     }
+
+    public function ContaDescricao()
+    {
+        return $this->hasManyThrough(AccountBook::class,AccountTransitions::class,'conta_id','livro_caixa_id','id','id');
+    }
     public $timestamps = true;
 }
