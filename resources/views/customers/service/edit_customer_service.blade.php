@@ -15,7 +15,7 @@
                         <ul class="nav nav-pills justify-content-end" id="pills-tab" role="tablist">
 
                             <li class="nav-item" role="presentation">
-                                <a class="nav-link active btn-sm" id="nav-home-ta" data-toggle="pill" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">Informações</a>
+                                <a class="nav-link active btn-sm" id="nav-home-ta" data-toggle="pill" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">Detalhes</a>
                             </li>
 
                             <li class="nav-item" role="presentation">
@@ -44,17 +44,14 @@
                                     <label for="status">Status:</label>
                                     <select name="status" id="" class="custom-select">
                                         @switch($c->status)
-                                            @case('P')
-                                            <option value="P" selected>Pendente</option>
-                                            <option value="C">Concluído</option>
+                                            @case('R')
+                                            <option value="R" selected>Remarcado</option>
                                                 @break
-                                            @case(C)
-                                            <option value="P">Pendente</option>
+                                            @case('C')
                                             <option value="C" selected>Concluído</option>
                                                 @break
                                             @default
                                             <option value="P">Pendente</option>
-                                            <option value="C">Concluído</option>
                                         @endswitch
                                     </select>
                                 </div>
@@ -62,7 +59,7 @@
                             <div class="row mt-3">
                                 <div class="col-12 col-sm-6 col-lg-2">
                                     <label for="id">Ordem:</label>
-                                    <input type="text" name="id" id="" value="{{ $c->ordem }}" class="form-control bg-gray-300" readonly>
+                                    <input type="text" name="customer_services_id" id="" value="{{ $c->ordem }}" class="form-control bg-gray-300" readonly>
                                 </div>
                                 <div class="col-12 col-sm-6 col-lg-3">
                                     <label for="dt_concl">Agendado para:</label>
@@ -70,7 +67,7 @@
                                 </div>
                                 <div class="col-12 col-sm-6 col-lg-3">
                                     <label for="st_hour">Horário:</label>
-                                    <input type="text" name="hora_agend" value="{{ date('H:i',strtotime($c->hora_agend)) }}" id="" class="form-control">
+                                    <input type="text" name="hora_agend" value="{{ date('H:i',strtotime($c->hora_agend)) }}" id="hora_id" class="form-control" maxlength="5" onkeyup="mask_hora();" required placeholder="12:00" pattern="[0-9,:]{5}">
                                 </div>
                             </div>
                             <div class="row mt-3">

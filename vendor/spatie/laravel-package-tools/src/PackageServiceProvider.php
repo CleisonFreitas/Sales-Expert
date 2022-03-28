@@ -29,7 +29,7 @@ abstract class PackageServiceProvider extends ServiceProvider
             throw InvalidPackage::nameIsRequired();
         }
 
-        foreach($this->package->configFileNames as $configFileName) {
+        foreach ($this->package->configFileNames as $configFileName) {
             $this->mergeConfigFrom($this->package->basePath("/../config/{$configFileName}.php"), $configFileName);
         }
 
@@ -42,8 +42,16 @@ abstract class PackageServiceProvider extends ServiceProvider
     {
         $this->bootingPackage();
 
+        if ($this->package->hasTranslations) {
+            $langPath = 'vendor/' . $this->package->shortName();
+
+            $langPath = (function_exists('lang_path'))
+                ? lang_path($langPath)
+                : resource_path('lang/' . $langPath);
+        }
+
         if ($this->app->runningInConsole()) {
-            foreach($this->package->configFileNames as $configFileName) {
+            foreach ($this->package->configFileNames as $configFileName) {
                 $this->publishes([
                     $this->package->basePath("/../config/{$configFileName}.php") => config_path("{$configFileName}.php"),
                 ], "{$this->package->shortName()}-config");
@@ -57,25 +65,22 @@ abstract class PackageServiceProvider extends ServiceProvider
 
             $now = Carbon::now();
             foreach ($this->package->migrationFileNames as $migrationFileName) {
-                if (! $this->migrationFileExists($migrationFileName)) {
-                    $this->publishes([
-                        $this->package->basePath("/../database/migrations/{$migrationFileName}.php.stub") => with($migrationFileName, function ($migrationFileName) use ($now) {
-                            $migrationPath = 'migrations/';
-
-                            if (Str::contains($migrationFileName, '/')) {
-                                $migrationPath .= Str::of($migrationFileName)->beforeLast('/')->finish('/');
-                                $migrationFileName = Str::of($migrationFileName)->afterLast('/');
-                            }
-
-                            return database_path($migrationPath . $now->addSecond()->format('Y_m_d_His') . '_' . Str::of($migrationFileName)->snake()->finish('.php'));
-                        }),
-                    ], "{$this->package->shortName()}-migrations");
+                $filePath = $this->package->basePath("/../database/migrations/{$migrationFileName}.php");
+                if (! file_exists($filePath)) {
+                    // Support for the .stub file extension
+                    $filePath .= '.stub';
                 }
+
+                $this->publishes([
+                    $filePath => $this->generateMigrationName(
+                        $migrationFileName,
+                        $now->addSecond()
+                    ), ], "{$this->package->shortName()}-migrations");
             }
 
             if ($this->package->hasTranslations) {
                 $this->publishes([
-                    $this->package->basePath('/../resources/lang') => resource_path("lang/vendor/{$this->package->shortName()}"),
+                    $this->package->basePath('/../resources/lang') => $langPath,
                 ], "{$this->package->shortName()}-translations");
             }
 
@@ -97,11 +102,12 @@ abstract class PackageServiceProvider extends ServiceProvider
             );
 
             $this->loadJsonTranslationsFrom($this->package->basePath('/../resources/lang/'));
-            $this->loadJsonTranslationsFrom(resource_path('lang/vendor/'. $this->package->shortName()));
+
+            $this->loadJsonTranslationsFrom($langPath);
         }
 
         if ($this->package->hasViews) {
-            $this->loadViewsFrom($this->package->basePath('/../resources/views'), $this->package->shortName());
+            $this->loadViewsFrom($this->package->basePath('/../resources/views'), $this->package->viewNamespace());
         }
 
         foreach ($this->package->viewComponents as $componentClass => $prefix) {
@@ -132,7 +138,7 @@ abstract class PackageServiceProvider extends ServiceProvider
         return $this;
     }
 
-    public static function migrationFileExists(string $migrationFileName): bool
+    public static function generateMigrationName(string $migrationFileName, Carbon $now): string
     {
         $migrationsPath = 'migrations/';
 
@@ -145,11 +151,11 @@ abstract class PackageServiceProvider extends ServiceProvider
 
         foreach (glob(database_path("${migrationsPath}*.php")) as $filename) {
             if ((substr($filename, -$len) === $migrationFileName . '.php')) {
-                return true;
+                return $filename;
             }
         }
 
-        return false;
+        return database_path($migrationsPath . $now->format('Y_m_d_His') . '_' . Str::of($migrationFileName)->snake()->finish('.php'));
     }
 
     public function registeringPackage()

@@ -13,6 +13,7 @@ use App\Http\Controllers\AccountController;
 use App\Http\Controllers\AccountReferenceController;
 use App\Http\Controllers\CustomerReportController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\RescheduleController;
 use App\Http\Controllers\ServiceController;
 //use alert;
 
@@ -87,6 +88,9 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/customers_service/create',                     [CustomerServiceController::class, 'store'])->name('customer_service_create');
     Route::get('/customer_service/edit/{ordem}',                 [CustomerServiceController::class, 'edit'])->name('service_edit');
     Route::post('/customer_service/payment',                     [CustomerServiceController::class, 'payment'])->name('service_payment');
+
+    //Service - Reschedule
+    Route::match(['POST','PUT'], '/customer_service/reschedule', [RescheduleController::class,'store'])->name('reschedule_service');
 
     //Oprations - Accounts
     Route::get('/operation/accounts',           [AccountController::class,'index'])->name('account.new');

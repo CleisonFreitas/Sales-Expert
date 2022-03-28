@@ -202,7 +202,7 @@
                                                                 <i class="fas fa-pencil-alt"></i>
                                                             </a>
                                                             <a href="{{ route('customer_shop',$customers->id) }}" class="btn btn-primary btn-sm btn-circle">
-                                                                <i class="fas fa-people-arrows"></i>
+                                                            <i class="fas fa-bell"></i>
                                                             </a>
                                                             <a href="{{ route('customer_warning',$customers->id) }}" class="btn btn-danger btn-sm btn-circle">
                                                                 <i class="fas fa-trash"></i>
