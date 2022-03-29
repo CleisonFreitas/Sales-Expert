@@ -154,7 +154,21 @@ class AccountBookController extends Controller
     public function account_transition(){
 
         // Lançar conta à receber
-        $accountbook = AccountBook::selectcaix();
+      //  $accountbook = AccountBook::selectcaix();
+
+        $paymentbook = AccountBook::all();
+
+        foreach($paymentbook as $i => $payment){
+            $conta[$i] = [
+                'Caixa' => $payment->referenciacaixa->descricao,
+                'Serviços' => 
+                    [
+                        'Procedimentos' =>  $payment->services,
+                    //    'Valor' => 
+                    ]
+            ];
+        }
+        dd($conta);die;
      //   $allbooks = AccountBook::with(['livrocaixa','CaixaReferencia'])
     //    ->join('accounts','account_transitions.conta_id','=','accounts.id')->get();
         $paymethod = PaymentMethod::all();
@@ -181,7 +195,7 @@ class AccountBookController extends Controller
         }*/
 
        // dd([$resultado]);die;
-        return view('operation.posting_account',compact('accountbook','accounts','paymethod'));
+        return view('operation.posting_account',compact('paymentbook','accounts','paymethod'));
     }
 
     public function transition_store(Request $request)
