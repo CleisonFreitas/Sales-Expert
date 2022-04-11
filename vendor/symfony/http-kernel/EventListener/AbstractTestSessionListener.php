@@ -31,7 +31,11 @@ trigger_deprecation('symfony/http-kernel', '5.4', '"%s" is deprecated use "%s" i
  *
  * @internal
  *
+<<<<<<< HEAD
  * @deprecated since Symfony 5.4, use AbstractSessionListener instead
+=======
+ * @deprecated the TestSessionListener use the default SessionListener instead
+>>>>>>> 7226ba94aa59a96a75d40f0f901cbb8862fe68e0
  */
 abstract class AbstractTestSessionListener implements EventSubscriberInterface
 {
@@ -41,6 +45,8 @@ abstract class AbstractTestSessionListener implements EventSubscriberInterface
     public function __construct(array $sessionOptions = [])
     {
         $this->sessionOptions = $sessionOptions;
+
+        trigger_deprecation('symfony/http-kernel', '5.4', 'The %s is deprecated use the %s instead.', __CLASS__, AbstractSessionListener::class);
     }
 
     public function onKernelRequest(RequestEvent $event)
@@ -114,6 +120,11 @@ abstract class AbstractTestSessionListener implements EventSubscriberInterface
     /**
      * Gets the session object.
      *
+<<<<<<< HEAD
+=======
+     * @deprecated since Symfony 5.4, will be removed in 6.0.
+     *
+>>>>>>> 7226ba94aa59a96a75d40f0f901cbb8862fe68e0
      * @return SessionInterface|null
      */
     abstract protected function getSession();

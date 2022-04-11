@@ -12,7 +12,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($accountbook as $book)
+                    @foreach ($paymentbook as $book)
                     <tr>
                         <td>{{$book->caixa_id}}</td>
                         <td>{{$book->descricao}}</td>
@@ -33,7 +33,7 @@
 
                     <!-- Modal -->
                     <div class="modal fade" id="modal_{{$book->caixa_id}}" tabindex="-1" aria-labelledby="modal_{{$book->caixa_id}}Label" aria-hidden="true">
-                        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-md">
+                        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg">
                             <div class="modal-content">
                                 <div class="modal-header" style="text-align: right">
                                     <nav class="mx-auto mt-2" >

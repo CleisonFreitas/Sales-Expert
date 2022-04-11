@@ -368,12 +368,18 @@ class DebugClassLoader
 
         $parent = get_parent_class($class) ?: null;
         self::$returnTypes[$class] = [];
+<<<<<<< HEAD
         $classIsTemplate = false;
 
         // Detect annotations on the class
         if ($doc = $this->parsePhpDoc($refl)) {
             $classIsTemplate = isset($doc['template']);
 
+=======
+
+        // Detect annotations on the class
+        if ($doc = $this->parsePhpDoc($refl)) {
+>>>>>>> 7226ba94aa59a96a75d40f0f901cbb8862fe68e0
             foreach (['final', 'deprecated', 'internal'] as $annotation) {
                 if (null !== $description = $doc[$annotation][0] ?? null) {
                     self::${$annotation}[$class] = '' !== $description ? ' '.$description.(preg_match('/[.!]$/', $description) ? '' : '.') : '.';
@@ -516,10 +522,13 @@ class DebugClassLoader
 
             // To read method annotations
             $doc = $this->parsePhpDoc($method);
+<<<<<<< HEAD
 
             if (($classIsTemplate || isset($doc['template'])) && $method->hasReturnType()) {
                 unset($doc['return']);
             }
+=======
+>>>>>>> 7226ba94aa59a96a75d40f0f901cbb8862fe68e0
 
             if (isset(self::$annotatedParameters[$class][$method->name])) {
                 $definedParameters = [];

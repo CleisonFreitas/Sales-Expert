@@ -23,6 +23,9 @@
     "conflict": {
         "ext-psr": "<1.1|>=2"
     },
+    "conflict": {
+        "ext-psr": "<1.1|>=2"
+    },
     "suggest": {
         "symfony/service-implementation": ""
     },

@@ -79,8 +79,8 @@
                     Clientes
                 </a>
                 <a class="collapse-item" href="{{ route('customer_service') }}">
-                    <i class="fas fa-hand-holding-heart mx-2"></i>
-                    Atendimento
+                <i class="fas fa-calendar-week mx-2"></i>
+                    Agendados
                 </a>
             </div>
         </div>

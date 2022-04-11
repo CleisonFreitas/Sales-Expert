@@ -46,7 +46,7 @@ class AccountBook extends Model
         return $this->hasMany(AccountTransitions::class, 'livro_caixa_id');
     }
 
-    public function CaixaReferencia()
+    public function referenciacaixa()
     {
         return $this->belongsTo(AccountReference::class,'caixa_id');
     }
@@ -56,4 +56,13 @@ class AccountBook extends Model
         return $this->hasManyThrough(Account::class,AccountTransitions::class,'livro_caixa_id','conta_id','id','id');
     }
 
+    public function payments()
+    {
+        return $this->hasMany(Payments::class,'caix_ref');
+    }
+    
+    public function services()
+    {
+        return $this->hasManyThrough(CustomerService::class,Payments::class,'caixa_ref','customer_services_id','ordem','id');
+    }
 }

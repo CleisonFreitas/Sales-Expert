@@ -99,7 +99,7 @@
                                     <label for="description">Serviços:</label>
                                     <select name="service_id[]" class="custom-select" onblur="nomeDisplay()" id="field2" multiple multiselect-search="true" multiselect-select-all="true" >
                                         @foreach ($services as $service)
-                                            <option value="{{$service->id}}" id="servico">{{$service->descricao}}</option>
+                                            <option value="{{$service->id}}" id="servico">{{$service->descricao}}- R${{number_format($service->valor,2,',','.')}}</option>
                                         @endforeach
                                     </select>
                                 </div>

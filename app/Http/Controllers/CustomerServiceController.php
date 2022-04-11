@@ -22,7 +22,7 @@ class CustomerServiceController extends Controller
         $payments = PaymentMethod::all();
 
         $select = CustomerService::getService();
-
+     //   dd($select);die;
         if($select == true){
             return view('customers.service.customer_service')->with([
             'employers'=>$employer,
@@ -72,7 +72,6 @@ class CustomerServiceController extends Controller
             };
 
             $request_all['descricao'] = Str::remove(['Servicos',']','[[{','}}','[','{""','}',',"descricao",','{"descricao",','"'],str_replace(':',',',collect($nota)));
-        //    dd($request_all['descricao']);die;
             CustomerService::create($request_all);
 
           //  $customer_service['valor'] = $valor;
@@ -141,9 +140,16 @@ class CustomerServiceController extends Controller
     public function payment(Request $request) {
         try{
             DB::beginTransaction();
+            $ordem = $request->customer_services_id;
 
-            $payment = $request->all();
+            $identpay = [];
+            $identpay = CustomerService::where('ordem',$ordem)->get();
 
+            foreach($identpay as $identpay){
+                if($identpay->status == 'C') {
+                    return redirect()->back()->with([toast()->info('Baixa de pagamento já registrada!')]);
+                }
+            }
             $payment['valor'] = str_replace(',','.',$request->valor);
 
             if($request->cortesia == "Sim") {
@@ -154,6 +160,8 @@ class CustomerServiceController extends Controller
           //  dd($payment,$select_pay);die;
 
             Payments::create($request->all());
+            CustomerService::where('ordem',$request->customer_services_id)
+                            ->update(['status' => 'C']);
 
         }catch(\Exception $ex){
             DB::rollback();
@@ -161,7 +169,7 @@ class CustomerServiceController extends Controller
             return redirect()->back()->with([toast()->error($ex->getMessage())]);
         }
         DB::commit();
-        return redirect()->back()->with([toast()->success('Baixa realizada com sucesso!')]);
+        return redirect()->route('customer_service')->with([toast()->success('Baixa realizada com sucesso!')]);
     }
 
 }

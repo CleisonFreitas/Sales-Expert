@@ -52,6 +52,10 @@
 
     <!-- Bootstrap core JavaScript-->
 
+    <!-- Masks -->
+    <script src="{{ asset('js/mascara.js') }}"></script>
+    <script src="{{ asset('js/jquery.maskMoney.min.js') }}" type="text/javascript"></script>
+
 
     <script src="{{ asset('vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
 
@@ -63,10 +67,7 @@
     <script src="{{ asset('js/internote.js') }}"></script>
     <script src="{{ asset('js/fontawesome.js') }}"></script>
 
-    <!-- Masks -->
-    <script src="{{ asset('js/mascara.js') }}"></script>
-    <script src="{{ asset('js/jquery.maskMoney.min.js') }}" type="text/javascript"></script>
-
+    
 
     <!-- Page level plugins -->
     <script src="{{ asset('vendor/chart.js/Chart.min.js') }}"></script>
