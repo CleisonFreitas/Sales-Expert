@@ -1,10 +1,5 @@
 #!/usr/bin/env bash
 
-if ! [ -x "$(command -v docker-compose)" ]; then
-    shopt -s expand_aliases
-    alias docker-compose='docker compose'
-fi
-
 UNAMEOUT="$(uname -s)"
 
 # Verify operating system is supported...
@@ -143,7 +138,6 @@ function sail_is_not_running {
 }
 
 # Define Docker Compose command prefix...
-<<<<<<< HEAD
 if [ -x "$(command -v docker-compose)" ]; then
     DOCKER_COMPOSE=(docker-compose)
 else
@@ -157,58 +151,6 @@ if [ -n "$SAIL_FILES" ]; then
     for FILE in "${SAIL_FILES[@]}"; do
         if [ -f "$FILE" ]; then
             DOCKER_COMPOSE+=(-f "$FILE")
-=======
-DOCKER_COMPOSE=(docker-compose)
-
-if [ -n "$SAIL_FILES" ]; then
-    # Convert SAIL_FILES to an array...
-    SAIL_FILES=(${SAIL_FILES//:/ })
-
-    for FILE in "${SAIL_FILES[@]}"; do
-        if [ -f "$FILE" ]; then
-            DOCKER_COMPOSE+=(-f "$FILE")
-        else
-            echo -e "${WHITE}Unable to find Docker Compose file: '${FILE}'${NC}" >&2
-
-            exit 1
-        fi
-    done
-fi
-
-EXEC="yes"
-
-if [ -z "$SAIL_SKIP_CHECKS" ]; then
-    # Ensure that Docker is running...
-    if ! docker info > /dev/null 2>&1; then
-        echo -e "${WHITE}Docker is not running.${NC}" >&2
-
-        exit 1
-    fi
-
-    # Determine if Sail is currently up...
-    if "${DOCKER_COMPOSE[@]}" ps "$APP_SERVICE" | grep 'Exit\|exited'; then
-        echo -e "${WHITE}Shutting down old Sail processes...${NC}" >&2
-
-        "${DOCKER_COMPOSE[@]}" down > /dev/null 2>&1
-
-        EXEC="no"
-    elif [ -z "$(${DOCKER_COMPOSE[@]} ps -q)" ]; then
-        EXEC="no"
-    fi
-fi
-
-ARGS=()
-
-if [ $# -gt 0 ]; then
-    # Proxy PHP commands to the "php" binary on the application container...
-    if [ "$1" == "php" ]; then
-        shift 1
-
-        if [ "$EXEC" == "yes" ]; then
-            ARGS+=(exec -u sail)
-            [ ! -t 0 ] && ARGS+=(-T)
-            ARGS+=("$APP_SERVICE" "php" "$@")
->>>>>>> 7226ba94aa59a96a75d40f0f901cbb8862fe68e0
         else
             echo "${BOLD}Unable to find Docker Compose file: '${FILE}'${NC}" >&2
 
@@ -219,71 +161,31 @@ fi
 
 EXEC="yes"
 
-<<<<<<< HEAD
 if [ -z "$SAIL_SKIP_CHECKS" ]; then
     # Ensure that Docker is running...
     if ! docker info > /dev/null 2>&1; then
         echo "${BOLD}Docker is not running.${NC}" >&2
-=======
-        if [ "$EXEC" == "yes" ]; then
-            ARGS+=(exec -u sail)
-            [ ! -t 0 ] && ARGS+=(-T)
-            ARGS+=("$APP_SERVICE" ./vendor/bin/"$@")
-        else
-            sail_is_not_running
-        fi
->>>>>>> 7226ba94aa59a96a75d40f0f901cbb8862fe68e0
 
         exit 1
     fi
 
-<<<<<<< HEAD
     # Determine if Sail is currently up...
     if "${DOCKER_COMPOSE[@]}" ps "$APP_SERVICE" 2>&1 | grep 'Exit\|exited'; then
         echo "${BOLD}Shutting down old Sail processes...${NC}" >&2
-=======
-        if [ "$EXEC" == "yes" ]; then
-            ARGS+=(exec -u sail)
-            [ ! -t 0 ] && ARGS+=(-T)
-            ARGS+=("$APP_SERVICE" "composer" "$@")
-        else
-            sail_is_not_running
-        fi
->>>>>>> 7226ba94aa59a96a75d40f0f901cbb8862fe68e0
 
         "${DOCKER_COMPOSE[@]}" down > /dev/null 2>&1
 
-<<<<<<< HEAD
         EXEC="no"
     elif [ -z "$("${DOCKER_COMPOSE[@]}" ps -q)" ]; then
         EXEC="no"
     fi
 fi
-=======
-        if [ "$EXEC" == "yes" ]; then
-            ARGS+=(exec -u sail)
-            [ ! -t 0 ] && ARGS+=(-T)
-            ARGS+=("$APP_SERVICE" php artisan "$@")
-        else
-            sail_is_not_running
-        fi
->>>>>>> 7226ba94aa59a96a75d40f0f901cbb8862fe68e0
 
 ARGS=()
 
-<<<<<<< HEAD
 # Proxy PHP commands to the "php" binary on the application container...
 if [ "$1" == "php" ]; then
     shift 1
-=======
-        if [ "$EXEC" == "yes" ]; then
-            ARGS+=(exec -u sail -e XDEBUG_SESSION=1)
-            [ ! -t 0 ] && ARGS+=(-T)
-            ARGS+=("$APP_SERVICE" php artisan "$@")
-        else
-            sail_is_not_running
-        fi
->>>>>>> 7226ba94aa59a96a75d40f0f901cbb8862fe68e0
 
     if [ "$EXEC" == "yes" ]; then
         ARGS+=(exec -u sail)
@@ -293,31 +195,9 @@ if [ "$1" == "php" ]; then
         sail_is_not_running
     fi
 
-<<<<<<< HEAD
 # Proxy vendor binary commands on the application container...
 elif [ "$1" == "bin" ]; then
     shift 1
-=======
-        if [ "$EXEC" == "yes" ]; then
-            ARGS+=(exec -u sail)
-            [ ! -t 0 ] && ARGS+=(-T)
-            ARGS+=("$APP_SERVICE" php artisan test "$@")
-        else
-            sail_is_not_running
-        fi
-
-    # Proxy the "phpunit" command to "php vendor/bin/phpunit"...
-    elif [ "$1" == "phpunit" ]; then
-        shift 1
-
-        if [ "$EXEC" == "yes" ]; then
-            ARGS+=(exec -u sail)
-            [ ! -t 0 ] && ARGS+=(-T)
-            ARGS+=("$APP_SERVICE" php vendor/bin/phpunit "$@")
-        else
-            sail_is_not_running
-        fi
->>>>>>> 7226ba94aa59a96a75d40f0f901cbb8862fe68e0
 
     if [ "$EXEC" == "yes" ]; then
         ARGS+=(exec -u sail)
@@ -327,21 +207,9 @@ elif [ "$1" == "bin" ]; then
         sail_is_not_running
     fi
 
-<<<<<<< HEAD
 # Proxy docker-compose commands to the docker-compose binary on the application container...
 elif [ "$1" == "docker-compose" ]; then
     shift 1
-=======
-        if [ "$EXEC" == "yes" ]; then
-            ARGS+=(exec -u sail)
-            [ ! -t 0 ] && ARGS+=(-T)
-            ARGS+=(-e "APP_URL=http://${APP_SERVICE}")
-            ARGS+=(-e "DUSK_DRIVER_URL=http://selenium:4444/wd/hub")
-            ARGS+=("$APP_SERVICE" php artisan dusk "$@")
-        else
-            sail_is_not_running
-        fi
->>>>>>> 7226ba94aa59a96a75d40f0f901cbb8862fe68e0
 
     if [ "$EXEC" == "yes" ]; then
         ARGS+=(exec -u sail)
@@ -351,21 +219,9 @@ elif [ "$1" == "docker-compose" ]; then
         sail_is_not_running
     fi
 
-<<<<<<< HEAD
 # Proxy Composer commands to the "composer" binary on the application container...
 elif [ "$1" == "composer" ]; then
     shift 1
-=======
-        if [ "$EXEC" == "yes" ]; then
-            ARGS+=(exec -u sail)
-            [ ! -t 0 ] && ARGS+=(-T)
-            ARGS+=(-e "APP_URL=http://${APP_SERVICE}")
-            ARGS+=(-e "DUSK_DRIVER_URL=http://selenium:4444/wd/hub")
-            ARGS+=("$APP_SERVICE" php artisan dusk:fails "$@")
-        else
-            sail_is_not_running
-        fi
->>>>>>> 7226ba94aa59a96a75d40f0f901cbb8862fe68e0
 
     if [ "$EXEC" == "yes" ]; then
         ARGS+=(exec -u sail)
@@ -375,19 +231,9 @@ elif [ "$1" == "composer" ]; then
         sail_is_not_running
     fi
 
-<<<<<<< HEAD
 # Proxy Artisan commands to the "artisan" binary on the application container...
 elif [ "$1" == "artisan" ] || [ "$1" == "art" ]; then
     shift 1
-=======
-        if [ "$EXEC" == "yes" ]; then
-            ARGS+=(exec -u sail)
-            [ ! -t 0 ] && ARGS+=(-T)
-            ARGS+=("$APP_SERVICE" php artisan tinker)
-        else
-            sail_is_not_running
-        fi
->>>>>>> 7226ba94aa59a96a75d40f0f901cbb8862fe68e0
 
     if [ "$EXEC" == "yes" ]; then
         ARGS+=(exec -u sail)
@@ -397,19 +243,9 @@ elif [ "$1" == "artisan" ] || [ "$1" == "art" ]; then
         sail_is_not_running
     fi
 
-<<<<<<< HEAD
 # Proxy the "debug" command to the "php artisan" binary on the application container with xdebug enabled...
 elif [ "$1" == "debug" ]; then
     shift 1
-=======
-        if [ "$EXEC" == "yes" ]; then
-            ARGS+=(exec -u sail)
-            [ ! -t 0 ] && ARGS+=(-T)
-            ARGS+=("$APP_SERVICE" node "$@")
-        else
-            sail_is_not_running
-        fi
->>>>>>> 7226ba94aa59a96a75d40f0f901cbb8862fe68e0
 
     if [ "$EXEC" == "yes" ]; then
         ARGS+=(exec -u sail -e XDEBUG_SESSION=1)
@@ -419,19 +255,9 @@ elif [ "$1" == "debug" ]; then
         sail_is_not_running
     fi
 
-<<<<<<< HEAD
 # Proxy the "test" command to the "php artisan test" Artisan command...
 elif [ "$1" == "test" ]; then
     shift 1
-=======
-        if [ "$EXEC" == "yes" ]; then
-            ARGS+=(exec -u sail)
-            [ ! -t 0 ] && ARGS+=(-T)
-            ARGS+=("$APP_SERVICE" npm "$@")
-        else
-            sail_is_not_running
-        fi
->>>>>>> 7226ba94aa59a96a75d40f0f901cbb8862fe68e0
 
     if [ "$EXEC" == "yes" ]; then
         ARGS+=(exec -u sail)
@@ -441,19 +267,9 @@ elif [ "$1" == "test" ]; then
         sail_is_not_running
     fi
 
-<<<<<<< HEAD
 # Proxy the "phpunit" command to "php vendor/bin/phpunit"...
 elif [ "$1" == "phpunit" ]; then
     shift 1
-=======
-        if [ "$EXEC" == "yes" ]; then
-            ARGS+=(exec -u sail)
-            [ ! -t 0 ] && ARGS+=(-T)
-            ARGS+=("$APP_SERVICE" npx "$@")
-        else
-            sail_is_not_running
-        fi
->>>>>>> 7226ba94aa59a96a75d40f0f901cbb8862fe68e0
 
     if [ "$EXEC" == "yes" ]; then
         ARGS+=(exec -u sail)
@@ -463,19 +279,9 @@ elif [ "$1" == "phpunit" ]; then
         sail_is_not_running
     fi
 
-<<<<<<< HEAD
 # Proxy the "dusk" command to the "php artisan dusk" Artisan command...
 elif [ "$1" == "dusk" ]; then
     shift 1
-=======
-        if [ "$EXEC" == "yes" ]; then
-            ARGS+=(exec -u sail)
-            [ ! -t 0 ] && ARGS+=(-T)
-            ARGS+=("$APP_SERVICE" yarn "$@")
-        else
-            sail_is_not_running
-        fi
->>>>>>> 7226ba94aa59a96a75d40f0f901cbb8862fe68e0
 
     if [ "$EXEC" == "yes" ]; then
         ARGS+=(exec -u sail)
@@ -487,20 +293,9 @@ elif [ "$1" == "dusk" ]; then
         sail_is_not_running
     fi
 
-<<<<<<< HEAD
 # Proxy the "dusk:fails" command to the "php artisan dusk:fails" Artisan command...
 elif [ "$1" == "dusk:fails" ]; then
     shift 1
-=======
-        if [ "$EXEC" == "yes" ]; then
-            ARGS+=(exec)
-            [ ! -t 0 ] && ARGS+=(-T)
-            ARGS+=(mysql bash -c)
-            ARGS+=('MYSQL_PWD=${MYSQL_PASSWORD} mysql -u ${MYSQL_USER} ${MYSQL_DATABASE}')
-        else
-            sail_is_not_running
-        fi
->>>>>>> 7226ba94aa59a96a75d40f0f901cbb8862fe68e0
 
     if [ "$EXEC" == "yes" ]; then
         ARGS+=(exec -u sail)
@@ -512,20 +307,9 @@ elif [ "$1" == "dusk:fails" ]; then
         sail_is_not_running
     fi
 
-<<<<<<< HEAD
 # Initiate a Laravel Tinker session within the application container...
 elif [ "$1" == "tinker" ] ; then
     shift 1
-=======
-        if [ "$EXEC" == "yes" ]; then
-            ARGS+=(exec)
-            [ ! -t 0 ] && ARGS+=(-T)
-            ARGS+=(mariadb bash -c)
-            ARGS+=('MYSQL_PWD=${MYSQL_PASSWORD} mysql -u ${MYSQL_USER} ${MYSQL_DATABASE}')
-        else
-            sail_is_not_running
-        fi
->>>>>>> 7226ba94aa59a96a75d40f0f901cbb8862fe68e0
 
     if [ "$EXEC" == "yes" ]; then
         ARGS+=(exec -u sail)
@@ -535,20 +319,9 @@ elif [ "$1" == "tinker" ] ; then
         sail_is_not_running
     fi
 
-<<<<<<< HEAD
 # Proxy Node commands to the "node" binary on the application container...
 elif [ "$1" == "node" ]; then
     shift 1
-=======
-        if [ "$EXEC" == "yes" ]; then
-            ARGS+=(exec)
-            [ ! -t 0 ] && ARGS+=(-T)
-            ARGS+=(pgsql bash -c)
-            ARGS+=('PGPASSWORD=${PGPASSWORD} psql -U ${POSTGRES_USER} ${POSTGRES_DB}')
-        else
-            sail_is_not_running
-        fi
->>>>>>> 7226ba94aa59a96a75d40f0f901cbb8862fe68e0
 
     if [ "$EXEC" == "yes" ]; then
         ARGS+=(exec -u sail)
@@ -558,19 +331,9 @@ elif [ "$1" == "node" ]; then
         sail_is_not_running
     fi
 
-<<<<<<< HEAD
 # Proxy NPM commands to the "npm" binary on the application container...
 elif [ "$1" == "npm" ]; then
     shift 1
-=======
-        if [ "$EXEC" == "yes" ]; then
-            ARGS+=(exec -u sail)
-            [ ! -t 0 ] && ARGS+=(-T)
-            ARGS+=("$APP_SERVICE" bash "$@")
-        else
-            sail_is_not_running
-        fi
->>>>>>> 7226ba94aa59a96a75d40f0f901cbb8862fe68e0
 
     if [ "$EXEC" == "yes" ]; then
         ARGS+=(exec -u sail)
@@ -580,19 +343,9 @@ elif [ "$1" == "npm" ]; then
         sail_is_not_running
     fi
 
-<<<<<<< HEAD
 # Proxy NPX commands to the "npx" binary on the application container...
 elif [ "$1" == "npx" ]; then
     shift 1
-=======
-        if [ "$EXEC" == "yes" ]; then
-            ARGS+=(exec)
-            [ ! -t 0 ] && ARGS+=(-T)
-            ARGS+=("$APP_SERVICE" bash "$@")
-        else
-            sail_is_not_running
-        fi
->>>>>>> 7226ba94aa59a96a75d40f0f901cbb8862fe68e0
 
     if [ "$EXEC" == "yes" ]; then
         ARGS+=(exec -u sail)
@@ -602,19 +355,9 @@ elif [ "$1" == "npx" ]; then
         sail_is_not_running
     fi
 
-<<<<<<< HEAD
 # Proxy YARN commands to the "yarn" binary on the application container...
 elif [ "$1" == "yarn" ]; then
     shift 1
-=======
-        if [ "$EXEC" == "yes" ]; then
-            ARGS+=(exec)
-            [ ! -t 0 ] && ARGS+=(-T)
-            ARGS+=(redis redis-cli)
-        else
-            sail_is_not_running
-        fi
->>>>>>> 7226ba94aa59a96a75d40f0f901cbb8862fe68e0
 
     if [ "$EXEC" == "yes" ]; then
         ARGS+=(exec -u sail)
@@ -624,7 +367,6 @@ elif [ "$1" == "yarn" ]; then
         sail_is_not_running
     fi
 
-<<<<<<< HEAD
 # Initiate a MySQL CLI terminal session within the "mysql" container...
 elif [ "$1" == "mysql" ]; then
     shift 1
@@ -711,37 +453,15 @@ elif [ "$1" == "share" ]; then
             --auth="$SAIL_SHARE_TOKEN" \
             --subdomain="$SAIL_SHARE_SUBDOMAIN" \
             "$@"
-=======
-        if [ "$EXEC" == "yes" ]; then
-            docker run --init --rm -p $SAIL_SHARE_DASHBOARD:4040 -t beyondcodegmbh/expose-server:latest share http://host.docker.internal:"$APP_PORT" \
-                --server-host="$SAIL_SHARE_SERVER_HOST" \
-                --server-port="$SAIL_SHARE_SERVER_PORT" \
-                --auth="$SAIL_SHARE_TOKEN" \
-                --subdomain="$SAIL_SHARE_SUBDOMAIN" \
-                "$@"
-
-            exit
-        else
-            sail_is_not_running
-        fi
->>>>>>> 7226ba94aa59a96a75d40f0f901cbb8862fe68e0
 
         exit
     else
-<<<<<<< HEAD
         sail_is_not_running
-=======
-        ARGS+=("$@")
->>>>>>> 7226ba94aa59a96a75d40f0f901cbb8862fe68e0
     fi
 
 # Pass unknown commands to the "docker-compose" binary...
 else
-<<<<<<< HEAD
     ARGS+=("$@")
-=======
-    ARGS+=(ps)
->>>>>>> 7226ba94aa59a96a75d40f0f901cbb8862fe68e0
 fi
 
 # Run Docker Compose with the defined arguments...

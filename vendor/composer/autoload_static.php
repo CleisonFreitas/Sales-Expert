@@ -4,7 +4,7 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInitf9a432eda49f6961ec10dd5e160af0fa
+class ComposerStaticInitc14e200975435bd5c806de1390f8f838
 {
     public static $files = array (
         'a4a119a56e50fbb293281d9a48007e0e' => __DIR__ . '/..' . '/symfony/polyfill-php80/bootstrap.php',
@@ -380,8 +380,8 @@ class ComposerStaticInitf9a432eda49f6961ec10dd5e160af0fa
         ),
         'Psr\\Http\\Message\\' => 
         array (
-            0 => __DIR__ . '/..' . '/psr/http-factory/src',
-            1 => __DIR__ . '/..' . '/psr/http-message/src',
+            0 => __DIR__ . '/..' . '/psr/http-message/src',
+            1 => __DIR__ . '/..' . '/psr/http-factory/src',
         ),
         'Psr\\Http\\Client\\' => 
         array (
@@ -598,6 +598,7 @@ class ComposerStaticInitf9a432eda49f6961ec10dd5e160af0fa
         'App\\Http\\Controllers\\AccountBookController' => __DIR__ . '/../..' . '/app/Http/Controllers/AccountBookController.php',
         'App\\Http\\Controllers\\AccountController' => __DIR__ . '/../..' . '/app/Http/Controllers/AccountController.php',
         'App\\Http\\Controllers\\AccountReferenceController' => __DIR__ . '/../..' . '/app/Http/Controllers/AccountReferenceController.php',
+        'App\\Http\\Controllers\\ArchiveController' => __DIR__ . '/../..' . '/app/Http/Controllers/ArchiveController.php',
         'App\\Http\\Controllers\\Auth\\AuthenticatedSessionController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/AuthenticatedSessionController.php',
         'App\\Http\\Controllers\\Auth\\ConfirmPasswordController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/ConfirmPasswordController.php',
         'App\\Http\\Controllers\\Auth\\ConfirmablePasswordController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/ConfirmablePasswordController.php',
@@ -3067,7 +3068,6 @@ class ComposerStaticInitf9a432eda49f6961ec10dd5e160af0fa
         'League\\CommonMark\\Extension\\DescriptionList\\Renderer\\DescriptionTermRenderer' => __DIR__ . '/..' . '/league/commonmark/src/Extension/DescriptionList/Renderer/DescriptionTermRenderer.php',
         'League\\CommonMark\\Extension\\DisallowedRawHtml\\DisallowedRawHtmlExtension' => __DIR__ . '/..' . '/league/commonmark/src/Extension/DisallowedRawHtml/DisallowedRawHtmlExtension.php',
         'League\\CommonMark\\Extension\\DisallowedRawHtml\\DisallowedRawHtmlRenderer' => __DIR__ . '/..' . '/league/commonmark/src/Extension/DisallowedRawHtml/DisallowedRawHtmlRenderer.php',
-<<<<<<< HEAD
         'League\\CommonMark\\Extension\\Embed\\Bridge\\OscaroteroEmbedAdapter' => __DIR__ . '/..' . '/league/commonmark/src/Extension/Embed/Bridge/OscaroteroEmbedAdapter.php',
         'League\\CommonMark\\Extension\\Embed\\DomainFilteringAdapter' => __DIR__ . '/..' . '/league/commonmark/src/Extension/Embed/DomainFilteringAdapter.php',
         'League\\CommonMark\\Extension\\Embed\\Embed' => __DIR__ . '/..' . '/league/commonmark/src/Extension/Embed/Embed.php',
@@ -3077,8 +3077,6 @@ class ComposerStaticInitf9a432eda49f6961ec10dd5e160af0fa
         'League\\CommonMark\\Extension\\Embed\\EmbedProcessor' => __DIR__ . '/..' . '/league/commonmark/src/Extension/Embed/EmbedProcessor.php',
         'League\\CommonMark\\Extension\\Embed\\EmbedRenderer' => __DIR__ . '/..' . '/league/commonmark/src/Extension/Embed/EmbedRenderer.php',
         'League\\CommonMark\\Extension\\Embed\\EmbedStartParser' => __DIR__ . '/..' . '/league/commonmark/src/Extension/Embed/EmbedStartParser.php',
-=======
->>>>>>> 7226ba94aa59a96a75d40f0f901cbb8862fe68e0
         'League\\CommonMark\\Extension\\ExtensionInterface' => __DIR__ . '/..' . '/league/commonmark/src/Extension/ExtensionInterface.php',
         'League\\CommonMark\\Extension\\ExternalLink\\ExternalLinkExtension' => __DIR__ . '/..' . '/league/commonmark/src/Extension/ExternalLink/ExternalLinkExtension.php',
         'League\\CommonMark\\Extension\\ExternalLink\\ExternalLinkProcessor' => __DIR__ . '/..' . '/league/commonmark/src/Extension/ExternalLink/ExternalLinkProcessor.php',
@@ -3226,10 +3224,7 @@ class ComposerStaticInitf9a432eda49f6961ec10dd5e160af0fa
         'League\\CommonMark\\Renderer\\Block\\DocumentRenderer' => __DIR__ . '/..' . '/league/commonmark/src/Renderer/Block/DocumentRenderer.php',
         'League\\CommonMark\\Renderer\\Block\\ParagraphRenderer' => __DIR__ . '/..' . '/league/commonmark/src/Renderer/Block/ParagraphRenderer.php',
         'League\\CommonMark\\Renderer\\ChildNodeRendererInterface' => __DIR__ . '/..' . '/league/commonmark/src/Renderer/ChildNodeRendererInterface.php',
-<<<<<<< HEAD
         'League\\CommonMark\\Renderer\\DocumentRendererInterface' => __DIR__ . '/..' . '/league/commonmark/src/Renderer/DocumentRendererInterface.php',
-=======
->>>>>>> 7226ba94aa59a96a75d40f0f901cbb8862fe68e0
         'League\\CommonMark\\Renderer\\HtmlDecorator' => __DIR__ . '/..' . '/league/commonmark/src/Renderer/HtmlDecorator.php',
         'League\\CommonMark\\Renderer\\HtmlRenderer' => __DIR__ . '/..' . '/league/commonmark/src/Renderer/HtmlRenderer.php',
         'League\\CommonMark\\Renderer\\Inline\\NewlineRenderer' => __DIR__ . '/..' . '/league/commonmark/src/Renderer/Inline/NewlineRenderer.php',
@@ -5979,10 +5974,10 @@ class ComposerStaticInitf9a432eda49f6961ec10dd5e160af0fa
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInitf9a432eda49f6961ec10dd5e160af0fa::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInitf9a432eda49f6961ec10dd5e160af0fa::$prefixDirsPsr4;
-            $loader->prefixesPsr0 = ComposerStaticInitf9a432eda49f6961ec10dd5e160af0fa::$prefixesPsr0;
-            $loader->classMap = ComposerStaticInitf9a432eda49f6961ec10dd5e160af0fa::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInitc14e200975435bd5c806de1390f8f838::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInitc14e200975435bd5c806de1390f8f838::$prefixDirsPsr4;
+            $loader->prefixesPsr0 = ComposerStaticInitc14e200975435bd5c806de1390f8f838::$prefixesPsr0;
+            $loader->classMap = ComposerStaticInitc14e200975435bd5c806de1390f8f838::$classMap;
 
         }, null, ClassLoader::class);
     }

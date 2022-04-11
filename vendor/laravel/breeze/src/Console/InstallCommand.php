@@ -19,12 +19,8 @@ class InstallCommand extends Command
      */
     protected $signature = 'breeze:install {stack=blade : The development stack that should be installed (blade,react,vue,api)}
                             {--inertia : Indicate that the Vue Inertia stack should be installed (Deprecated)}
-<<<<<<< HEAD
                             {--pest : Indicate that Pest should be installed}
                             {--ssr : Indicates if Inertia SSR support should be installed}
-=======
-                            {--pest : Indicate that Pest should be installed }
->>>>>>> 7226ba94aa59a96a75d40f0f901cbb8862fe68e0
                             {--composer=global : Absolute path to the Composer binary which should be used to install packages}';
 
     /**

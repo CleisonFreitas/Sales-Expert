@@ -75,12 +75,6 @@
         "sort-packages": true
     },
     "extra": {
-<<<<<<< HEAD
-=======
-        "branch-alias": {
-            "dev-main": "4.x-dev"
-        },
->>>>>>> 7226ba94aa59a96a75d40f0f901cbb8862fe68e0
         "captainhook": {
             "force-install": true
         }

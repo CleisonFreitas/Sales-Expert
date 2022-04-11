@@ -19,11 +19,7 @@ return [
 
     'allowed_methods' => ['*'],
 
-<<<<<<< HEAD
     'allowed_origins' => [env('FRONTEND_URL', 'http://localhost:3000')],
-=======
-    'allowed_origins' => [env('FRONTEND_URL')],
->>>>>>> 7226ba94aa59a96a75d40f0f901cbb8862fe68e0
 
     'allowed_origins_patterns' => [],
 

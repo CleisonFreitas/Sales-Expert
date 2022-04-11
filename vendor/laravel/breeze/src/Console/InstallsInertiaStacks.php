@@ -3,10 +3,7 @@
 namespace Laravel\Breeze\Console;
 
 use Illuminate\Filesystem\Filesystem;
-<<<<<<< HEAD
 use Symfony\Component\Process\Process;
-=======
->>>>>>> 7226ba94aa59a96a75d40f0f901cbb8862fe68e0
 
 trait InstallsInertiaStacks
 {
@@ -25,26 +22,15 @@ trait InstallsInertiaStacks
             return [
                 '@inertiajs/inertia' => '^0.11.0',
                 '@inertiajs/inertia-vue3' => '^0.6.0',
-<<<<<<< HEAD
                 '@inertiajs/progress' => '^0.2.7',
                 '@tailwindcss/forms' => '^0.5.0',
                 '@vue/compiler-sfc' => '^3.2.31',
-=======
-                '@inertiajs/progress' => '^0.2.6',
-                '@tailwindcss/forms' => '^0.4.0',
-                '@vue/compiler-sfc' => '^3.2.30',
->>>>>>> 7226ba94aa59a96a75d40f0f901cbb8862fe68e0
                 'autoprefixer' => '^10.4.2',
                 'postcss' => '^8.4.6',
                 'postcss-import' => '^14.0.2',
                 'tailwindcss' => '^3.0.18',
-<<<<<<< HEAD
                 'vue' => '^3.2.31',
                 'vue-loader' => '^17.0.0',
-=======
-                'vue' => '^3.2.30',
-                'vue-loader' => '^16.1.2',
->>>>>>> 7226ba94aa59a96a75d40f0f901cbb8862fe68e0
             ] + $packages;
         });
 
@@ -88,27 +74,19 @@ trait InstallsInertiaStacks
         // Tailwind / Webpack...
         copy(__DIR__.'/../../stubs/inertia-common/tailwind.config.js', base_path('tailwind.config.js'));
         copy(__DIR__.'/../../stubs/inertia-common/webpack.mix.js', base_path('webpack.mix.js'));
-<<<<<<< HEAD
-=======
-        copy(__DIR__.'/../../stubs/inertia-common/webpack.config.js', base_path('webpack.config.js'));
->>>>>>> 7226ba94aa59a96a75d40f0f901cbb8862fe68e0
         copy(__DIR__.'/../../stubs/inertia-common/jsconfig.json', base_path('jsconfig.json'));
         copy(__DIR__.'/../../stubs/inertia-common/resources/css/app.css', resource_path('css/app.css'));
         copy(__DIR__.'/../../stubs/inertia-vue/resources/js/app.js', resource_path('js/app.js'));
 
-<<<<<<< HEAD
         if ($this->option('ssr')) {
             $this->installInertiaVueSsrStack();
         }
 
-=======
->>>>>>> 7226ba94aa59a96a75d40f0f901cbb8862fe68e0
         $this->info('Breeze scaffolding installed successfully.');
         $this->comment('Please execute the "npm install && npm run dev" command to build your assets.');
     }
 
     /**
-<<<<<<< HEAD
      * Install the Inertia Vue SSR stack into the application.
      *
      * @return void
@@ -137,8 +115,6 @@ trait InstallsInertiaStacks
     }
 
     /**
-=======
->>>>>>> 7226ba94aa59a96a75d40f0f901cbb8862fe68e0
      * Install the Inertia React Breeze stack.
      *
      * @return void
@@ -206,10 +182,6 @@ trait InstallsInertiaStacks
         // Tailwind / Webpack...
         copy(__DIR__.'/../../stubs/inertia-common/tailwind.config.js', base_path('tailwind.config.js'));
         copy(__DIR__.'/../../stubs/inertia-common/webpack.mix.js', base_path('webpack.mix.js'));
-<<<<<<< HEAD
-=======
-        copy(__DIR__.'/../../stubs/inertia-common/webpack.config.js', base_path('webpack.config.js'));
->>>>>>> 7226ba94aa59a96a75d40f0f901cbb8862fe68e0
         copy(__DIR__.'/../../stubs/inertia-common/jsconfig.json', base_path('jsconfig.json'));
         copy(__DIR__.'/../../stubs/inertia-common/resources/css/app.css', resource_path('css/app.css'));
         copy(__DIR__.'/../../stubs/inertia-react/resources/js/app.js', resource_path('js/app.js'));
@@ -217,7 +189,6 @@ trait InstallsInertiaStacks
         $this->replaceInFile('.vue()', '.react()', base_path('webpack.mix.js'));
         $this->replaceInFile('.vue', '.js', base_path('tailwind.config.js'));
 
-<<<<<<< HEAD
         if ($this->option('ssr')) {
             $this->installInertiaReactSsrStack();
         }
@@ -252,9 +223,4 @@ trait InstallsInertiaStacks
         $this->replaceInFile("'enabled' => false", "'enabled' => true", config_path('inertia.php'));
         $this->replaceInFile('mix --production', 'mix --production --mix-config=webpack.ssr.mix.js && mix --production', base_path('package.json'));
     }
-=======
-        $this->info('Breeze scaffolding installed successfully.');
-        $this->comment('Please execute the "npm install && npm run dev" command to build your assets.');
-    }
->>>>>>> 7226ba94aa59a96a75d40f0f901cbb8862fe68e0
 }

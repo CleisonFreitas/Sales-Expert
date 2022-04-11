@@ -6,7 +6,6 @@ Updates should follow the [Keep a CHANGELOG](https://keepachangelog.com/) princi
 
 ## [Unreleased][unreleased]
 
-<<<<<<< HEAD
 ## [2.3.0] - 2022-04-07
 
 ### Added
@@ -18,8 +17,6 @@ Updates should follow the [Keep a CHANGELOG](https://keepachangelog.com/) princi
 
 - Deprecated `MarkdownRendererInterface`; use `DocumentRendererInterface` instead
 
-=======
->>>>>>> 7226ba94aa59a96a75d40f0f901cbb8862fe68e0
 ## [2.2.3] - 2022-02-26
 
 ### Fixed
@@ -448,12 +445,8 @@ No changes were introduced since the previous release.
     - Alternative 1: Use `CommonMarkConverter` or `GithubFlavoredMarkdownConverter` if you don't need to customize the environment
     - Alternative 2: Instantiate a new `Environment` and add the necessary extensions yourself
 
-<<<<<<< HEAD
 [unreleased]: https://github.com/thephpleague/commonmark/compare/2.3.0...main
 [2.3.0]: https://github.com/thephpleague/commonmark/compare/2.2.3...2.3.0
-=======
-[unreleased]: https://github.com/thephpleague/commonmark/compare/2.2.3...main
->>>>>>> 7226ba94aa59a96a75d40f0f901cbb8862fe68e0
 [2.2.3]: https://github.com/thephpleague/commonmark/compare/2.2.2...2.2.3
 [2.2.2]: https://github.com/thephpleague/commonmark/compare/2.2.1...2.2.2
 [2.2.1]: https://github.com/thephpleague/commonmark/compare/2.2.0...2.2.1

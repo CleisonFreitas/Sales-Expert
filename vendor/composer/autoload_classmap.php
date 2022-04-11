@@ -11,6 +11,7 @@ return array(
     'App\\Http\\Controllers\\AccountBookController' => $baseDir . '/app/Http/Controllers/AccountBookController.php',
     'App\\Http\\Controllers\\AccountController' => $baseDir . '/app/Http/Controllers/AccountController.php',
     'App\\Http\\Controllers\\AccountReferenceController' => $baseDir . '/app/Http/Controllers/AccountReferenceController.php',
+    'App\\Http\\Controllers\\ArchiveController' => $baseDir . '/app/Http/Controllers/ArchiveController.php',
     'App\\Http\\Controllers\\Auth\\AuthenticatedSessionController' => $baseDir . '/app/Http/Controllers/Auth/AuthenticatedSessionController.php',
     'App\\Http\\Controllers\\Auth\\ConfirmPasswordController' => $baseDir . '/app/Http/Controllers/Auth/ConfirmPasswordController.php',
     'App\\Http\\Controllers\\Auth\\ConfirmablePasswordController' => $baseDir . '/app/Http/Controllers/Auth/ConfirmablePasswordController.php',

@@ -25,11 +25,7 @@ use League\CommonMark\Node\Node;
 use League\CommonMark\Output\RenderedContent;
 use League\CommonMark\Output\RenderedContentInterface;
 
-<<<<<<< HEAD
 final class HtmlRenderer implements DocumentRendererInterface, ChildNodeRendererInterface
-=======
-final class HtmlRenderer implements MarkdownRendererInterface, ChildNodeRendererInterface
->>>>>>> 7226ba94aa59a96a75d40f0f901cbb8862fe68e0
 {
     /** @psalm-readonly */
     private EnvironmentInterface $environment;

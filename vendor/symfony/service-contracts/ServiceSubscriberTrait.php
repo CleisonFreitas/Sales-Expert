@@ -90,23 +90,8 @@ trait ServiceSubscriberTrait
                     trigger_deprecation('symfony/service-contracts', '2.5', 'Using "%s" in "%s" without using the "%s" attribute on any method is deprecated.', ServiceSubscriberTrait::class, self::class, SubscribedService::class);
                 }
 
-<<<<<<< HEAD
                 $services[self::class.'::'.$method->name] = '?'.($returnType instanceof \ReflectionNamedType ? $returnType->getName() : $returnType);
-=======
-            if (self::class !== $method->getDeclaringClass()->name) {
-                continue;
->>>>>>> 7226ba94aa59a96a75d40f0f901cbb8862fe68e0
             }
-
-            if (!($returnType = $method->getReturnType()) instanceof \ReflectionNamedType) {
-                continue;
-            }
-
-            if ($returnType->isBuiltin()) {
-                continue;
-            }
-
-            $services[self::class.'::'.$method->name] = '?'.$returnType->getName();
         }
 
         return $services;
