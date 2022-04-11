@@ -71,4 +71,10 @@ class Customer extends Model
         'instagram',
     ];
     public $timestamps = true;
+
+    public function customerservices()
+    {
+        return $this->hasMany(CustomerService::class,'cust_id');
+    }
+
 }

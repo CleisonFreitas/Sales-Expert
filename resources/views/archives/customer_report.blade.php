@@ -33,7 +33,7 @@
                 <!--Relatório Principal -->
                 <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
 
-                    <form action="#" method="POST">
+                    <form action="{{ route('archive.report') }}" target="_blank" method="POST">
                         @csrf
                             <div class="row">
                                 <!-- Divisão de Layout -->
@@ -46,13 +46,13 @@
 
                                     <div class="row mt-3">
                                         <div class="col">
-                                            <input type="date" name="" id="st_date" value="{{ Date('Y-m-d') }}" class="form-control">
+                                            <input type="date" name="data_inicio" id="st_date" value="" class="form-control">
                                                 <label for="st-date">
                                                     <small id="st_date" class="form-text text-secondary ">Início*</small>
                                                 </label>
                                         </div>
                                         <div class="col">
-                                            <input type="date" name="" id="end_date" value="{{ Date('Y-m-d') }}" class="form-control">
+                                            <input type="date" name="data_fim" id="end_date" value="" class="form-control">
                                                 <label for="en-date mx-auto">
                                                     <small id="end_date" class="form-text text-secondary ">Fim *</small>
                                                 </label>
@@ -68,13 +68,13 @@
 
                                     <div class="row mt-3">
                                         <div class="col">
-                                            <input type="date" name="" id="st_date" value="{{ Date('Y-m-d') }}" class="form-control">
+                                            <input type="date" name="bd_data_inicio" id="st_date" value="" class="form-control">
                                                 <label for="st-date">
                                                     <small id="st_date" class="form-text text-secondary ">Início*</small>
                                                 </label>
                                         </div>
                                         <div class="col">
-                                            <input type="date" name="" id="end_date" value="{{ Date('Y-m-d') }}" class="form-control">
+                                            <input type="date" name="bd_data_fim" id="end_date" value="" class="form-control">
                                                 <label for="en-date mx-auto">
                                                     <small id="end_date" class="form-text text-secondary ">Fim*</small>
                                                 </label>
@@ -95,15 +95,17 @@
                                         <div class="col-12 col-sm-12 col-lg-6">
                                             <label for="serv-prod text-gray-800">Adiquiriu:</label>
                                             <select name="aquisicao" id="" class="custom-select">
-                                                <option value="#">Serviço 1</option>
-                                                <option value="#">Serviço 1</option>
+                                                <option value="%">Todos</option>
+                                                @foreach ($services as $service)
+                                                <option value="{{ $service->id }}">{{ $service->descricao }}</option>
+                                                @endforeach
                                             </select>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-12 col-sm-12 col-lg-6">
                                     <div class="row">
-                                        <div class="col-12 col-sm-12 col-lg-4">
+                                       <!-- <div class="col-12 col-sm-12 col-lg-4">
                                                 <label for="dias">Nos últimos</label>
                                                 <div class="input-group">
                                                     <input type="text" name="" id="" class="form-control">
@@ -113,13 +115,14 @@
                                                         </span>
                                                     </div>
                                                 </div>
-                                        </div>
+                                        </div>-->
                                         <div class="col-12 col-sm-12 col-lg-8">
                                             <label for="atendido">Atendido por</label>
-                                            <select name="login" id="" class="custom-select">
-                                                <option value="">Todos</option>
-                                                <option value="#">Jessica Andrade</option>
-                                                <option value="#">Thalita</option>
+                                            <select name="profissionais" id="" class="custom-select">
+                                                <option value="%">Todos</option>
+                                                @foreach ($employers as $employer)
+                                                    <option value="%{{ $employer->id }}%">{{ $employer->nome }}</option>
+                                                @endforeach
                                             </select>
                                         </div>
                                     </div>
@@ -133,7 +136,7 @@
                             <div class="row mt-2">
                                 <div class="col">
                                     <button class="btn bg-gray-400">Excel&nbsp; <img src="https://img.icons8.com/ios-filled/30/000000/ms-excel.png"/></button>
-                                    <button class="btn bg-gray-400">PDF&nbsp; <img src="https://img.icons8.com/ios-filled/30/000000/pdf--v2.png"/></button>
+                                    <button class="btn bg-gray-400" type="submit">PDF&nbsp; <img src="https://img.icons8.com/ios-filled/30/000000/pdf--v2.png"/></button>
                                 </div>
                             </div>
                         </form>

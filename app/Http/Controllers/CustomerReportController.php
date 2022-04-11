@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Models\Customer;
+use App\Models\Employer;
+use App\Models\Service;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 
@@ -17,61 +20,112 @@ class CustomerReportController extends Controller
     // Para o menu relatório archives/customer_reports
     public function index()
     {
+
+      try{
+
         $aniversariantes = Customer::aniversariantes();
+        $services = Service::all();
+        $employers = Employer::all();
 
-        return view('archives.customer_report')->with($aniversariantes);
+      //  return view('archives.customer_report')->with($aniversariantes);
+
+        }catch(\Exception $ex){
+            return redirect()->back()->with([toast()->error($ex->getMessage())]);
+        }
+
+        return view('archives.customer_report',[
+            'services' => $services,
+            'employers' => $employers
+        ])->with($aniversariantes);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    public function report(Request $request)
     {
-        //
+        try{
+
+            $report = $request->all();
+
+            $bd_data_inicio = $request->bd_data_inicio;
+            $bd_data_fim = $request->bd_data_fim;
+            $data_inicio = $request->data_inicio;
+            $data_fim = $request->data_fim;
+            $aquisicao = $request->aquisicao;
+            $profissionais = $request->profissionais;
+            $cep = $request->cep;
+
+            if(empty($bd_data_inicio)){
+                $bd_data_inicio = '1900-08-07%';
+            }
+            if(empty($bd_data_fim)){
+                $bd_data_fim = date('Y-m-d');
+            }
+            if(empty($data_inicio)){
+                $data_inicio = '1900-08-07%';
+            }
+            if(empty($data_fim)){
+                $data_fim = date('Y-m-d');
+            }
+            if(empty($aquisicao)){
+                $aquisicao = '%';
+            }
+            if(empty($profissionais)){
+                $profissionais = '%';
+            }
+            if(empty($cep)){
+                $cep = '%';
+            }
+
+            $customers = Customer::with(['customerservices'])
+            ->join('employers','resp_id','=','employers.id')
+            ->join('customer_services','cust_id','=','customers.id')
+            ->select('customers.*',
+                    'customers.nome as name',
+                    'customers.cadastro',
+                    'employers.nome',
+                    'customer_services.service_id')
+            ->whereBetween('nascimento', [$bd_data_inicio, $bd_data_fim])
+            ->whereBetween('customers.cadastro', [$data_inicio, $data_fim])
+            ->where([
+                ['customers.cep','like', $cep],
+                ['service_id','like','%'.$aquisicao.'%'],
+                ['employers.id','like',$profissionais]
+
+            ])
+            ->get();
+          //  echo json_encode($customers);die;
+/*
+            foreach($customers as $i => $customer){
+                $dados[$i] = [
+                    'nome' => $customer->name,
+                    'endereco' => $customer->logradouro,
+                    'telefone' => $customer->ct_num,
+                    'data_nascimento' => $customer->nascimento,
+                ];
+            }
+  */          
+            }catch(\Exception $ex){
+                return redirect()->back()->with([toast()->error($ex->getMessage())]);
+            }
+            return PDF::loadview('pdf.customer_report',[
+                'customers' => $customers,
+            ])
+                ->setPaper('a4','landscape')
+                ->stream('relatorio-clientes.pdf');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function show($id)
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+
     public function edit($id)
     {
         //
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+
     public function update(Request $request, $id)
     {
         //

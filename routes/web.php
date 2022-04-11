@@ -34,8 +34,8 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/company/create',      [CompanyController::class, 'register'])->name('company_register');
     Route::put('/company/update/{id}',  [CompanyController::class, 'update'])->name('company_updt');
 
-    Route::get('dashboard',                    [HomeController::class, 'index'])->name('dashboard');
-    Route::post('search',                      [HomeController::class,'search'])->name('search');
+    Route::get('dashboard',                     [HomeController::class, 'index'])->name('dashboard');
+    Route::post('search',                       [HomeController::class,'search'])->name('search');
     Route::post('dashboard/note',               [HomeController::class,'nota'])->name('note_create');
     Route::put('dashboard/note/update/{id}',    [HomeController::class,'nota_update'])->name('note_update');
     Route::get('dashboard/note/delete/{id}',    [HomeController::class,'nota_delete'])->name('note_delete');
@@ -73,6 +73,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/services/edit/{id}',       [ServiceController::class,'edit'])->name('services_edit');
     Route::get('/services/delete/{id}',     [ServiceController::class, 'destroy'])->name('services_delete');
     Route::put('services/update/{id}',      [ServiceController::class, 'update'])->name('services_update');
+
     // Customers - Customer
     Route::get('/customer',                     [CustomerController::class, 'show'])->name('customer');
     Route::post('/customer/create',             [CustomerController::class, 'create'])->name('customer_create');
@@ -110,7 +111,7 @@ Route::middleware(['auth'])->group(function () {
 
     // Archives
     Route::get('/archives/customer_report', [CustomerReportController::class, 'index'])->name('archive.customer');
-
+    Route::post('archives/customer_report', [CustomerReportController::class, 'report'])->name('archive.report');
     //if route doesn't exist
     Route::fallback(function () {
 
