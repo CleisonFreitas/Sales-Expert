@@ -8,6 +8,11 @@ use App\Http\Controllers\Controller;
 use App\Models\Account;
 use Illuminate\Http\Request;
 use App\Http\Requests\AccountRequest;
+use Exception;
+use Illuminate\Support\Facades\DB;
+use RealRashid\SweetAlert\Facades\Alert;
+
+use function PHPUnit\Framework\throwException;
 
 class AccountController extends Controller
 {
@@ -22,16 +27,6 @@ class AccountController extends Controller
         $conta = Account::Where('categoria','=','C')->get();
 
         return view('operation.accounts',compact('grupo','conta'));
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
     }
 
 
@@ -68,34 +63,73 @@ class AccountController extends Controller
      */
     public function edit($id)
     {
-        $account = Account::findOrfail($id);
+        try{
+            $account = Account::findOrfail($id);
 
-        $grupo = Account::Where('categoria','=','G')->get();
-        $conta = Account::Where('categoria','=','C')->get();
+            $grupo_selected = Account::Where([
+                ['categoria','=','G'],
+                ['id','=',$account->pertence]
+            ])->get();
 
-        return view('operation.accounts',compact('account','grupo','conta'));
+            $grupo = Account::Where([
+                ['categoria','=','G'],
+            ])->get();
+            $conta = Account::Where('categoria','=','C')->get();
+
+            return view('operation.accounts',compact('account','grupo','conta','grupo_selected'));
+
+        }catch(\Exception $ex){
+            return redirect()->back()->with([toast()->error('Nenhum registro encontrado!')]);
+        }
+        
     }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, $id)
     {
-        //
+        try{
+            DB::beginTransaction();
+
+            $account = Account::find($id);
+            $account->update($request->all());
+
+            DB::commit();
+            return redirect()->back()->with([toast()->success('Registro atualizado com sucesso!')]);
+        }catch(\Exception $ex){
+            DB::rollback();
+            return redirect()->back()->with([toast()->error($ex->getMessage())]);
+        }
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+    public function warning($id){
+        $account = Account::find($id);
+        Alert::alert()->html('Aviso'," Você está prestes a excluir esse cadastro!
+        <br>Deseja prosseguir?<br>
+        <br><a class='btn btn-danger' href='/operation/accounts/delete/$id')}}'>Sim</a>&nbsp;
+        <a class='btn btn-secondary' href='/operation/accounts'>Não</a><br>",'warning')
+        ->autoClose(20000);
+        return redirect()->back();
+
+    }
+
+
     public function destroy($id)
     {
-        //
+        try{
+            DB::beginTransaction();
+            $account_pertence = Account::Where('pertence',$id)->get();
+
+            if($account_pertence->count()){
+                return redirect()->back()->with([toast()->error('Esse grupo possui registros relacionados')]);
+            }
+
+            $account = Account::find($id);
+
+            $account->delete();
+
+            DB::commit();
+            return redirect()->route('account.new')->with([toast()->success('Registro excluído com sucesso!')]);
+        }catch(\Exception $ex){
+            DB::rollback();
+            return redirect()->back()->with([toast()->error($ex->getMessage())]);
+        }
     }
 }

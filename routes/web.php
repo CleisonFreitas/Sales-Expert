@@ -96,9 +96,12 @@ Route::middleware(['auth'])->group(function () {
     Route::match(['post','put'], '/customer_service/reschedule', [RescheduleController::class,'store'])->name('reschedule_service');
 
     //Oprations - Accounts
-    Route::get('/operation/accounts',           [AccountController::class,'index'])->name('account.new');
-    Route::post('/operation/accounts/store',    [AccountController::class, 'store'])->name('account.store');
-    Route::get('/operation/accounts/{id}',      [AccountController::class, 'edit'])->name('account.edit');
+    Route::get('/operation/accounts',                   [AccountController::class,'index'])->name('account.new');
+    Route::post('/operation/accounts/store',            [AccountController::class, 'store'])->name('account.store');
+    Route::get('/operation/accounts/{id}',              [AccountController::class, 'edit'])->name('account.edit');
+    Route::put('/operation/accounts/update/{id}',       [AccountController::class, 'update'])->name('account.update');
+    Route::get('operation/accounts/aviso/{id}',         [AccountController::class,'warning'])->name('account.warning');
+    Route::get('operation/accounts/delete/{id}',        [AccountController::class,'destroy'])->name('account.delete');
     // Operations - Account_Book
     Route::get('/operation/accountability',                             [AccountBookController::class, 'index'])->name('account.book');
     Route::post('/operation/accountability/open',                       [AccountBookController::class, 'store'])->name('account.book.open');

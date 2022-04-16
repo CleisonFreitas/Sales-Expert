@@ -14,10 +14,10 @@
                 <nav class="mx-auto mt-2">
                     <ul class="nav nav-pills justify-content-end" id="pills-tab" role="tablist">
                         <li class="nav-item" role="presentation">
-                            <a class="nav-link active btn-sm" id="nav-create-tab" data-toggle="pill" href="#nav-create" role="tab" aria-controls="nav-create" aria-selected="true"><i class="fas fa-file-invoice"></i></a>
+                            <a class="nav-link active btn-sm" id="nav-consult-tab" data-toggle="pill" href="#nav-consult" role="tab" aria-controls="nav-consult" aria-selected="false"><i class="fas fa-th-list"></i></a>
                         </li>
                         <li class="nav-item" role="presentation">
-                            <a class="nav-link btn-sm" id="nav-consult-tab" data-toggle="pill" href="#nav-consult" role="tab" aria-controls="nav-consult" aria-selected="false"><i class="fas fa-th-list"></i></a>
+                            <a class="nav-link btn-sm" id="nav-create-tab" data-toggle="pill" href="#nav-create" role="tab" aria-controls="nav-create" aria-selected="true"><i class="fas fa-file-invoice"></i></a>
                         </li>
                     </ul>
                 </nav>
@@ -31,9 +31,9 @@
         </div>
         <div class="tab-content" id="nav-tabContent">
             <!-- Formulário de controle de conta -->
-            <div class="tab-pane fade show active" id="nav-create" role="tabpanel" aria-labelledby="nav-create-tab">
+            <div class="tab-pane fade show" id="nav-create" role="tabpanel" aria-labelledby="nav-create-tab">
                 @if(isset($account))
-                <form action="{{ route('account.edit',$account->id) }}" method="post">
+                <form action="{{ route('account.update',$account->id) }}" method="post">
                     @method('PUT')
                     @csrf
                          @include('components.account_form')
@@ -49,7 +49,7 @@
             </div>
 
             <!-- Lista de Contas -->
-            <div class="tab-pane fade show" id="nav-consult" role="tabpanel" aria-labelledby="nav-consult-tab">
+            <div class="tab-pane fade show active" id="nav-consult" role="tabpanel" aria-labelledby="nav-consult-tab">
                 <small><div class="table-responsive mt-3">
                     <table class="table table-hover" id="dataTable" width="100%" cellspacing="0">
                         <thead>
@@ -57,7 +57,7 @@
                                 <th>Grupo</th>
                                 <th>Status</th>
                                 <th>Tipo</th>
-                                <th>Editar</th>
+                                <th>Editar/Excluir</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -68,11 +68,12 @@
                                         <td>{{ $g->tipo }}</td>
                                         <td>
                                             <div class="row">
-                                                <a href="{{ route('account.edit',$g->id)}}" class="btn btn-primary btn-sm mx-1"><i class="fas fa-edit"></i></a>
+                                                <a href="{{ route('account.edit',$g->id)}}" class="btn btn-secondary btn-sm mx-1"><i class="fas fa-edit"></i></a>
                                                 <!-- Button trigger modal -->
                                                 <button type="button" class="btn btn-info btn-sm " data-toggle="modal" data-target="#modal{{ $g->id }}">
                                                     <i class="fas fa-list-alt"></i>
                                                 </button>
+                                                <a href="{{ route('account.warning',$g->id) }}" class="btn btn-danger btn-sm mx-1"><i class="fas fa-trash"></i></a>
                                             </div>
                                                 <!-- Modal -->
                                                 <div class="modal fade" id="modal{{ $g->id }}" tabindex="-1" aria-labelledby="{{ $g->id }}ModalLabel" aria-hidden="true">
@@ -102,7 +103,7 @@
                                                                                             <td>{{ $c->tipo }}</td>
                                                                                             <td>
                                                                                                 <a href="{{ route('account.edit',$c->id)}}" class="btn btn-sm"><i class="fas fa-edit" style="color: blue;"></i></a>
-                                                                                                <a href="#" class="btn  btn-sm"><i class="fas fa-trash-alt" style="color:red;"></i></a>
+                                                                                                <a href="{{ route('account.warning',$c->id) }}" class="btn btn-sm"><i class="fas fa-trash-alt" style="color:red;"></i></a>
                                                                                             </td>
                                                                                         </tr>
                                                                                     @endif

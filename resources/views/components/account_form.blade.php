@@ -50,7 +50,7 @@
 <div class="row mt-1">
     <div class="col-12 col-sm-12 col-lg-12">
         <label for="descricao">Descrição:</label>
-        <input type="text" name="descricao" id="" value="{{ old('descricao') ?? $account->descricao }}" class="form-control" placeholder="Descrição da Conta" required>
+        <input type="text" name="descricao" id="" value="{{ $account->descricao ?? old('descricao')  }}" class="form-control" placeholder="Descrição da Conta" required>
         @error('descricao')
             <small class="text-danger">{{ $message }}</small>
         @enderror
@@ -85,15 +85,23 @@
         <label for="parente">Pertence à:</label>
         <select name="pertence" class="custom-select">
             @if (isset($account))
-                <option value="{{ $account->pertence}}">{{ $account->descricao}}</option>
-                @foreach ($grupo as $g)
-                    <option value="{{ $g->id }}">{{ $g->descricao }}</option>
-                @endforeach
-            @else
-            @foreach ($grupo as $g)
-                    <option value="{{ $g->id }}">{{ $g->descricao }}</option>
+                @foreach ($grupo_selected as $g)
+                @switch($g)
+                    @case('')
+                        <option>Nenhum</option>
+                        @break
+                    @default
+                    <option value=''>Nenhum</option>
+                    <option value="{{ $g->pertence }}" selected>{{ $g->descricao}}</option> 
+                @endswitch
+                    
                 @endforeach
             @endif
+            @foreach ($grupo as $g)
+                <option>Nenhum</option>
+                <option value="{{ $g->pertence }}">{{ $g->descricao }}</option>
+            @endforeach
+            
         </select>
         @error('pertence')
             <small class="text-danger">{{ $message }}</small>
@@ -107,6 +115,6 @@
 <div class="row mt-2">
     <div class="col-12">
         <button type="submit" class="btn btn-danger">Gravar</button>
-        <button type="reset" class="btn btn-secondary">Novo</button>
+        <a href="{{ route('account.new') }}" class="btn btn-secondary">Novo</a>
     </div>
 </div>
