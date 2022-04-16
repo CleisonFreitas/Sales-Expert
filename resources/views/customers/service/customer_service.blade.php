@@ -72,7 +72,7 @@
                                             <i class="far fa-calendar-times"></i>
                                         </a>
                                         @endif
-                                        <a href="" class="btn btn-danger btn-sm btn-circle" title="Excluir atendimento">
+                                        <a href="{{ route('customer_service_warning',$c->ordem) }}" class="btn btn-danger btn-sm btn-circle" title="Excluir atendimento">
                                             <i class="fas fa-trash"></i>
                                         </a>
                                     </td>

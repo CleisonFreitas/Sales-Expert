@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Customer;
-use Alert;
 use App\Models\CustomerService;
 use Exception;
 use RealRashid\SweetAlert\Facades\Alert as FacadesAlert;
@@ -48,6 +47,11 @@ class CustomerController extends Controller
     //    $cliente_servico = CustomerService::Where('cust_id',$id)->get();
         try {
             $cliente = Customer::find($id);
+
+            $search = CustomerService::Where('cust_id',$id)->get();
+            if($search->count()){
+                return redirect()->back()->with([toast()->info('Não foi possível realizar exclusão pois esse cliente possui atendimento(s)')->autoClose(30000)]);
+            }
             $cliente->delete();
         }catch (\Exception $e) {
         //    dd($e);

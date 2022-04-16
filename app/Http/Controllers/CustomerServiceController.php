@@ -11,9 +11,11 @@ use App\Models\PaymentMethod;
 use App\Models\Service;
 use App\Models\AccountBook;
 use App\Models\Payments;
+use App\Models\Reschedule;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class CustomerServiceController extends Controller
 {
@@ -101,7 +103,17 @@ class CustomerServiceController extends Controller
     }
     public function edit($ordem){
         $employer = Employer::all();
-        $payments = PaymentMethod::all();
+        $payment_accept = Payments::Where('customer_services_id',$ordem)->get();
+
+        if($payment_accept->count()){
+            foreach($payment_accept as $payment){
+                $payment_methods = PaymentMethod::Where('id',$payment['form_paga_id'])->get();
+            }
+        }
+        else{
+            $payment_methods = PaymentMethod::all();
+        }
+        
         $accountbook = AccountBook::selectcaix();
 
         $select = DB::table('customer_services')
@@ -116,7 +128,8 @@ class CustomerServiceController extends Controller
 
         return view('customers.service.edit_customer_service')->with([
             'employers'=>$employer,
-            'payment_methods'=>$payments,
+            'payment_methods'=>$payment_methods,
+            'payment_accept' => $payment_accept,
             'customer_services'=>$select,
             'accountbook' => $accountbook,
             ]);
@@ -170,6 +183,72 @@ class CustomerServiceController extends Controller
         }
         DB::commit();
         return redirect()->route('customer_service')->with([toast()->success('Baixa realizada com sucesso!')]);
+    }
+
+    public function warning($ordem){
+        $servico = CustomerService::Where('ordem',$ordem)->get();
+        Alert::alert()->html('Aviso'," Você está prestes a excluir esse cadastro!
+        <br>Deseja prosseguir?<br>
+        <br><a class='btn btn-danger' href='/customer_services/delete/$ordem')}}'>Sim</a>&nbsp;
+        <a class='btn btn-secondary' href='/customer_services'>Não</a><br>",'warning')
+        ->autoClose(20000);
+        return redirect()->back();
+    }
+
+    public function payment_warning($id)
+    {
+        $payment = Payments::Where('id',$id)->get();
+
+        foreach($payment as $payment){
+            $ordem = $payment['customer_services_id'];
+        }
+        Alert::alert()->html('Aviso'," Você está prestes a excluir esse cadastro!
+        <br>Deseja prosseguir?<br>
+        <br><a class='btn btn-danger' href='/customer_services/payment/delete/$id')}}'>Sim</a>&nbsp;
+        <a class='btn btn-secondary' href='/customer_services/edit/$ordem'>Não</a><br>",'warning')
+        ->autoClose(20000);
+        return redirect()->back();
+
+    }
+    
+    public function payment_delete($id)
+    {
+        try{
+            DB::beginTransaction();
+            $payment = Payments::find($id);
+            $customer_service = CustomerService::Where('ordem',$payment->customer_services_id)->update(['status' => 'P']);
+            
+            $payment->delete();
+            
+            DB::commit();
+            return redirect()->back()->with([toast()->success('Pagamento excluído com sucesso!')]);
+        }catch(\Exception $ex){
+            DB::rollback();
+            return redirect()->with([toast()->error($ex->getMessage())]);
+        }
+    }
+
+    public function destroy($ordem)
+    {
+        try{
+            DB::beginTransaction();
+            $payment = Payments::Where('customer_services_id',$ordem)->get();
+
+            if($payment->count()){
+                return redirect()->back()->with([toast()->info('Exclusão não permitida pois esse atendimento possui registros relacionados!')]);
+            }
+            $reschedule = Reschedule::Where('cliente_ordem',$ordem)->delete();
+            if($reschedule == false){
+                return redirect()->back()->with([toast()->error('Erro ao tentar excluir agendamento vínculado')]);
+            }
+            $customer_service = CustomerService::Where('ordem',$ordem)->delete();
+
+            DB::commit();
+            return redirect()->back()->with([toast()->success('Atendimento excluído com sucesso!')]);
+        }catch(\Exception $ex){
+            DB::rollback();
+            return redirect()->back()->with([toast()->error($ex->getMessage())]);
+        }
     }
 
 }

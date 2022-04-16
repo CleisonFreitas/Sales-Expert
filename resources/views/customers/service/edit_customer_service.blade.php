@@ -141,16 +141,13 @@
                                         <div class="col">
                                             <label for="forma_pagamento">Forma de Pagamento:</label>
                                             <select name="form_paga_id" id="" class="custom-select">
-                                                <option>Escolha uma forma de pagamento</option>
                                                 @foreach ($payment_methods as $payment)
                                                     <option value="{{ $payment->id }}">{{ $payment->descricao }}</option>
                                                 @endforeach
                                             </select>
                                         </div>
                                     </div>
-                                    <div class="row mt-2">
-
-                                    </div>
+                                    
 
                                 </div>
                                 <div class="col-12 col-sm-12 col-lg-6">
@@ -184,7 +181,14 @@
                             </div>
                             <div class="row mt-2">
                                 <div class="col">
-                                    <button type="submit" class="btn btn-danger">Baixar</button>
+                                    @if ($payment_accept->count())
+                                        @foreach ($payment_accept as $p)
+                                            <a href="{{ route('service_payment_warning',$p->id) }}" class="btn btn-danger">Excluir</a>
+                                        @endforeach
+                                    @else
+                                        <button type="submit" class="btn btn-danger">Baixar</button>
+                                    @endif
+                                    
                                 </div>
                             </div>
                         </form>

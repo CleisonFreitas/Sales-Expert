@@ -17,6 +17,8 @@ use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\RescheduleController;
 use App\Http\Controllers\ServiceController;
+use App\Models\CustomerService;
+
 //use alert;
 
 /*
@@ -86,11 +88,15 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/customer/delete/{id}',         [CustomerController::class, 'delete'])->name('customer_delete');
 
     // Customers - Service
-    Route::get('/customers_service',                             [CustomerServiceController::class, 'show'])->name('customer_service');
-    Route::get('/customers_service/customer/{id}',               [CustomerServiceController::class, 'shop'])->name('customer_shop');
-    Route::post('/customers_service/create',                     [CustomerServiceController::class, 'store'])->name('customer_service_create');
-    Route::get('/customer_service/edit/{ordem}',                 [CustomerServiceController::class, 'edit'])->name('service_edit');
-    Route::post('/customer_service/payment',                     [CustomerServiceController::class, 'payment'])->name('service_payment');
+    Route::get('/customer_services',                             [CustomerServiceController::class, 'show'])->name('customer_service');
+    Route::get('/customer_services/customer/{id}',               [CustomerServiceController::class, 'shop'])->name('customer_shop');
+    Route::post('/customer_services/create',                     [CustomerServiceController::class, 'store'])->name('customer_service_create');
+    Route::get('/customer_services/edit/{ordem}',                [CustomerServiceController::class, 'edit'])->name('service_edit');
+    Route::post('/customer_services/payment',                    [CustomerServiceController::class, 'payment'])->name('service_payment');
+    Route::get('/customer_services/payment/warning/{id}',        [CustomerServiceController::class,'payment_warning'])->name('service_payment_warning');
+    Route::get('/customer_services/payment/delete/{id}',         [CustomerServiceController::class,'payment_delete'])->name('service_payment_delete');
+    Route::get('/customer_services/warning/{ordem}',             [CustomerServiceController::class,'warning'])->name('customer_service_warning');
+    Route::get('/customer_services/delete/{ordem}',              [CustomerServiceController::class,'destroy'])->name('customer_service_delete');
 
     //Service - Reschedule
     Route::match(['post','put'], '/customer_service/reschedule', [RescheduleController::class,'store'])->name('reschedule_service');
