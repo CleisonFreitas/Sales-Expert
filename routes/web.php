@@ -91,7 +91,7 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/customer_service/payment',                     [CustomerServiceController::class, 'payment'])->name('service_payment');
 
     //Service - Reschedule
-    Route::match(['POST','PUT'], '/customer_service/reschedule', [RescheduleController::class,'store'])->name('reschedule_service');
+    Route::match(['post','put'], '/customer_service/reschedule', [RescheduleController::class,'store'])->name('reschedule_service');
 
     //Oprations - Accounts
     Route::get('/operation/accounts',           [AccountController::class,'index'])->name('account.new');

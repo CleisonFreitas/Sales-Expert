@@ -213,7 +213,7 @@ class AccountBookController extends Controller
 
     public function warning($id){
         $cliente = AccountTransitions::find($id);
-        Alert::alert()->html('Aviso'," Você está prestes esse lançamento!
+        Alert::alert()->html('Aviso'," Você está prestes à excluir esse lançamento!
         <br>Deseja prosseguir?<br>
         <br><a class='btn btn-danger' href='/customer/delete/$id')}}'>Sim</a>&nbsp;
         <a class='btn btn-secondary' href='/customer/edit/$id'>Não</a><br>",'warning')

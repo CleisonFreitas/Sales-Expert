@@ -92,17 +92,10 @@ class CustomerReportController extends Controller
 
             ])
             ->get();
-          //  echo json_encode($customers);die;
-/*
-            foreach($customers as $i => $customer){
-                $dados[$i] = [
-                    'nome' => $customer->name,
-                    'endereco' => $customer->logradouro,
-                    'telefone' => $customer->ct_num,
-                    'data_nascimento' => $customer->nascimento,
-                ];
+            
+            if($customers->count() < 1){
+                return redirect()->back()->with([toast()->info('Pesquisa não retornou resultados')->autoClose(40000)]);
             }
-  */          
             }catch(\Exception $ex){
                 return redirect()->back()->with([toast()->error($ex->getMessage())]);
             }
