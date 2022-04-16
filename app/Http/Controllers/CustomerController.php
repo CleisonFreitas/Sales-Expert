@@ -39,7 +39,7 @@ class CustomerController extends Controller
         FacadesAlert::alert()->html('Aviso'," Você está prestes a excluir esse cadastro!
         <br>Deseja prosseguir?<br>
         <br><a class='btn btn-danger' href='/customer/delete/$id')}}'>Sim</a>&nbsp;
-        <a class='btn btn-secondary' href='/customer/edit/$id'>Não</a><br>",'warning')
+        <a class='btn btn-secondary' href='/customer'>Não</a><br>",'warning')
         ->autoClose(20000);
         return redirect()->back();
     }

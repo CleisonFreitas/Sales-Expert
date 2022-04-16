@@ -14,10 +14,10 @@
                     <nav class="mx-auto mt-2">
                         <ul class="nav nav-pills justify-content-end" id="pills-tab" role="tablist">
                             <li class="nav-item" role="presentation">
-                                <a class="nav-link active btn-sm" id="nav-home-ta" data-toggle="pill" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true"><i class="fas fa-user-plus"></i></a>
+                                <a class="nav-link active btn-sm" id="nav-contact-tab" data-toggle="pill" href="#nav-contact" role="tab" aria-controls="nav-contact" aria-selected="false"><i class="fas fa-user-clock"></i></a>
                             </li>
                             <li class="nav-item" role="presentation">
-                                <a class="nav-link btn-sm" id="nav-contact-tab" data-toggle="pill" href="#nav-contact" role="tab" aria-controls="nav-contact" aria-selected="false"><i class="fas fa-user-clock"></i></a>
+                                <a class="nav-link  btn-sm" id="nav-home-ta" data-toggle="pill" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true"><i class="fas fa-user-plus"></i></a>
                             </li>
                         </ul>
                     </nav>
@@ -29,7 +29,7 @@
             <form action="{{ route('customer_create') }}" method="POST">
                 @csrf
                 <div class="tab-content" id="nav-tabContent">
-                    <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+                    <div class="tab-pane fade show" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
                         <!-- Main -->
                         <div class="card-header bg-gray-300 ">
                             <h5 class="m-0 font-weight-bold text-secondary">Cadastrar novo cliente</h5>
@@ -166,7 +166,7 @@
                         <!-- #Main -->
                     </div>
 
-                    <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
+                    <div class="tab-pane fade show active" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
                         <form action="#">
                             @csrf
                             <div class="row">
@@ -197,13 +197,13 @@
                                                         <td>{{ $c->status }}</td>
                                                         <td>{{ date('d/m/Y', strtotime($c->cadastro)) }}</td>
                                                         <td>
-                                                            <a href="{{ route('customer_edit',$c->id) }}" class="btn btn-secondary btn-sm btn-circle">
+                                                            <a href="{{ route('customer_edit',$c->id) }}" title="Editar" class="btn btn-secondary btn-sm btn-circle">
                                                                 <i class="fas fa-pencil-alt"></i>
                                                             </a>
-                                                            <a href="{{ route('customer_shop',$c->id) }}" class="btn btn-primary btn-sm btn-circle">
-                                                                <i class="fas fa-people-arrows"></i>
+                                                            <a href="{{ route('customer_shop',$c->id) }}" title="Atendimento" class="btn btn-primary btn-sm btn-circle">
+                                                                <i class="fas fa-hands-helping"></i>
                                                             </a>
-                                                            <a href="{{ route('customer_warning',$c->id) }}" class="btn btn-danger btn-sm btn-circle">
+                                                            <a href="{{ route('customer_warning',$c->id) }}" title="Excluir registro" class="btn btn-danger btn-sm btn-circle">
                                                                 <i class="fas fa-trash"></i>
                                                             </a>
                                                         </td>
