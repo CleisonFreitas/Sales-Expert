@@ -21,4 +21,9 @@ class Payments extends Model
     ];
 
     public $timestamps = true;
+
+    public function customerservices()
+    {
+        return $this->belongsTo(CustomerService::class,'customer_services_id','ordem');
+    }
 }

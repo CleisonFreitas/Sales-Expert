@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Payments;
 use App\Http\Controllers\Controller;
 use App\Models\AccountBook;
+use App\Models\Service;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -17,7 +18,9 @@ class PaymentController extends Controller
      */
     public function index()
     {
-        //
+        return view('archives/payment_report',[
+            'services' => Service::all(),
+        ]);
     }
 
     /**

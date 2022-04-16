@@ -13,6 +13,8 @@ use App\Http\Controllers\AccountController;
 use App\Http\Controllers\AccountReferenceController;
 use App\Http\Controllers\CustomerReportController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\PaymentController;
+use App\Http\Controllers\ReportController;
 use App\Http\Controllers\RescheduleController;
 use App\Http\Controllers\ServiceController;
 //use alert;
@@ -116,6 +118,8 @@ Route::middleware(['auth'])->group(function () {
     // Archives
     Route::get('/archives/customer_report', [CustomerReportController::class, 'index'])->name('archive.customer');
     Route::post('archives/customer_report', [CustomerReportController::class, 'report'])->name('archive.report');
+    Route::get('archives/payments_report',  [PaymentController::class, 'index'])->name('payment.report');
+    Route::post('archives/payments_report', [ReportController::class,'searchPayment'])->name('archive.payment.report');
     //if route doesn't exist
     Route::fallback(function () {
 
@@ -144,12 +148,6 @@ Route::get('/product&service', function () {
 Route::get('/customer_service_action', function () {
     return view('customers/customer_service_action');
 })->middleware(['auth'])->name('customer_action');
-
-// Archives
-Route::get('/archives/payments_report', function () {
-    return view('archives/payment_report');
-})->middleware(['auth'])->name('payment.report');
-
 
 
 require __DIR__.'/auth.php';

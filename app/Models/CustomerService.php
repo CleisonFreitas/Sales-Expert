@@ -45,8 +45,34 @@ class CustomerService extends Model
 
     public $timestamps = true;
 
-    public function Service() {
+    public function Service() 
+    {
         return $this->belongsTo(Service::class,'service_id');
+    }
+
+    public function payments()
+    {
+        return $this->hasMany(Payments::class,'customer_services_id');
+    }
+    
+    public function customer()
+    {
+        return $this->belongsTo(Customer::class,'cust_id');
+    }
+
+    static function paymentCustomer(string $dt_inicial,string $dt_final,string $cep,string $service_id)
+    {
+        $report = Self::Select('*')
+        ->join('payments','payments.customer_services_id','=','customer_services.ordem')
+        ->join('customers','customer_services.cust_id','=','customers.id')
+        ->whereBetween('payments.created_at', [$dt_inicial, $dt_final])
+        ->where([
+            ['customers.cep','like', $cep],
+            ['customer_services.service_id','like','%'.$service_id.'%']
+        ])
+        ->get();
+
+        return $report;
     }
 
 }
