@@ -86,7 +86,7 @@ class CustomerReportController extends Controller
             ->whereBetween('nascimento', [$bd_data_inicio, $bd_data_fim])
             ->whereBetween('customers.cadastro', [$data_inicio, $data_fim])
             ->where([
-                ['customers.cep','like', $cep],
+                ['customers.cep','like', '%'.$cep.'%'],
                 ['service_id','like','%'.$aquisicao.'%'],
                 ['employers.id','like',$profissionais]
 

@@ -6,6 +6,7 @@ use App\Models\CustomerService;
 use App\Models\Payments;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class ReportController extends Controller
 {
@@ -16,7 +17,7 @@ class ReportController extends Controller
 
             $dt_inicial = $request->dt_inicial;
             $dt_final = $request->dt_final;
-            $service_id = $request->service_id;
+            $service_id = Str::Remove(['["','"]'],$request->service_id);
             $cep = $request->cep;
 
             if(empty($dt_inicial)){
@@ -36,12 +37,18 @@ class ReportController extends Controller
             $report = Payments::with(['customerservices'])
             ->join('customer_services','customer_services_id','=','customer_services.ordem')
             ->join('customers','cust_id','=','customers.id')
-            ->select('payments.*','customers.nome','customer_services.descricao')
+            ->select('payments.*',
+                    'payments.created_at as pagamento',
+                    'customers.nome',
+                    'customers.ct_num',
+                    'customer_services.descricao',
+                    'customer_services.service_id')
             ->where([
-                ['customers.cep','like', $cep],
-                ['customer_services.service_id','like','%'.$service_id.'%']
+                ['customers.cep','like', '%'.$cep.'%'],
+                ['service_id','like','%'.$service_id.'%']
             ])
             ->get();  
+
 
             if($report->count() < 1){
                 return redirect()->back()->with([toast()->info('Pesquisa não retornou resultados')->autoClose(40000)]);

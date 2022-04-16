@@ -22,27 +22,29 @@
     <div class="container mb-3 text-dark">
         <div class="row">
             <div class="col">
-                <h1 style="text-align: center;">Relatório de Pagamentos</h1>
+                <h1 style="text-align: center;" class="text-danger">Relatório de Pagamentos</h1>
             </div>
         </div>
     </div>
-    <div class="card shadow">
+    <div class="card shadow bg-white">
         <div class="table-responsive">
-            <table class="table table-striped" style="text-align: center;">
-                <thead>
+            <table class="table" style="text-align: center;">
+                <thead class="text-dark">
                     <tr>
                         <th><b>Nome:</b></th>
+                        <th><b>Contato:</b></th>
                         <th><b>Serviço:</b></th>
                         <th><b>Valor:</b></th>
                         <th><b>Data de Pagamento:</b></th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody class="text-danger">
                     @foreach ($report as $report)
                     <tr>
                         <td><b>{{ $report->nome }}</b></td>
+                        <td><b>{{ $report->ct_num }}</b></td>
                         <td><b>{{ $report->descricao }}</b></td>
-                        <td><b>{{ $report->valor }}</b></td>
+                        <td><b>R$ {{ number_format($report->valor,2,',','.') }}</b></td>
                         <td><b>{{ date('d/m/Y',strtotime($report->created_at)) }}</b></td>
                     </tr>
                     @endforeach
