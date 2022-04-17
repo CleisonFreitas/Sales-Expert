@@ -1,4 +1,4 @@
-@extends('./layouts/main')
+@extends('layouts.main')
 
 @section('title','Employer')
 
@@ -37,7 +37,7 @@
                         <div class="row mt-2 mb-3">
                             <div class="col-12 col-sm-12 col-lg-3">
                                 <label for="dt_cad">Cadastro:</label>
-                                <input type="date" name="dt_cad" value="{{ date('Y-m-d') }}" id="" class="form-control">
+                                <input type="date" name="dt_cad" value="{{ date('Y-m-d') }}" id="" class="form-control" >
                             </div>
                         </div>
 
@@ -58,7 +58,7 @@
                         <div class="row mb-3">
                             <div class="col-12 col-sm-12 col-lg-9">
                                 <label for="f_name">Nome Completo: <small class='text-danger'>@error('nome'){{  $message }} @enderror</small></label>
-                                <input type="text" name="nome" value="{{ old('nome') }}" id="" class="form-control">
+                                <input type="text" name="nome" value="{{ old('nome') }}" id="" class="form-control" placeholder="Ex: Luciano Dias">
                                 <small class="form-text text-secondary">
                                     *Campo obrigatório 
                                 </small>
@@ -74,11 +74,11 @@
                         <div class="row mb-3">
                             <div class="col-12 col-sm-12 col-lg-4">
                                 <label for="itin">CPF:</label>
-                                <input type="text" name="cpf" value="{{ old('cpf') }}" id="txtCpf" maxlength="14" onkeyup="mask_cpf();" class="form-control">
+                                <input type="text" name="cpf" value="{{ old('cpf') }}" id="txtCpf" maxlength="14" onkeyup="mask_cpf();" class="form-control" placeholder="Ex: 452.132.157-22">
                             </div>
                             <div class="col-12 col-sm-6 col-lg-5">
                                 <label for="ssn">RG:</label>
-                                <input type="text" name="rg" value="{{ old('rg') }}" id="" class="form-control">
+                                <input type="text" name="rg" value="{{ old('rg') }}" id="" class="form-control" placeholder="Ex: 74541252">
                             </div>
                             <div class="col-12 col-sm-6 col-lg-3">
                                 <label for="gender">Gênero:</label>
@@ -98,28 +98,28 @@
                         <div class="row mt-2 mb-3">
                             <div class="col-12 col-sm-12 col-lg-3">
                                 <label for="zip_code">Cep: </label>
-                                <input type="text" name="cep" value="{{ old('cep') }}" id="cep" maxlength="9" class="form-control" onkeyup="mask_cep();" onblur="pesquisacep(this.value);">                            </div>
+                                <input type="text" name="cep" value="{{ old('cep') }}" id="cep" maxlength="9" class="form-control" onkeyup="mask_cep();" onblur="pesquisacep(this.value);" placeholder="Ex: 60321-025">                            </div>
                             <div class="col-8 col-sm-9 col-lg-7">
                                 <label for="street">Rua/Avenida: </label>
-                                <input type="text" name="logradouro" value="{{ old('logradouro') }}" id="street" class="form-control">
+                                <input type="text" name="logradouro" value="{{ old('logradouro') }}" id="street" class="form-control" placeholder="Ex: Rua dos Anzóis">
                             </div>
                             <div class="col-4 col-sm-3 col-lg-2">
                                 <label for="n_home">Número: </label>
-                                <input type="text" name="numero" value="{{ old('numero') }}" id="" class="form-control">
+                                <input type="text" name="numero" value="{{ old('numero') }}" id="" class="form-control" placeholder="Ex: 33">
                             </div>
                         </div>
                         <div class="row mt-2 mb-3">
                             <div class="col-9 col-sm-9 col-lg-4">
                                 <label for="city">Cidade:</label>
-                                <input type="text" name="cidade" value="{{ old('cidade') }}" id="city" class="form-control">
+                                <input type="text" name="cidade" value="{{ old('cidade') }}" id="city" class="form-control" placeholder="Ex: Fortaleza">
                             </div>
                             <div class="col-3 col-sm-3 col-lg-2">
                                 <label for="state">Estado:</label>
-                                <input type="text" name="estado" value="{{ old('estado') }}" id="state" class="form-control">
+                                <input type="text" name="estado" value="{{ old('estado') }}" id="state" class="form-control" placeholder="Ex: CE">
                             </div>
                             <div class="col-12 col-sm-12 col-lg-6">
                                 <label for="district">Bairro:</label>
-                                <input type="text" name="bairro" value="{{ old('bairro') }}" id="district" class="form-control">
+                                <input type="text" name="bairro" value="{{ old('bairro') }}" id="district" class="form-control" placeholder="Ex: Barra do Ceará">
                             </div>
                         </div>
                         <div class="row mt-2 mb-3">
@@ -130,25 +130,25 @@
                         <div class="row mb-3">
                             <div class="col-12 col-sm-12 col-lg-8">
                                 <label for="email">E-mail:</label>
-                                <input type="email" name="email" value="{{ old('email') }}" id="" class="form-control">
+                                <input type="email" name="email" value="{{ old('email') }}" id="" class="form-control" placeholder="Ex: example@example.com.br">
                             </div>
                             <div class="col-12 col-sm-12 col-lg-4">
                                 <label for="ct_num">Celular:</label>
-                                <input type="text" name="ct_num" value="{{ old('ct_num') }}" id="txtFone"  maxlength="15" onkeyup="mask_fone();" class="form-control">
+                                <input type="text" name="ct_num" value="{{ old('ct_num') }}" id="txtFone"  maxlength="15" onkeyup="mask_fone();" class="form-control" placeholder="Ex: (85) 98745-1231">
                             </div>
                         </div>
                         <div class="row mb-3">
                             <div class="col-12 col-sm-12 col-lg-4">
                                 <label for="whatsapp">WhatsApp:</label>
-                                <input type="text" name="ct_whats" id="txtWhats" value="{{ old('txtWhats') }}"  maxlength="15" onkeyup="mask_whats();" class="form-control">
+                                <input type="text" name="ct_whats" id="txtWhats" value="{{ old('txtWhats') }}"  maxlength="15" onkeyup="mask_whats();" class="form-control"  placeholder="Ex: (85) 98745-1231">
                             </div>
                             <div class="col-12 col-sm-12 col-lg-4">
                                 <label for="facebook">Facebook:</label>
-                                <input type="text" name="facebook" value="{{ old('facebook') }}" id="" class="form-control">
+                                <input type="text" name="facebook" value="{{ old('facebook') }}" id="" class="form-control"  placeholder="Ex: facebook.com/eduardo.sampaio.123">
                             </div>
                             <div class="col-12 col-sm-12 col-lg-4">
                                 <label for="col-12 col-sm-12 col-lg-4">Instagram:</label>
-                                <input type="text" name="instagram" value="{{ old('instagram') }}" id="" class="form-control">
+                                <input type="text" name="instagram" value="{{ old('instagram') }}" id="" class="form-control" placeholder="Ex: @Ziragots">
                             </div>
                         </div>
                         <div class="row mt-2 mb-3">

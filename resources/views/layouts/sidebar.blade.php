@@ -48,9 +48,11 @@
                     <i class="fas fa-file-invoice-dollar mx-1"></i>
                     <span>Contas</span>
                 </a>
+                <!--
                 <a class="collapse-item" href="{{ route('supplier') }}">
                     <i class="fas fa-store mx-1"></i><span>Fornecedores</span>
                 </a>
+                -->
                 <a class="collapse-item" href="{{ route('services') }}">
                     <i class="fas fa-concierge-bell mx-1"></i><span>Serviços</span>
                 </a>

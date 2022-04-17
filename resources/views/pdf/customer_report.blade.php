@@ -22,13 +22,13 @@
     <div class="container mb-3 text-dark">
         <div class="row">
             <div class="col">
-                <h1 style="text-align: center;">Relatório de Clientes</h1>
+                <h1 style="text-align: center;" class="text-danger">Relatório de Clientes</h1>
             </div>
         </div>
     </div>
     <div class="card shadow">
         <div class="table-responsive">
-            <table class="table table-striped" style="text-align: center;">
+            <table class="table" style="text-align: center;">
                 <thead>
                     <tr>
                         <th><b>Nome:</b></th>
@@ -37,11 +37,11 @@
                         <th><b>Data de Nascimento:</b></th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody class="text-danger">
                     @foreach ($customers as $customer)
                     <tr>
                         <td><b>{{ $customer->name }}</b></td>
-                        <td><b>{{ $customer->logradouro }}</b></td>
+                        <td><b>{{ $customer->logradouro }},{{ $customer->numero }}</b></td>
                         <td><b>{{ $customer->ct_num }}</b></td>
                         <td><b>{{ date('d/m/Y',strtotime($customer->nascimento)) }}</b></td>
                     </tr>

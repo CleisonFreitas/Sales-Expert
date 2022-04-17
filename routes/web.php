@@ -57,13 +57,14 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/employer/delete/{id}', [EmployerController::class, 'delete'])->name('employer_delete');
 
     //Registers - Supplier
+    /*
     Route::get('/supplier',                 [SupplierController::class, 'show'])->name('supplier');
     Route::post('/supplier/create',         [SupplierController::class, 'create'])->name('supplier_create');
     Route::get('/supplier/edit/{id}',       [SupplierController::class, 'edit'])->name('supplier_edit');
     Route::put('/supplier/update/{id}',     [SupplierController::class, 'updt'])->name('supplier_update');
     Route::get('/supplier/warning/{id}',    [SupplierController::class, 'warning'])->name('supplier_warning');
     Route::get('/supplier/delete/{id}',     [SupplierController::class, 'delete'])->name('supplier_delete');
-
+    */
     //Registers - Payments
     Route::get('/payment_method',                   [PaymentMethodController::class, 'show'])->name('payment_method');
     Route::post('/payment_method/create',           [PaymentMethodController::class, 'create'])->name('payment_method_create');

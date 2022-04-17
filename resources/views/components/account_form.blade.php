@@ -99,7 +99,7 @@
             @endif
             @foreach ($grupo as $g)
                 <option>Nenhum</option>
-                <option value="{{ $g->pertence }}">{{ $g->descricao }}</option>
+                <option value="{{ $g->id }}">{{ $g->descricao }}</option>
             @endforeach
             
         </select>

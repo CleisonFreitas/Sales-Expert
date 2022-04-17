@@ -135,8 +135,8 @@
                             </div>
                             <div class="row mt-2">
                                 <div class="col">
-                                    <button class="btn bg-gray-400">Excel&nbsp; <img src="https://img.icons8.com/ios-filled/30/000000/ms-excel.png"/></button>
-                                    <button class="btn bg-gray-400" type="submit">PDF&nbsp; <img src="https://img.icons8.com/ios-filled/30/000000/pdf--v2.png"/></button>
+                                    <!-- <button class="btn bg-gray-400">Excel&nbsp; <img src="https://img.icons8.com/ios-filled/30/000000/ms-excel.png"/></button> -->
+                                    <button class="btn bg-gray-400" type="submit">Relatório&nbsp; <img src="https://img.icons8.com/ios-filled/30/000000/pdf--v2.png"/></button>
                                 </div>
                             </div>
                         </form>

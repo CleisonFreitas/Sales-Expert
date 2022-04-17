@@ -22,12 +22,10 @@
                 </div>
             </div>
             <datalist id="ContentList">
-                <option value="Fornecedores">
                 <option value="Clientes">
                 <option value="Atendimento">
                 <option value="Caixa">
-                <option value="Contas(Receber)">
-                <option value="Contas(Pagar)">
+                <option value="Contas">
               </datalist>
         </form>
 

@@ -13,6 +13,7 @@ use App\Http\Requests\OpenBookRequest;
 use App\Models\Account;
 use App\Models\AccountTransitions;
 use App\Models\PaymentMethod;
+use App\Models\Payments;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class AccountBookController extends Controller
@@ -32,6 +33,7 @@ class AccountBookController extends Controller
             $account_book = AccountBook::all();
             $select_account = AccountBook::selectcaix();
             $caixa = 'A';
+            
 
         }catch(\Exception $e){
             return response()->json('Dados não encontrados!');
@@ -79,21 +81,20 @@ class AccountBookController extends Controller
             $account_reference = AccountReference::all();
             $select_account = AccountBook::selectcaix();
             $caixa = 'F';
+            $payment_book = Payments::Where('caix_ref',$id)->sum('valor');
 
         }catch(\Exception $e){
 
             return redirect()->route('dashboard')->with([toast()->info($e->getMessage())]);
         }
 
-        return view("operation.close_account_book", compact('select_account','account_reference','account','caixa'));
+        return view("operation.close_account_book", compact('select_account',
+                                                            'account_reference',
+                                                            'account',
+                                                            'caixa',
+                                                            'payment_book'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\AccountBook  $accountBook
-     * @return \Illuminate\Http\Response
-     */
     public function close(Request $request,$id)
     {
         try{

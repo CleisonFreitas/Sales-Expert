@@ -21,8 +21,8 @@
         <input type="date" name="data_fech" id="" value="{{ date('Y-m-d') }}" class="form-control" required>
     </div>
     <div class="col-12 col-sm-6 col-lg-2">
-        <label for="anual">Valor:</label>
-        <input type="text" name="referencia" value="0.00" id="" class="form-control" readonly>
+        <label for="valor">Valor:</label>
+        <input type="text" name="valor" value="{{ number_format($payment_book,2,',','.') ?? 0.00}}" id="" class="form-control" readonly>
     </div>
     @endif
     <div class="col-12 col-sm-6 col-lg-2">

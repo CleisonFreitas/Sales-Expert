@@ -79,12 +79,8 @@ class HomeController extends Controller
                         return redirect()->route('account.book');
                     break;
 
-                    case('Contas(Receber)');
-                        return redirect()->route('posting.receive');
-                    break;
-
-                    case('Contas(Pagar)');
-                        return redirect()->route('posting.pay');
+                    case('Contas');
+                        return redirect()->route('account.new');
                     break;
 
                     default;
