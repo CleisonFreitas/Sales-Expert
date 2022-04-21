@@ -154,22 +154,41 @@ class AccountBookController extends Controller
     // Contas do Caixa(Movimentações)
     public function account_transition(){
 
-        // Lançar conta à receber
+        // Movimentações e Atendimentos
       //  $accountbook = AccountBook::selectcaix();
+        $data = [];
+        $paymentbook = AccountBook::with(['referenciacaixa','payments','contas'])->get();
+     //   dd($paymentbook);die;
+        
 
-        $paymentbook = AccountBook::all();
-
-        foreach($paymentbook as $i => $payment){
-            $conta[$i] = [
-                'Caixa' => $payment->referenciacaixa->descricao,
-                'Serviços' => 
-                    [
-                        'Procedimentos' =>  $payment->services,
-                    //    'Valor' => 
-                    ]
+        foreach($paymentbook as $i => $book){
+            $data[$i] = [
+                'id' => $book->caixa_id,
+                'descricao' => $book->referenciacaixa->descricao,
+                'data_abertura' => $book->data_aber,
+                'data_fech' => $book->data_fech,
+                'atendimentos' => [],
+                'contas' => []
             ];
+
+            foreach($book->payments as $payment){
+                $data[$i]['atendimentos'][] = [
+                    'pagamento_id' => $payment->id,
+                    'descricao_servico' => $payment->descricao,
+                    'valor' => $payment->valor,
+                ];
+            }
+
+            foreach($book->contas as $conta){
+                $data[$i]['contas'][] = [
+                    'id' => $conta->id,
+                    'descricao_conta' => $conta->conta_descricao,
+                    'valor' => $conta->valor
+                ];
+            }
+
         }
-        dd($conta);die;
+        dd($data);die;
      //   $allbooks = AccountBook::with(['livrocaixa','CaixaReferencia'])
     //    ->join('accounts','account_transitions.conta_id','=','accounts.id')->get();
         $paymethod = PaymentMethod::all();

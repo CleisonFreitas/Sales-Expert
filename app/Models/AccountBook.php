@@ -56,9 +56,18 @@ class AccountBook extends Model
         return $this->hasManyThrough(Account::class,AccountTransitions::class,'livro_caixa_id','conta_id','id','id');
     }
 
+    public function contas()
+    {
+        return $this->hasMany(AccountTransitions::class,'livro_caixa_id')
+        ->join('accounts','account_transitions.conta_id','=','accounts.id')
+        ->select('account_transitions.*','accounts.descricao as conta_descricao')
+        ->groupBy('account_transitions.conta_id');
+
+    }
     public function payments()
     {
-        return $this->hasMany(Payments::class,'caix_ref');
+        return $this->hasMany(Payments::class,'caix_ref')
+        ->leftjoin('customer_services','customer_services_id','=','customer_services.ordem');
     }
     
     public function services()
