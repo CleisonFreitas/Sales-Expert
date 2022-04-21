@@ -49,7 +49,7 @@
                     <span>Contas</span>
                 </a>
                 <!--
-                <a class="collapse-item" href="{{ route('supplier') }}">
+                <a class="collapse-item" href="#">
                     <i class="fas fa-store mx-1"></i><span>Fornecedores</span>
                 </a>
                 -->

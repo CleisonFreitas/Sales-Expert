@@ -50,7 +50,7 @@
                     </tr>
                     <tr>
                         <td>Saídas</td>
-                        <td>R$ 0,00</td>
+                        <td>R$ {{ number_format($saida,2,',','.') }}</td>
                     </tr>
                 </tbody>
             </table>

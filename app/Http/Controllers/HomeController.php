@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\AccountTransitions;
 use App\Models\Customer;
 use App\Models\CustomerService;
+use App\Models\Dashboard;
 use App\Models\Note;
+use App\Models\Payments;
 use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Carbon\Carbon;
@@ -27,34 +30,57 @@ class HomeController extends Controller
     {
 
         try{
+
             $atendimentos = CustomerService::Where([
                 'data_agend' => date('Y-m-d'),
-                'status' => 'P'
+                'status' => ['P','R']
                 ])->get();
-
+    
             $contanivers = Customer::contanivers();
-
+    
             $entradas = CustomerService::Where([
                 'data_agend' => date('Y-m-d'),
                 'status' => 'P'
                 ])->sum('valor');
-
-            $arrecadacao = CustomerService::Where([
-                'data_agend' => date('Y-m-d'),
-                'status' => 'C'
-                ])->sum('valor');
+    
+            $pagamento = Payments::Where([
+                    ['created_at','LIKE', date('Y-m-d %')],
+                ])
+                ->sum('valor');
+    
+            $transition = AccountTransitions::Select('*')
+            ->join('accounts','account_transitions.conta_id','=','accounts.id')
+            ->Where([
+                ['account_transitions.created_at','LIKE', date('Y-m-d %')],
+                ['tipo' ,'=','Receita']
+            ])
+            ->sum('valor');
+    
+            $arrecadacao = $pagamento + $transition;
+    
+            $saida = AccountTransitions::Select('*')
+            ->join('accounts','account_transitions.conta_id','=','accounts.id')
+            ->Where([
+                ['account_transitions.created_at','LIKE', date('Y-m-d %')],
+                ['tipo' ,'=','Despesa']
+            ])
+            ->sum('valor');
+    
 
         }catch(\Exception $e){
             return response()->json($e->getMessage());
         }
 
         return view('reports.dashboard',[
-            'notas' => Note::all(),
-            'atendimentos' => $atendimentos,
-            'aniversariantes' => $contanivers,
-            'entradas' => $entradas,
-            'arrecadacao' => $arrecadacao,
+                'notas' => Note::all(),
+                'atendimentos' => $atendimentos,
+                'aniversariantes' => $contanivers,
+                'entradas' => $entradas,
+                'arrecadacao' => $arrecadacao,
+                'saida' => $saida
         ]);
+
+        
     }
 
     public function search(Request $request)
@@ -140,20 +166,39 @@ class HomeController extends Controller
         try{
             $atendimentos = CustomerService::Where([
                 'data_agend' => date('Y-m-d'),
-                'status' => 'P'
+                'status' => ['P','R']
                 ])->get();
-
+    
             $contanivers = Customer::contanivers();
-
+    
             $entradas = CustomerService::Where([
                 'data_agend' => date('Y-m-d'),
                 'status' => 'P'
                 ])->sum('valor');
-
-            $arrecadacao = CustomerService::Where([
-                'data_agend' => date('Y-m-d'),
-                'status' => 'C'
-                ])->sum('valor');
+    
+            $pagamento = Payments::Where([
+                    ['created_at','LIKE', date('Y-m-d %')],
+                ])
+                ->sum('valor');
+    
+            $transition = AccountTransitions::Select('*')
+            ->join('accounts','account_transitions.conta_id','=','accounts.id')
+            ->Where([
+                ['account_transitions.created_at','LIKE', date('Y-m-d %')],
+                ['tipo' ,'=','Receita']
+            ])
+            ->sum('valor');
+    
+            $arrecadacao = $pagamento + $transition;
+    
+            $saida = AccountTransitions::Select('*')
+            ->join('accounts','account_transitions.conta_id','=','accounts.id')
+            ->Where([
+                ['account_transitions.created_at','LIKE', date('Y-m-d %')],
+                ['tipo' ,'=','Despesa']
+            ])
+            ->sum('valor');
+    
 
         }catch(\Exception $e){
             return response()->json($e->getMessage());
@@ -165,8 +210,10 @@ class HomeController extends Controller
             'aniversariantes' => $contanivers,
             'entradas' => $entradas,
             'arrecadacao' => $arrecadacao,
+            'saida' => $saida
         ])
             ->setPaper('a4','landscape')
             ->stream('relatorio-dashboard.pdf');
     }
+
 }
