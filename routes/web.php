@@ -116,9 +116,12 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/operation/accountability/show/{id}',                   [AccountBookController::class, 'show'])->name('account.book.show');
 
     // Operations - posting_account
-    Route::get('/operation/transitions',                [AccountBookController::class,'account_transition'])->name('posting.account');
-    Route::post('/operation/transitions/store',         [AccountBookController::class, 'transition_store'])->name('posting.account.store');
-    Route::get('/operation/transitions/delete/{id}',    [AccountBookController::class, 'transition_warning'])->name('posting.account.delete');
+    Route::get('/operation/transitions',                                [AccountBookController::class,'account_transition'])->name('posting.account');
+    Route::post('/operation/transitions/store',                         [AccountBookController::class, 'transition_store'])->name('posting.account.store');
+    Route::get('/operation/transitions/account_warning/{id}',           [AccountBookController::class, 'warning_conta'])->name('posting.account.aviso');
+    Route::get('/operation/transitions/account_payment_delete/{id}',            [AccountBookController::class, 'account_payment_delete'])->name('posting.account.delete');
+    Route::get('/operation/transitions/service_warning/{id}',           [AccountBookController::class, 'warning_service'])->name('posting.service.aviso');
+    Route::get('/operation/transitions/service_delete/{id}',            [AccountBookController::class, 'service_payment_delete'])->name('posting.service.delete');
 
 
 

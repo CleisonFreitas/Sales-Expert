@@ -12,27 +12,27 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($paymentbook as $book)
+                    @foreach ($data as $book)
                     <tr>
-                        <td>{{$book->caixa_id}}</td>
-                        <td>{{$book->descricao}}</td>
-                        <td>{{date('d/m/Y',strtotime($book->data_aber))}}</td>
+                        <td>{{$book['id']}}</td>
+                        <td>{{$book['descricao']}}</td>
+                        <td>{{date('d/m/Y',strtotime($book['data_abertura']))}}</td>
                         <td>
-                            @if ($book->data_fech)
+                            @if ($book['data_fech'])
                                 <span class="btn btn-danger btn-sm">Fechado</span>
                             @else
                                 <span class="btn btn-info btn-sm">Aberto
                             @endif
                         </td>
                         <td>
-                            <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modal_{{$book->caixa_id}}" title="visualizar lançamentos">
+                            <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modal_{{$book['id']}}" title="visualizar lançamentos">
                                 <i class="fas fa-key"></i>
                             </button>
                         </td>
                     </tr>
 
                     <!-- Modal -->
-                    <div class="modal fade" id="modal_{{$book->caixa_id}}" tabindex="-1" aria-labelledby="modal_{{$book->caixa_id}}Label" aria-hidden="true">
+                    <div class="modal fade" id="modal_{{$book['id']}}" tabindex="-1" aria-labelledby="modal_{{$book['id']}}Label" aria-hidden="true">
                         <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg">
                             <div class="modal-content">
                                 <div class="modal-header" style="text-align: right">
@@ -59,22 +59,23 @@
                                                 </div>
                                             </div>
                                             <hr>
-                                            <div class="row">
-                                               <div class="col col-md-10 col-lg-9">
-                                                   <h6>Limpeza de pele fenômenal de supra</h6>
-                                               </div>
-                                               <div class="col col-md-10 col-lg-3">
-                                                   <h6 class="">R$ 60,00<a href="#" id="delete" style="color:red;"><i class="fas fa-trash-alt mx-2"></i></a></h6>
-                                               </div>
-                                            </div>
+                                            @if (!$book['atendimentos'])
+                                              <div class="row">
+                                                <div class="col">
+                                                    <h6 style="text-align: center">Esse caixa ainda não possui pagamentos  </h6>
+                                                </div>      
+                                            </div> 
+                                            @endif
+                                            @foreach ($book['atendimentos'] as $servico)
                                             <div class="row">
                                                 <div class="col col-md-10 col-lg-9">
-                                                    <h6>Clareamento facial</h6>
+                                                    <h6>{{ $servico['descricao_servico'] }}</h6>
                                                 </div>
                                                 <div class="col col-md-10 col-lg-3">
-                                                    <h6 class="">R$ 60,00<a href="#" id="delete" style="color:red;"><i class="fas fa-trash-alt mx-2"></i></a></h6>
+                                                    <h6 class="">R$ {{ number_format($servico['valor'],2,',','.') }}<a href="{{ route('posting.service.aviso',$servico['pagamento_id']) }}" id="delete" style="color:red;"><i class="fas fa-trash-alt mx-2"></i></a></h6>
                                                 </div>
                                              </div>
+                                            @endforeach
                                         </div>
                                         <div class="tab-pane fade show" id="nav-movimentacao" role="tabpanel" aria-labelledby="nav-movimentacao-tab">
                                             <div class="row" >
@@ -86,22 +87,23 @@
                                                 </div>
                                             </div>
                                             <hr>
-                                            <div class="row">
-                                               <div class="col col-md-10 col-lg-9">
-                                                   <h6></h6>
-                                               </div>
-                                               <div class="col col-md-10 col-lg-3">
-                                                   <h6 class="">60 R$<a href="#" id="delete" style="color:red;"><i class="fas fa-trash-alt mx-2"></i></a></h6>
-                                               </div>
-                                            </div>
+                                            @if (!$book['contas'])
+                                              <div class="row">
+                                                <div class="col">
+                                                    <h6 style="text-align: center">Esse caixa ainda não possui lançamentos  </h6>
+                                                </div>      
+                                            </div> 
+                                            @endif
+                                            @foreach ($book['contas'] as $conta)
                                             <div class="row">
                                                 <div class="col col-md-10 col-lg-9">
-                                                    <h6>Alimentação funcionário</h6>
+                                                    <h6>{{ $conta['descricao_conta'] }}</h6>
                                                 </div>
                                                 <div class="col col-md-10 col-lg-3">
-                                                    <h6 class="">R$ 60,00<a href="#" id="delete" style="color:red;"><i class="fas fa-trash-alt mx-2"></i></a></h6>
+                                                    <h6 class="">R$ {{ number_format($conta['valor'],2,',','.') }}<a href="{{ route('posting.account.aviso',$conta['id']) }}" id="delete" style="color:red;"><i class="fas fa-trash-alt mx-2"></i></a></h6>
                                                 </div>
                                              </div>
+                                            @endforeach
                                         </div>
                                     </div>
                                 </div>

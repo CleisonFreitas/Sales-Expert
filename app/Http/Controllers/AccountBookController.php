@@ -173,6 +173,7 @@ class AccountBookController extends Controller
 
             foreach($book->payments as $payment){
                 $data[$i]['atendimentos'][] = [
+                //    'id' => $payment->id,
                     'pagamento_id' => $payment->id,
                     'descricao_servico' => $payment->descricao,
                     'valor' => $payment->valor,
@@ -188,34 +189,18 @@ class AccountBookController extends Controller
             }
 
         }
-        dd($data);die;
      //   $allbooks = AccountBook::with(['livrocaixa','CaixaReferencia'])
     //    ->join('accounts','account_transitions.conta_id','=','accounts.id')->get();
         $paymethod = PaymentMethod::all();
         $accounts = Account::Where([
             ['categoria','=','C'],
         ])->get();
+        $accountbook = AccountBook::all();
 
-     //   echo json_encode([$allbooks]);die;
-      //  dd($allbooks);die;
-    /*    foreach($allbooks as $i => $livroconta){
-            $resultado[$i] = [
-                'Caixa_id' =>$livroconta->caixa_id,
-                'Caixa' => $livroconta->CaixaReferencia->descricao,
-                'Conta_Caixa' => [],
-            ];
-            foreach($livroconta->livrocaixa as $k => $contacaixa){
-                $resultado[$i]['Conta_Caixa'][$k] = [
-                    'id' => $contacaixa->conta_id,
-                    'valor' => $contacaixa->valor,
-                    'observação' => $contacaixa->observacao
-                ];
-            }
-
-        }*/
-
-       // dd([$resultado]);die;
-        return view('operation.posting_account',compact('paymentbook','accounts','paymethod'));
+        return view('operation.posting_account', ['data'=>$data,
+                                                  'paymethod' => $paymethod,
+                                                  'accounts'=> $accounts,
+                                                  'accountbook' => $accountbook]);
     }
 
     public function transition_store(Request $request)
@@ -231,14 +216,67 @@ class AccountBookController extends Controller
         return redirect()->route('posting.account')->with([toast()->success('Lançamento Realizado com sucesso!')]);
     }
 
-    public function warning($id){
-        $cliente = AccountTransitions::find($id);
-        Alert::alert()->html('Aviso'," Você está prestes à excluir esse lançamento!
-        <br>Deseja prosseguir?<br>
-        <br><a class='btn btn-danger' href='/customer/delete/$id')}}'>Sim</a>&nbsp;
-        <a class='btn btn-secondary' href='/customer/edit/$id'>Não</a><br>",'warning')
-        ->autoClose(20000);
-        return redirect()->back();
+    public function warning_conta($id)
+    {
+        try{
+            $conta = AccountTransitions::find($id);
+            Alert::alert()->html('Aviso'," Você está prestes à excluir esse lançamento!
+            <br>Deseja prosseguir?<br>
+            <br><a class='btn btn-danger' href='/operation/transitions/account_payment_delete/$id')}}'>Sim</a>&nbsp;
+            <a class='btn btn-secondary' href='/operation/transitions'>Não</a><br>",'warning')
+            ->autoClose(20000);
+            return redirect()->back();
+
+        }catch(\Exception $ex){
+            return redirect()->back()->with([toast()->error($ex->getMessage())]);
+        }
+        
+    }
+
+    public function warning_service($id)
+    {
+        try{
+            $service = Payments::findOrfail($id);
+            Alert::alert()->html('Aviso'," Você está prestes à excluir esse pagamento!
+            <br>Deseja prosseguir?<br>
+            <br><a class='btn btn-danger' href='/operation/transitions/service_delete/$id')}}'>Sim</a>&nbsp;
+            <a class='btn btn-secondary' href='/operation/transitions'>Não</a><br>",'warning')
+            ->autoClose(20000);
+            return redirect()->back();
+        }catch(\Exception $ex){
+            return redirect()->back()->with([toast()->error($ex->getMessage())]);
+        }
+        
+    }
+
+    public function service_payment_delete($id)
+    {
+        try{
+            $payment_service = Payments::findOrfail($id);
+            $payment_service->delete();
+
+            if($payment_service == true){
+                return redirect()->route('posting.account')->with([toast()->success('Pagamento excluído com sucesso!')]);
+            }
+
+        }catch(\Exception $ex){
+            return redirect()->back()->with([toast()->error($ex->getMessage())]);
+        }
+    }
+
+    public function account_payment_delete($id)
+    {
+        try{
+            $account_payment = AccountTransitions::findOrfail($id);
+            $account_payment->delete();
+
+            if($account_payment == true){
+                return redirect()->route('posting.account')->with([toast()->success('Lançamento excluído com sucesso!')]);
+            }
+
+        }catch(\Exception $ex){
+            return redirect()->back()->with([toast()->error($ex->getMessage())]);
+        }
     }
 
 
