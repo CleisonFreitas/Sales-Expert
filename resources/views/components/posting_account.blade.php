@@ -19,14 +19,14 @@
                         <td>{{date('d/m/Y',strtotime($book['data_abertura']))}}</td>
                         <td>
                             @if ($book['data_fech'])
-                                <span class="btn btn-danger btn-sm">Fechado</span>
+                                <span class="btn btn-danger btn-sm"><i class="fas fa-lock"></i></span>
                             @else
-                                <span class="btn btn-info btn-sm">Aberto
+                                <span class="btn btn-info btn-sm"><i class="fas fa-lock-open"></i>
                             @endif
                         </td>
                         <td>
                             <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modal_{{$book['id']}}" title="visualizar lançamentos">
-                                <i class="fas fa-key"></i>
+                                <i class="fas fa-search-dollar"></i>
                             </button>
                         </td>
                     </tr>
@@ -109,7 +109,6 @@
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="fas fa-times-circle mx-1"></i>Fechar</button>
-                                    <button type="button" class="btn btn-danger"><i class="far fa-file-pdf mx-1"></i>Relatório</button>
                                 </div>
                             </div>
                         </div>
@@ -141,7 +140,7 @@
                     <label for="caixa">Caixa:</label>
                     <select name="livro_caixa_id" id="" class="custom-select">
                         @foreach ($accountbook as $accountbook)
-                            <option value="{{ $accountbook->id }}">{{ $accountbook->id }} - {{ $accountbook->descricao }}</option>
+                            <option value="{{ $accountbook->id }}">{{ $accountbook->id }} - {{ $accountbook->referenciacaixa->descricao }}</option>
                         @endforeach
                     </select>
                 </div>

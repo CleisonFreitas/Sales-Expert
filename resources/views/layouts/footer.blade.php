@@ -30,7 +30,7 @@
                         <span aria-hidden="true">×</span>
                     </button>
                 </div>
-                <div class="modal-body">Selecione "Logout" abaixo caso queira encerrar a sessão.</div>
+                <div class="modal-body">Clique em "Deslogar" abaixo caso queira encerrar a sessão.</div>
                 <div class="modal-footer">
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
                     <form method="POST" action="{{ route('logout') }}">

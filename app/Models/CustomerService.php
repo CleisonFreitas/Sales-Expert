@@ -19,6 +19,7 @@ class CustomerService extends Model
         ->join('customers','customers.id','=','customer_services.cust_id')
         ->join('employers','employers.id','=','customer_services.resp_id')
         ->select('customer_services.*','employers.nome as e_nome','customers.nome as c_nome')
+        ->orderBy('customer_services.data_agend','desc')
         ->get();
 
         return $service;

@@ -84,21 +84,13 @@
     <div class="col-12 col-sm-6 col-lg-6">
         <label for="parente">Pertence à:</label>
         <select name="pertence" class="custom-select">
+            <option>Nenhum</option>
             @if (isset($account))
                 @foreach ($grupo_selected as $g)
-                @switch($g)
-                    @case('')
-                        <option>Nenhum</option>
-                        @break
-                    @default
-                    <option value=''>Nenhum</option>
-                    <option value="{{ $g->pertence }}" selected>{{ $g->descricao}}</option> 
-                @endswitch
-                    
+                    <option value="{{ $g->pertence }}" selected>{{ $g->descricao}}</option>  
                 @endforeach
             @endif
             @foreach ($grupo as $g)
-                <option>Nenhum</option>
                 <option value="{{ $g->id }}">{{ $g->descricao }}</option>
             @endforeach
             

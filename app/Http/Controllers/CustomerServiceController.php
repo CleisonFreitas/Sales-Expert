@@ -140,8 +140,13 @@ class CustomerServiceController extends Controller
     public function update(Request $request,$ordem)
     {
         try{
-            $customer_service = CustomerService::find($ordem);
-            $customer_service->update($request->all());
+            $customer_service = CustomerService::Where('ordem',$ordem)
+            ->update([
+                'resp_id' => $request->resp_id,
+                'data_agend' => $request->data_agend,
+                'hora_agend' => $request->hora_agend,
+                'observacao' => $request->observacao
+            ]);
 
         }catch(\Exception $e){
             return redirect()->back()->with([toast()->error($e->getMessage())]);

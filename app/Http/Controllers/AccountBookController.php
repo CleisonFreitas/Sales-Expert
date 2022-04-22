@@ -12,9 +12,12 @@ use Illuminate\Support\Facades\DB;
 use App\Http\Requests\OpenBookRequest;
 use App\Models\Account;
 use App\Models\AccountTransitions;
+use App\Models\CustomerService;
 use App\Models\PaymentMethod;
 use App\Models\Payments;
 use RealRashid\SweetAlert\Facades\Alert;
+
+use function PHPUnit\Framework\isNull;
 
 class AccountBookController extends Controller
 {
@@ -82,6 +85,8 @@ class AccountBookController extends Controller
             $select_account = AccountBook::selectcaix();
             $caixa = 'F';
             $payment_book = Payments::Where('caix_ref',$id)->sum('valor');
+            $account_transitions = AccountTransitions::Where('livro_caixa_id',$id)->sum('valor');
+            $valor_caixa = $payment_book + $account_transitions;
 
         }catch(\Exception $e){
 
@@ -92,7 +97,8 @@ class AccountBookController extends Controller
                                                             'account_reference',
                                                             'account',
                                                             'caixa',
-                                                            'payment_book'));
+                                                            'payment_book',
+                                                            'valor_caixa'));
     }
 
     public function close(Request $request,$id)
@@ -101,6 +107,8 @@ class AccountBookController extends Controller
             DB::beginTransaction();
             // Localizando Caixa
             $account_book = AccountBook::find($id);
+
+            
 
             // Verificando se o campo "data_fech" foi enviado e se é válido
             $account_book->data_fech = $request->input('data_fech');
@@ -155,10 +163,10 @@ class AccountBookController extends Controller
     public function account_transition(){
 
         // Movimentações e Atendimentos
-      //  $accountbook = AccountBook::selectcaix();
+
         $data = [];
         $paymentbook = AccountBook::with(['referenciacaixa','payments','contas'])->get();
-     //   dd($paymentbook);die;
+
         
 
         foreach($paymentbook as $i => $book){
@@ -195,7 +203,7 @@ class AccountBookController extends Controller
         $accounts = Account::Where([
             ['categoria','=','C'],
         ])->get();
-        $accountbook = AccountBook::all();
+        $accountbook = AccountBook::with(['referenciacaixa'])->whereNUll('data_fech')->get();
 
         return view('operation.posting_account', ['data'=>$data,
                                                   'paymethod' => $paymethod,
@@ -252,14 +260,15 @@ class AccountBookController extends Controller
     public function service_payment_delete($id)
     {
         try{
+            DB::beginTransaction();
             $payment_service = Payments::findOrfail($id);
+            $custservice = CustomerService::Where('ordem',$payment_service->customer_services_id)->update(['status' => 'P']);
             $payment_service->delete();
 
-            if($payment_service == true){
-                return redirect()->route('posting.account')->with([toast()->success('Pagamento excluído com sucesso!')]);
-            }
-
+            DB::commit();
+            return redirect()->route('posting.account')->with([toast()->success('Pagamento excluído com sucesso!')]);
         }catch(\Exception $ex){
+            DB::rollBack();
             return redirect()->back()->with([toast()->error($ex->getMessage())]);
         }
     }

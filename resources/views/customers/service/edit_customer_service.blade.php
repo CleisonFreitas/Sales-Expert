@@ -34,7 +34,9 @@
             @foreach ($customer_services as $c )
                 <div class="tab-content" id="nav-tabContent">
                     <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
-                        <form action="#" method="POST">
+                        <form action="{{ route('customer_service_update',$c->ordem) }}" method="POST">
+                            @method('PUT')
+                            @csrf
                             <div class="row mt-3">
                                 <div class="col-12 col-sm-8 col-lg-3">
                                     <label for="st_date">Cadastro:</label>

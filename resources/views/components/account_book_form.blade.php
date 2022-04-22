@@ -22,7 +22,7 @@
     </div>
     <div class="col-12 col-sm-6 col-lg-2">
         <label for="valor">Valor:</label>
-        <input type="text" name="valor" value="{{ number_format($payment_book,2,',','.') ?? 0.00}}" id="" class="form-control" readonly>
+        <input type="text" name="valor" value="{{ number_format($valor_caixa,2,',','.') ?? 0.00}}" id="" class="form-control" readonly>
     </div>
     @endif
     <div class="col-12 col-sm-6 col-lg-2">

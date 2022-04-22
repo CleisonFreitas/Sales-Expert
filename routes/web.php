@@ -93,6 +93,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/customer_services/customer/{id}',               [CustomerServiceController::class, 'shop'])->name('customer_shop');
     Route::post('/customer_services/create',                     [CustomerServiceController::class, 'store'])->name('customer_service_create');
     Route::get('/customer_services/edit/{ordem}',                [CustomerServiceController::class, 'edit'])->name('service_edit');
+    Route::put('/customer_services/update/{ordem}',              [CustomerServiceController::class,'update'])->name('customer_service_update');
     Route::post('/customer_services/payment',                    [CustomerServiceController::class, 'payment'])->name('service_payment');
     Route::get('/customer_services/payment/warning/{id}',        [CustomerServiceController::class,'payment_warning'])->name('service_payment_warning');
     Route::get('/customer_services/payment/delete/{id}',         [CustomerServiceController::class,'payment_delete'])->name('service_payment_delete');

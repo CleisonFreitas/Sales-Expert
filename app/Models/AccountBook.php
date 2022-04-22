@@ -61,7 +61,8 @@ class AccountBook extends Model
         return $this->hasMany(AccountTransitions::class,'livro_caixa_id')
         ->join('accounts','account_transitions.conta_id','=','accounts.id')
         ->select('account_transitions.*','accounts.descricao as conta_descricao')
-        ->groupBy('account_transitions.conta_id');
+        ->orderBy('account_transitions.created_at','asc')
+        ->orderBy('account_transitions.conta_id','asc');
 
     }
     public function payments()
