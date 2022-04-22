@@ -46,7 +46,7 @@
                     </tr>
                     <tr>
                         <td>Entradas</td>
-                        <td>R$ {{number_format($entradas,2,',','.')}}</td>
+                        <td>R$ {{number_format($arrecadacao,2,',','.')}}</td>
                     </tr>
                     <tr>
                         <td>Saídas</td>
