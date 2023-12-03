@@ -1,6 +1,3 @@
-
-[<img src="https://github-ads.s3.eu-central-1.amazonaws.com/support-ukraine.svg?t=1" />](https://supportukrainenow.org)
-
 # Dump the contents of a database
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/spatie/db-dumper.svg?style=flat-square)](https://packagist.org/packages/spatie/db-dumper)
@@ -8,10 +5,9 @@
 [![MIT Licensed](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE.md)
 [![Total Downloads](https://img.shields.io/packagist/dt/spatie/db-dumper.svg?style=flat-square)](https://packagist.org/packages/spatie/db-dumper)
 
-This repo contains an easy to use class to dump a database using PHP. Currently MySQL, PostgreSQL, SQLite and MongoDB are supported. Behind
-the scenes `mysqldump`, `pg_dump`, `sqlite3` and `mongodump` are used.
+This repo contains an easy to use class to dump a database using PHP. Currently MySQL, PostgreSQL, SQLite and MongoDB are supported. Behind the scenes `mysqldump`, `pg_dump`, `sqlite3` and `mongodump` are used.
 
-Here's are simple examples of how to create a database dump with different drivers:
+Here are simple examples of how to create a database dump with different drivers:
 
 **MySQL**
 
@@ -124,6 +120,20 @@ Spatie\DbDumper\Databases\MySql::create()
     ->dumpToFile('dump.sql');
 ```
 
+### Use a Database URL
+
+In some applications or environments, database credentials are provided as URLs instead of individual components. In this case, you can use the `setDatabaseUrl` method instead of the individual methods.
+
+```php
+Spatie\DbDumper\Databases\MySql::create()
+    ->setDatabaseUrl($databaseUrl)
+    ->dumpToFile('dump.sql');
+```
+
+When providing a URL, the package will automatically parse it and provide the individual components to the applicable dumper.
+
+For example, if you provide the URL `mysql://username:password@hostname:3306/dbname`, the dumper will use the `hostname` host, running on port `3306`, and will connect to `dbname` with `username` and `password`.
+
 ### Dump specific tables
 
 Using an array:
@@ -152,7 +162,7 @@ Spatie\DbDumper\Databases\MySql::create()
 In order to use "_--column-statistics=0_" as option in mysqldump command you can use _doNotUseColumnStatistics()_ method.
 
 If you have installed _mysqldump 8_, it queries by default _column_statics_ table in _information_schema_ database.
-In some old version of MySql (service) like 5.7, this table it not exists. So you could have an exception during the execution of mysqldump. To avoid this, you could use _doNotUseColumnStatistics()_ method.
+In some old version of MySql (service) like 5.7, this table doesn't exist. So you could have an exception during the execution of mysqldump. To avoid this, you could use _doNotUseColumnStatistics()_ method.
 
 ```php
 Spatie\DbDumper\Databases\MySql::create()
@@ -295,7 +305,7 @@ Please see [CHANGELOG](CHANGELOG.md) for more information on what has changed re
 
 ## Contributing
 
-Please see [CONTRIBUTING](.github/CONTRIBUTING.md) for details.
+Please see [CONTRIBUTING](https://github.com/spatie/.github/blob/main/CONTRIBUTING.md) for details.
 
 ## Security Vulnerabilities
 

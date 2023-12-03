@@ -1,6 +1,9 @@
 <?php
+
 namespace Lucascudo\LaravelPtBRLocalization;
+
 use Illuminate\Support\ServiceProvider;
+
 class LaravelPtBRLocalizationServiceProvider extends ServiceProvider
 {
     /**
@@ -11,8 +14,8 @@ class LaravelPtBRLocalizationServiceProvider extends ServiceProvider
     public function register()
     {
         $this->publishes([
-            __DIR__ . '/pt-BR.json' => resource_path('lang/pt-BR.json'),
-            __DIR__ . '/pt-BR' => resource_path('lang/pt-BR'),
+            __DIR__ . '/pt-BR.json' => $this->app->langPath() . '/pt-BR.json',
+            __DIR__ . '/pt-BR' => $this->app->langPath() . '/pt-BR',
         ], 'laravel-pt-br-localization');
     }
 }
