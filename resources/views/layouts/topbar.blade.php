@@ -5,9 +5,7 @@
         <button id="sidebarToggleTop" class="btn btn-danger d-md-none rounded-circle mr-3">
             <i class="fa fa-bars"></i>
         </button>
-        @foreach ($company as $company)
-        <h5 class="my-2 my-md-0 mw-100"><i class="far fa-building"></i>&nbsp;{{ $company->empr_nome }}</h5>
-        @endforeach
+        <h5 class="my-2 my-md-0 mw-100"><i class="far fa-building"></i>&nbsp;{{get_company()->empr_nome ?? 'Nome_Empresa'}} </h5>
         <!-- Topbar Search -->
         <form action ="{{ route('search') }}" method="POST"
         class="d-none d-sm-inline-block form-inline ml-auto my-2 my-md-0 mw-100 navbar-search">

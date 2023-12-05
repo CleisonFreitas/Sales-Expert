@@ -11,6 +11,7 @@ use App\Http\Controllers\CustomerServiceController;
 use App\Http\Controllers\AccountBookController;
 use App\Http\Controllers\AccountController;
 use App\Http\Controllers\AccountReferenceController;
+use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\CustomerReportController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PaymentController;
@@ -40,11 +41,11 @@ Route::middleware(['auth'])->group(function () {
     Route::put('/company/update/{id}',  [CompanyController::class, 'update'])->name('company_updt');
 
     Route::get('dashboard',                     [HomeController::class, 'index'])->name('dashboard');
-    Route::post('search',                       [HomeController::class,'search'])->name('search');
-    Route::post('dashboard/note',               [HomeController::class,'nota'])->name('note_create');
-    Route::put('dashboard/note/update/{id}',    [HomeController::class,'nota_update'])->name('note_update');
-    Route::get('dashboard/note/delete/{id}',    [HomeController::class,'nota_delete'])->name('note_delete');
-    Route::get('dashboard/relatorio-pdf',       [HomeController::class,'dashpdf'])->name('dashboard_pdf');
+    Route::post('search',                       [HomeController::class, 'search'])->name('search');
+    Route::post('dashboard/note',               [HomeController::class, 'nota'])->name('note_create');
+    Route::put('dashboard/note/update/{id}',    [HomeController::class, 'nota_update'])->name('note_update');
+    Route::get('dashboard/note/delete/{id}',    [HomeController::class, 'nota_delete'])->name('note_delete');
+    Route::get('dashboard/relatorio-pdf',       [HomeController::class, 'dashpdf'])->name('dashboard_pdf');
 
 
 
@@ -53,7 +54,7 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/employer/create',     [EmployerController::class, 'create'])->name('employer_create');
     Route::get('/employer/edit/{id}',   [EmployerController::class, 'edit'])->name('employer_edit');
     Route::put('/employer/update/{id}', [EmployerController::class, 'updt'])->name('employer_updt');
-    Route::get('/employer/warning/{id}',[EmployerController::class, 'warning'])->name('employer_warning');
+    Route::get('/employer/warning/{id}', [EmployerController::class, 'warning'])->name('employer_warning');
     Route::get('/employer/delete/{id}', [EmployerController::class, 'delete'])->name('employer_delete');
 
     //Registers - Supplier
@@ -76,7 +77,7 @@ Route::middleware(['auth'])->group(function () {
     //Register - Services
     Route::get('/services',                 [ServiceController::class, 'index'])->name('services');
     Route::post('services/store',           [ServiceController::class, 'store'])->name('services_create');
-    Route::get('/services/edit/{id}',       [ServiceController::class,'edit'])->name('services_edit');
+    Route::get('/services/edit/{id}',       [ServiceController::class, 'edit'])->name('services_edit');
     Route::get('/services/delete/{id}',     [ServiceController::class, 'destroy'])->name('services_delete');
     Route::put('services/update/{id}',      [ServiceController::class, 'update'])->name('services_update');
 
@@ -93,23 +94,23 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/customer_services/customer/{id}',               [CustomerServiceController::class, 'shop'])->name('customer_shop');
     Route::post('/customer_services/create',                     [CustomerServiceController::class, 'store'])->name('customer_service_create');
     Route::get('/customer_services/edit/{ordem}',                [CustomerServiceController::class, 'edit'])->name('service_edit');
-    Route::put('/customer_services/update/{ordem}',              [CustomerServiceController::class,'update'])->name('customer_service_update');
+    Route::put('/customer_services/update/{ordem}',              [CustomerServiceController::class, 'update'])->name('customer_service_update');
     Route::post('/customer_services/payment',                    [CustomerServiceController::class, 'payment'])->name('service_payment');
-    Route::get('/customer_services/payment/warning/{id}',        [CustomerServiceController::class,'payment_warning'])->name('service_payment_warning');
-    Route::get('/customer_services/payment/delete/{id}',         [CustomerServiceController::class,'payment_delete'])->name('service_payment_delete');
-    Route::get('/customer_services/warning/{ordem}',             [CustomerServiceController::class,'warning'])->name('customer_service_warning');
-    Route::get('/customer_services/delete/{ordem}',              [CustomerServiceController::class,'destroy'])->name('customer_service_delete');
+    Route::get('/customer_services/payment/warning/{id}',        [CustomerServiceController::class, 'payment_warning'])->name('service_payment_warning');
+    Route::get('/customer_services/payment/delete/{id}',         [CustomerServiceController::class, 'payment_delete'])->name('service_payment_delete');
+    Route::get('/customer_services/warning/{ordem}',             [CustomerServiceController::class, 'warning'])->name('customer_service_warning');
+    Route::get('/customer_services/delete/{ordem}',              [CustomerServiceController::class, 'destroy'])->name('customer_service_delete');
 
     //Service - Reschedule
-    Route::match(['post','put'], '/customer_service/reschedule', [RescheduleController::class,'store'])->name('reschedule_service');
+    Route::match(['post', 'put'], '/customer_service/reschedule', [RescheduleController::class, 'store'])->name('reschedule_service');
 
     //Oprations - Accounts
-    Route::get('/operation/accounts',                   [AccountController::class,'index'])->name('account.new');
+    Route::get('/operation/accounts',                   [AccountController::class, 'index'])->name('account.new');
     Route::post('/operation/accounts/store',            [AccountController::class, 'store'])->name('account.store');
     Route::get('/operation/accounts/{id}',              [AccountController::class, 'edit'])->name('account.edit');
     Route::put('/operation/accounts/update/{id}',       [AccountController::class, 'update'])->name('account.update');
-    Route::get('operation/accounts/aviso/{id}',         [AccountController::class,'warning'])->name('account.warning');
-    Route::get('operation/accounts/delete/{id}',        [AccountController::class,'destroy'])->name('account.delete');
+    Route::get('operation/accounts/aviso/{id}',         [AccountController::class, 'warning'])->name('account.warning');
+    Route::get('operation/accounts/delete/{id}',        [AccountController::class, 'destroy'])->name('account.delete');
     // Operations - Account_Book
     Route::get('/operation/accountability',                             [AccountBookController::class, 'index'])->name('account.book');
     Route::post('/operation/accountability/open',                       [AccountBookController::class, 'store'])->name('account.book.open');
@@ -117,7 +118,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/operation/accountability/show/{id}',                   [AccountBookController::class, 'show'])->name('account.book.show');
 
     // Operations - posting_account
-    Route::get('/operation/transitions',                                [AccountBookController::class,'account_transition'])->name('posting.account');
+    Route::get('/operation/transitions',                                [AccountBookController::class, 'account_transition'])->name('posting.account');
     Route::post('/operation/transitions/store',                         [AccountBookController::class, 'transition_store'])->name('posting.account.store');
     Route::get('/operation/transitions/account_warning/{id}',           [AccountBookController::class, 'warning_conta'])->name('posting.account.aviso');
     Route::get('/operation/transitions/account_payment_delete/{id}',            [AccountBookController::class, 'account_payment_delete'])->name('posting.account.delete');
@@ -133,20 +134,23 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/archives/customer_report', [CustomerReportController::class, 'index'])->name('archive.customer');
     Route::post('archives/customer_report', [CustomerReportController::class, 'report'])->name('archive.report');
     Route::get('archives/payments_report',  [PaymentController::class, 'index'])->name('payment.report');
-    Route::post('archives/payments_report', [ReportController::class,'searchPayment'])->name('archive.payment.report');
+    Route::post('archives/payments_report', [ReportController::class, 'searchPayment'])->name('archive.payment.report');
     //if route doesn't exist
     Route::fallback(function () {
 
         return redirect()->back()->with([toast()->info('Página não encontrada')]);
     });
-
-
 });
 
 
 Route::get('/', function () {
-    return view('welcome');
-});
+    return view('auth/new-login');
+})->middleware('guest')
+    ->name('login');
+
+Route::post('/login', [AuthenticatedSessionController::class, 'store'])
+    ->middleware('guest')
+    ->name('auth.login');
 /*
 Route::get('/dashboard', function () {
     return view('reports/dashboard');
@@ -164,4 +168,4 @@ Route::get('/customer_service_action', function () {
 })->middleware(['auth'])->name('customer_action');
 
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';

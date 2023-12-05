@@ -2,7 +2,7 @@
             <footer class="sticky-footer text-gray-700 shadow">
                 <div class="container my-auto">
                     <div class="copyright text-center my-auto">
-                        <span>Weaver Systems &copy;  2021</span>
+                        <span class="text-bold text-md">Dev Mais &copy;  2021</span>
                     </div>
                 </div>
             </footer>
