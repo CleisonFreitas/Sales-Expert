@@ -18,7 +18,6 @@ Before running the application, ensure the following are installed on your syste
 ```
 git clone https://github.com/{usuario}/Sales-Expert.git
 cd Sales-Expert
-cp .env.example .env
 ```
 
 ### 2. Environment configuration
